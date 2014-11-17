@@ -1,0 +1,5 @@
+TAREAS INICIALES
+
+NOEMI -> crear tabla Usuarios, Roles
+CARLOS -> Crear tabla Clientes, historial de cambios
+LUIS -> Resto de tablas
