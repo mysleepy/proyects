@@ -15,11 +15,18 @@ namespace MySleepy
         ConnectDB conexion;
         int rol;
 
-        public PrincipalForm(int idRol, ConnectDB c)
+        public PrincipalForm(int idRol, ConnectDB c,String nombre)
         {
             InitializeComponent();
             this.conexion = c;
             this.rol = idRol;
+            tipoRol(nombre);
+        }
+
+        private void tipoRol(String nombre)
+        {
+            String etiqueta = "Usted se ha identificado como "+nombre;
+            lblTipoUsuario.Text = etiqueta;
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)

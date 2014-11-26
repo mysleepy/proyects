@@ -30,7 +30,7 @@ namespace MySleepy
                 if (validarPass())
                 {
                     conseguirIdRol();
-                    PrincipalForm principal = new PrincipalForm(idRol, conexion);
+                    PrincipalForm principal = new PrincipalForm(idRol, conexion, txtUsuario.Text);
                     principal.Show();
                     this.Visible = false;
                 }

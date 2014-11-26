@@ -117,7 +117,6 @@ d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo hasta 26-11\MySleepy\MySl
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\bin\Debug\MySleepy.exe.config
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.exe
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.pdb
-d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.AccesoForm.resources
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.AddNuevoArticulo.resources
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.AddArticulo.resources
@@ -136,3 +135,4 @@ d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\bin\Deb
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\bin\Debug\BCrypt.Net.dll
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\bin\Debug\BCrypt.Net.pdb
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\bin\Debug\BCrypt.Net.xml
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache

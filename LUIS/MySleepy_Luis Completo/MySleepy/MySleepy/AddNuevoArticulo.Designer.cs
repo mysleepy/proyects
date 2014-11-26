@@ -74,6 +74,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 7;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // btnAnadir
             // 
@@ -133,6 +134,7 @@
             this.txtReferencia.Name = "txtReferencia";
             this.txtReferencia.Size = new System.Drawing.Size(100, 20);
             this.txtReferencia.TabIndex = 15;
+            this.txtReferencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReferencia_KeyPress);
             // 
             // label5
             // 
@@ -164,6 +166,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddNuevoArticulo";
             this.Text = "Nuevo Articulo";
+            this.Load += new System.EventHandler(this.AddNuevoArticulo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

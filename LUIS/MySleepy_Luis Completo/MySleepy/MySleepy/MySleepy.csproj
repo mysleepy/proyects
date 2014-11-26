@@ -55,6 +55,12 @@
     <Compile Include="AccesoForm.Designer.cs">
       <DependentUpon>AccesoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCliente.designer.cs">
+      <DependentUpon>AddCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddNuevoArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,12 +72,6 @@
     </Compile>
     <Compile Include="AddArticulo.Designer.cs">
       <DependentUpon>AddArticulo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AddCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddCliente.Designer.cs">
-      <DependentUpon>AddCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="AddUsuario.cs">
       <SubType>Form</SubType>
@@ -98,6 +98,7 @@
     <Compile Include="AddPedido.Designer.cs">
       <DependentUpon>AddPedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="MetodosAuxiliares.cs" />
     <Compile Include="PedidosForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,14 +127,14 @@
     <EmbeddedResource Include="AccesoForm.resx">
       <DependentUpon>AccesoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddCliente.resx">
+      <DependentUpon>AddCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddNuevoArticulo.resx">
       <DependentUpon>AddNuevoArticulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddArticulo.resx">
       <DependentUpon>AddArticulo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddCliente.resx">
-      <DependentUpon>AddCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddUsuario.resx">
       <DependentUpon>AddUsuario.cs</DependentUpon>

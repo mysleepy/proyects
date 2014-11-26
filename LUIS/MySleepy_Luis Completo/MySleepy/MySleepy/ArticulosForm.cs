@@ -14,7 +14,6 @@ namespace MySleepy
     {
         // Atributos a nivel de clase
         ConnectDB conexion;
-        String referencia,nombre,composicion,medida,precio;
         Boolean mostrado;
         int rolUsuario;
         public ArticulosForm(int idRol, ConnectDB c)
@@ -22,6 +21,14 @@ namespace MySleepy
             InitializeComponent();
             this.conexion = c ;
             rolUsuario = idRol;
+            cargarDGVInicio();
+        }
+
+        private void cargarDGVInicio()
+        {
+            String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0";
+            actualizarDGV(sentencia);
+            dgvArticulos.ClearSelection();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -44,51 +51,65 @@ namespace MySleepy
 
         private void filtrar(String medida, String nombre, String referencia, String precio)
         {
-            String sentencia= "SELECT * FROM ARTICULOS";
+            String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0 ";
 
             if (rbEliminados.Checked == true)
             {
-                sentencia= sentencia+" WHERE ELIMINADO=1";
-            }else{
-                sentencia=sentencia+" WHERE ELIMINADO=0";
+                sentencia ="SELECT * FROM ARTICULOS WHERE ELIMINADO=1";
+                
             }
 
             if (medida != "")
             {
                  sentencia = sentencia + " AND MEDIDA='" + medida + "'";
+                
             }
 
             if (nombre != "")
             {
                 sentencia = sentencia + " AND NOMBRE='" + nombre + "'";
-
+               
             }
 
             if (referencia != "")
             {
-                sentencia = sentencia + " AND REFERENCIA='"+ referencia +"'";
+                sentencia = sentencia + " AND REFERENCIA="+ Convert.ToInt32(referencia);
+                
             }
 
             if (precio != "")
             {
                 sentencia = sentencia + " AND PRECIO=" + precio;
+                
             }
             actualizarDGV(sentencia);
         }
 
         private void actualizarDGV(String sentencia)
         {
+            limpiarTabla();
             DataSet resultado = conexion.getData(sentencia, "ARTICULOS");
-            dgvArticulos.DataSource = resultado;
+            DataTable tArticulos = resultado.Tables["ARTICULOS"];
+            foreach (DataRow row in tArticulos.Rows)
+            {
+                int referencia = Convert.ToInt32(row["REFERENCIA"]);
+                String nombre = Convert.ToString(row["NOMBRE"]);
+                String composicion = Convert.ToString(row["COMPOSICION"]);
+                String medida = Convert.ToString(row["MEDIDA"]);
+                String precio = Convert.ToString(row["PRECIO"]);
+                dgvArticulos.Rows.Add(referencia, nombre, composicion,medida,precio);
+                
+            } // Fin del bucle for each
+            limpiarSeleccion();
         }
 
-        public Boolean getMostrado()
+        public void limpiarTabla()
         {
-            return mostrado;
-        }
-        public void setMostrado(Boolean valor)
-        {
-            mostrado = valor;
+            // Limpiamos el datagridView
+            while (dgvArticulos.RowCount > 0)
+            {
+                dgvArticulos.Rows.Remove(dgvArticulos.CurrentRow);
+            }
         }
 
         private void btnLimpiar_Click_1(object sender, EventArgs e)
@@ -98,15 +119,19 @@ namespace MySleepy
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddNuevoArticulo add = new AddNuevoArticulo(conexion);
+            AddNuevoArticulo add = new AddNuevoArticulo(conexion,0);
             add.Show();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvArticulos.SelectedRows != null)
+            limpiarSeleccion();
+            if (dgvArticulos.CurrentRow != null)
             {
-               
+                AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1);
+                add.activarReferencia(false);
+                add.rellenar(dgvArticulos.CurrentRow);
+                add.Show();
             }
             else
             {
@@ -116,7 +141,8 @@ namespace MySleepy
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvArticulos.CurrentRow != null)
+            dgvArticulos.ClearSelection();
+            if (dgvArticulos.CurrentRow != null && dgvArticulos.SelectedRows!=null)
             {
                 DialogResult result = MessageBox.Show("¿Seguro que desea eliminar el articulo?", "Eliminar", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -124,6 +150,7 @@ namespace MySleepy
                     eliminarRegistro(dgvArticulos.CurrentRow);
                     // Actualiza tabla
                     dgvArticulos.Rows.RemoveAt(dgvArticulos.CurrentRow.Index);
+                    limpiarSeleccion();
                 } 
             }
             else
@@ -161,13 +188,18 @@ namespace MySleepy
 
         private void ArticulosForm_Load(object sender, EventArgs e)
         {
+            limpiarSeleccion();
+        }
+
+        private void limpiarSeleccion()
+        {
             dgvArticulos.ClearSelection();
             dgvArticulos.Update();
         }
 
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
-            dgvArticulos.ClearSelection();
+            limpiarSeleccion();
             if (dgvArticulos.CurrentRow != null)
             {
                 DialogResult result = MessageBox.Show("¿Seguro que desea restaurar el articulo?", "Restaurar", MessageBoxButtons.YesNo);
@@ -189,6 +221,22 @@ namespace MySleepy
             int referencia = Convert.ToInt32(fila.Cells[0].Value);
             String sentencia = "UPDATE ARTICULOS SET ELIMINADO=0 WHERE REFERENCIA=" + referencia;
             conexion.setData(sentencia);
+        }
+
+        private void rbEliminados_Click(object sender, EventArgs e)
+        {
+            limpiarSeleccion();
+            btnBorrar.Enabled = false;
+            btnRestaurar.Enabled = true;
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void rbNoEliminados_CheckedChanged(object sender, EventArgs e)
+        {
+            limpiarSeleccion();
+            btnBorrar.Enabled = true;
+            btnRestaurar.Enabled = false;
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
     }
 }

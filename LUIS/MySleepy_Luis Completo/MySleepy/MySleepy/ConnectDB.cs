@@ -95,15 +95,15 @@ namespace MySleepy
 
         public int siguienteID(String campo, String tabla)
         {
-           String sentencia= "SELECT MAX("+campo+") from "+tabla;
+           String sentencia= "SELECT MAX("+campo+") from"+tabla;
            DataSet resultado=getData(sentencia,tabla);
-           DataTable tTabla=resultado.Tables[tabla];
+           DataTable tTabla = resultado.Tables[tabla];
 
-           int id=0;
+           int idg=0;
            foreach(DataRow row in tTabla.Rows){
-               id=Convert.ToInt32(row[campo]);
+               idg = Convert.ToInt16(row["MAX(" + campo + ")"]);
            }
-           return id+1;
+           return idg+1;
         }
     }
 }

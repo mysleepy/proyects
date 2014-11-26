@@ -116,6 +116,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(167, 20);
             this.txtEmail.TabIndex = 21;
+            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmail_KeyPress);
             // 
             // label1
             // 
@@ -215,6 +216,7 @@
             // 
             // cbCP
             // 
+            this.cbCP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCP.FormattingEnabled = true;
             this.cbCP.Location = new System.Drawing.Point(407, 95);
             this.cbCP.Name = "cbCP";
@@ -224,8 +226,9 @@
             // 
             // cbCAutonoma
             // 
+            this.cbCAutonoma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCAutonoma.FormattingEnabled = true;
-            this.cbCAutonoma.Location = new System.Drawing.Point(140, 22);
+            this.cbCAutonoma.Location = new System.Drawing.Point(140, 27);
             this.cbCAutonoma.Name = "cbCAutonoma";
             this.cbCAutonoma.Size = new System.Drawing.Size(147, 21);
             this.cbCAutonoma.TabIndex = 21;
@@ -233,8 +236,9 @@
             // 
             // cbProvincia
             // 
+            this.cbProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProvincia.FormattingEnabled = true;
-            this.cbProvincia.Location = new System.Drawing.Point(140, 52);
+            this.cbProvincia.Location = new System.Drawing.Point(140, 55);
             this.cbProvincia.Name = "cbProvincia";
             this.cbProvincia.Size = new System.Drawing.Size(147, 21);
             this.cbProvincia.TabIndex = 20;
@@ -242,6 +246,7 @@
             // 
             // cbPoblacion
             // 
+            this.cbPoblacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPoblacion.FormattingEnabled = true;
             this.cbPoblacion.Location = new System.Drawing.Point(407, 55);
             this.cbPoblacion.Name = "cbPoblacion";
