@@ -47,7 +47,13 @@ namespace MySleepy
 
         private void conseguirIdRol()
         {
-            idRol = Convert.ToInt32(conexion.DLookUp("IDROL", "USUARIOS", " WHERE  UPPER(NOMBRE)='" + txtUsuario.Text.ToUpper() + "'"));
+            String sentencia = "SELECT IDUSUARIO FROM USUARIOS WHERE UPPER(NOMBRE)='" + txtUsuario.Text.ToUpper() + "' AND ELIMINADO=0";
+            DataSet data = conexion.getData(sentencia, "tUsuarios");
+            DataTable tUsuarios = data.Tables["tUsuarios"];
+            foreach (DataRow row in tUsuarios.Rows)
+            {
+                idRol = Convert.ToInt32(row["IDUSUARIO"]);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

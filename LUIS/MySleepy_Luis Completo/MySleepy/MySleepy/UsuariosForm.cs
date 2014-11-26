@@ -107,14 +107,7 @@ namespace MySleepy
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //Extraemos los datos de la fila seleccionada -> id
-
-            //Si el usuario con el que nos hemos conectado es root -> vamos al formulario AddUsuarios donde lo podremos cambiar todo
-
-            //Para el resto de usuarios -> ModificarUsuario
-            ModificarUsuario mod = new ModificarUsuario();
-            mod.Show();
-
+           
             
         }
 

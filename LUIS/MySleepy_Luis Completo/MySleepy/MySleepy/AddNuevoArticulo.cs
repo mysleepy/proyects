@@ -16,28 +16,52 @@ namespace MySleepy
         public AddNuevoArticulo(ConnectDB c)
         {
             InitializeComponent();
-            dgvArticulos.ClearSelection();
+           
             this.conexion = c;
             
-            cargarDGV();
+            
         }
 
-        public void cargarDGV(){
-            ejecutarConsulta();
-        }
-
-        private void ejecutarConsulta()
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            String sentencia = "SELECT NOMBRE,COMPOSICION,PRECIO FROM ARTICULOS";
-            DataSet resultado=conexion.getData(sentencia,"tArticulos");
-            dgvArticulos.DataSource = resultado;
-
+            this.Close();
         }
 
-        private void AddArticulo_Load(object sender, EventArgs e)
+        private void btnAnadir_Click(object sender, EventArgs e)
         {
-            dgvArticulos.ClearSelection();
-            dgvArticulos.Update();
+            if (comprobar())
+            {
+                añadirArticulo();
+                MessageBox.Show("Articulo añadido");
+            }
+            else
+            {
+                MessageBox.Show("Tienes que rellenar los campos que faltan");
+            }
         }
+
+        private void añadirArticulo()
+        {
+            // añade articulos a la base de datos
+            int nuevoid=conexion.siguienteID("IDARTICULO","ARTICULOS");
+            String sentencia = "INSERT INTO ARTICULOS(IDARTICULO,COMPOSICION,MEDIDA,PRECIO,ELIMINADO,NOMBRE,REFERENCIA)"+ 
+                                        " VALUES("+nuevoid+",'"+txtComposicion.Text.ToUpper()+"','"+txtMedida.Text.ToUpper()+"',"+txtPrecio.Text+",0,'"+txtNombre.Text.ToUpper()+"',"+txtReferencia.Text+")";
+            conexion.setData(sentencia);
+        }
+
+        private bool comprobar()
+        {
+            TextBox[] ids={txtReferencia,txtComposicion,txtMedida,txtNombre,txtPrecio};
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (ids[i].Text == "")
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+       
     }
 }

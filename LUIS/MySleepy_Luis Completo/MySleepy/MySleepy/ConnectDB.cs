@@ -92,5 +92,18 @@ namespace MySleepy
             objConexion.Close();
             return resultado;
         }
+
+        public int siguienteID(String campo, String tabla)
+        {
+           String sentencia= "SELECT MAX("+campo+") from "+tabla;
+           DataSet resultado=getData(sentencia,tabla);
+           DataTable tTabla=resultado.Tables[tabla];
+
+           int id=0;
+           foreach(DataRow row in tTabla.Rows){
+               id=Convert.ToInt32(row[campo]);
+           }
+           return id+1;
+        }
     }
 }
