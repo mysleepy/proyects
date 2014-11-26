@@ -59,6 +59,9 @@ namespace MySleepy
         private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Pedidos pedidos = new Pedidos();
+            pedidos.MdiParent = this;
+            pedidos.SetDesktopLocation(-1, -1); // saldra en la esquina
+            pedidos.WindowState = FormWindowState.Normal;
             pedidos.Show();
         }
     }

@@ -91,3 +91,6 @@ d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_ADDClientes\MySleepy\MySleepy\obj\Debug
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_ADDClientes\MySleepy\MySleepy\obj\Debug\MySleepy.AddUsuario.resources
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_ADDClientes\MySleepy\MySleepy\obj\Debug\MySleepy.AddPedido.resources
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_ADDClientes\MySleepy\MySleepy\obj\Debug\MySleepy.Pedidos.resources
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo hasta 26-11\MySleepy\MySleepy\bin\Debug\MySleepy.exe.config
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo hasta 26-11\MySleepy\MySleepy\obj\Debug\MySleepy.exe
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Luis Completo hasta 26-11\MySleepy\MySleepy\obj\Debug\MySleepy.pdb

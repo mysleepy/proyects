@@ -55,6 +55,12 @@
     <Compile Include="AccesoForm.Designer.cs">
       <DependentUpon>AccesoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddNuevoArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNuevoArticulo.Designer.cs">
+      <DependentUpon>AddNuevoArticulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </Compile>
     <EmbeddedResource Include="AccesoForm.resx">
       <DependentUpon>AccesoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNuevoArticulo.resx">
+      <DependentUpon>AddNuevoArticulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddArticulo.resx">
       <DependentUpon>AddArticulo.cs</DependentUpon>

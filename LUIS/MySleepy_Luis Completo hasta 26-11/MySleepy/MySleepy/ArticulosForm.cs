@@ -13,13 +13,13 @@ namespace MySleepy
     public partial class ArticulosForm : Form
     {
         // Atributos a nivel de clase
-        ConnectDB c;
+        ConnectDB conexion;
         String referencia,nombre,composicion,medida,precio;
         Boolean mostrado;
         public ArticulosForm()
         {
             InitializeComponent();
-            c = new ConnectDB();
+            this.conexion = new ConnectDB() ;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace MySleepy
 
         private void actualizarDGV(String sentencia)
         {
-            DataSet resultado = c.getData(sentencia, "ARTICULOS");
+            DataSet resultado = conexion.getData(sentencia, "ARTICULOS");
             dgvArticulos.DataSource = resultado;
         }
 
@@ -96,7 +96,7 @@ namespace MySleepy
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddArticulo add = new AddArticulo(c);
+            AddNuevoArticulo add = new AddNuevoArticulo(conexion);
             add.Show();
         }
 
@@ -134,7 +134,7 @@ namespace MySleepy
         {
             int referencia = Convert.ToInt32(fila.Cells[0].Value);
             String sentencia = "UPDATE ARTICULOS SET ELIMINADO=1 WHERE REFERENCIA=" + referencia;
-            c.setData(sentencia);
+            conexion.setData(sentencia);
         }
 
         private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)
@@ -161,6 +161,32 @@ namespace MySleepy
         {
             dgvArticulos.ClearSelection();
             dgvArticulos.Update();
+        }
+
+        private void btnRestaurar_Click(object sender, EventArgs e)
+        {
+            dgvArticulos.ClearSelection();
+            if (dgvArticulos.CurrentRow != null)
+            {
+                DialogResult result = MessageBox.Show("¿Seguro que desea restaurar el articulo?", "Restaurar", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    restaurarRegistro(dgvArticulos.CurrentRow);
+                    // Actualiza tabla
+                    filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debes seleccionar un registro");
+            }
+        }
+
+        private void restaurarRegistro(DataGridViewRow fila)
+        {
+            int referencia = Convert.ToInt32(fila.Cells[0].Value);
+            String sentencia = "UPDATE ARTICULOS SET ELIMINADO=0 WHERE REFERENCIA=" + referencia;
+            conexion.setData(sentencia);
         }
     }
 }
