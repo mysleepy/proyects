@@ -13,10 +13,12 @@ namespace MySleepy
     public partial class ClientesForm : Form
     {
         ConnectDB conexion;
-        public ClientesForm()
+        int rolUsuario;
+        public ClientesForm(int idRol, ConnectDB c)
         {
             InitializeComponent();
-            conexion = new ConnectDB();
+            conexion = c;
+            rolUsuario = idRol;
             cargarTabla();
         }
 

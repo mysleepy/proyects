@@ -13,10 +13,12 @@ namespace MySleepy
     public partial class Pedidos : Form
     {
         ConnectDB conexion;
-        public Pedidos()
+        int rolUsuario;
+        public Pedidos(int idRol, ConnectDB c)
         {
             InitializeComponent();
-            conexion = new ConnectDB();
+            conexion = c;
+            rolUsuario = idRol;
         }
 
         private void btnAñadir_Click(object sender, EventArgs e)

@@ -35,6 +35,7 @@
             this.articulosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,10 +43,11 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sistemaToolStripMenuItem,
-            this.pedidosToolStripMenuItem});
+            this.pedidosToolStripMenuItem,
+            this.historialToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(762, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(762, 31);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -56,16 +58,17 @@
             this.clientesToolStripMenuItem,
             this.articulosToolStripMenuItem,
             this.salirToolStripMenuItem});
+            this.sistemaToolStripMenuItem.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sistemaToolStripMenuItem.Image = global::MySleepy.Properties.Resources.mantenimiento;
             this.sistemaToolStripMenuItem.Name = "sistemaToolStripMenuItem";
-            this.sistemaToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.sistemaToolStripMenuItem.Size = new System.Drawing.Size(103, 27);
             this.sistemaToolStripMenuItem.Text = "Sistema";
             // 
             // usuariosToolStripMenuItem
             // 
             this.usuariosToolStripMenuItem.Image = global::MySleepy.Properties.Resources.socios;
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(158, 28);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
@@ -73,7 +76,7 @@
             // 
             this.clientesToolStripMenuItem.Image = global::MySleepy.Properties.Resources.clientes;
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(158, 28);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
@@ -81,7 +84,7 @@
             // 
             this.articulosToolStripMenuItem.Image = global::MySleepy.Properties.Resources.materias;
             this.articulosToolStripMenuItem.Name = "articulosToolStripMenuItem";
-            this.articulosToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.articulosToolStripMenuItem.Size = new System.Drawing.Size(158, 28);
             this.articulosToolStripMenuItem.Text = "Articulos";
             this.articulosToolStripMenuItem.Click += new System.EventHandler(this.articulosToolStripMenuItem_Click);
             // 
@@ -89,17 +92,25 @@
             // 
             this.salirToolStripMenuItem.Image = global::MySleepy.Properties.Resources.Door_converted;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(158, 28);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // pedidosToolStripMenuItem
             // 
+            this.pedidosToolStripMenuItem.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pedidosToolStripMenuItem.Image = global::MySleepy.Properties.Resources.editoriales;
             this.pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
-            this.pedidosToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.pedidosToolStripMenuItem.Size = new System.Drawing.Size(104, 27);
             this.pedidosToolStripMenuItem.Text = "Pedidos";
             this.pedidosToolStripMenuItem.Click += new System.EventHandler(this.pedidosToolStripMenuItem_Click);
+            // 
+            // historialToolStripMenuItem
+            // 
+            this.historialToolStripMenuItem.Font = new System.Drawing.Font("Times New Roman", 15.75F);
+            this.historialToolStripMenuItem.Name = "historialToolStripMenuItem";
+            this.historialToolStripMenuItem.Size = new System.Drawing.Size(96, 27);
+            this.historialToolStripMenuItem.Text = "Historial";
             // 
             // PrincipalForm
             // 
@@ -112,6 +123,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PrincipalForm";
             this.Text = "Principal";
+            this.Load += new System.EventHandler(this.PrincipalForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -128,6 +140,7 @@
         private System.Windows.Forms.ToolStripMenuItem articulosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem historialToolStripMenuItem;
     }
 }
 

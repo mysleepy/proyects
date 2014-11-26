@@ -38,7 +38,6 @@
             this.lblError = new System.Windows.Forms.Label();
             this.btnCrear = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.chbMostrar = new System.Windows.Forms.CheckBox();
             this.cbRoles = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -105,7 +104,7 @@
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(68, 222);
+            this.btnCrear.Location = new System.Drawing.Point(68, 189);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 8;
@@ -115,7 +114,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(190, 222);
+            this.btnCancelar.Location = new System.Drawing.Point(190, 189);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 9;
@@ -123,21 +122,10 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // chbMostrar
-            // 
-            this.chbMostrar.AutoSize = true;
-            this.chbMostrar.Location = new System.Drawing.Point(116, 136);
-            this.chbMostrar.Name = "chbMostrar";
-            this.chbMostrar.Size = new System.Drawing.Size(115, 17);
-            this.chbMostrar.TabIndex = 10;
-            this.chbMostrar.Text = "Mostrar Caracteres";
-            this.chbMostrar.UseVisualStyleBackColor = true;
-            this.chbMostrar.CheckedChanged += new System.EventHandler(this.chbMostrar_CheckedChanged);
-            // 
             // cbRoles
             // 
             this.cbRoles.FormattingEnabled = true;
-            this.cbRoles.Location = new System.Drawing.Point(116, 170);
+            this.cbRoles.Location = new System.Drawing.Point(116, 137);
             this.cbRoles.Name = "cbRoles";
             this.cbRoles.Size = new System.Drawing.Size(136, 21);
             this.cbRoles.TabIndex = 11;
@@ -145,7 +133,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(81, 173);
+            this.label4.Location = new System.Drawing.Point(81, 140);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 12;
@@ -163,12 +151,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 283);
+            this.ClientSize = new System.Drawing.Size(332, 231);
             this.ControlBox = false;
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbRoles);
-            this.Controls.Add(this.chbMostrar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnCrear);
             this.Controls.Add(this.lblError);
@@ -197,7 +184,6 @@
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.CheckBox chbMostrar;
         private System.Windows.Forms.ComboBox cbRoles;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtNombre;

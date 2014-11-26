@@ -12,14 +12,19 @@ namespace MySleepy
 {
     public partial class PrincipalForm : Form
     {
-        public PrincipalForm()
+        ConnectDB conexion;
+        int rol;
+
+        public PrincipalForm(int idRol, ConnectDB c)
         {
             InitializeComponent();
+            this.conexion = c;
+            this.rol = idRol;
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UsuariosForm usuarios = new UsuariosForm();
+            UsuariosForm usuarios = new UsuariosForm(rol,conexion);
             usuarios.MdiParent = this;
             usuarios.SetDesktopLocation(-1, -1); // saldra en la esquina
             usuarios.WindowState = FormWindowState.Normal;
@@ -28,7 +33,7 @@ namespace MySleepy
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClientesForm clientes = new ClientesForm();
+            ClientesForm clientes = new ClientesForm(rol, conexion);
             clientes.MdiParent = this;
             clientes.SetDesktopLocation(-1, -1); // saldra en la esquina
             clientes.WindowState = FormWindowState.Normal;
@@ -37,7 +42,7 @@ namespace MySleepy
 
         private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ArticulosForm articulos = new ArticulosForm();
+            ArticulosForm articulos = new ArticulosForm(rol, conexion);
             articulos.MdiParent = this;
             articulos.SetDesktopLocation(-1, -1); // saldra en la esquina
             articulos.WindowState = FormWindowState.Normal;
@@ -58,11 +63,19 @@ namespace MySleepy
 
         private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Pedidos pedidos = new Pedidos();
+            Pedidos pedidos = new Pedidos(rol, conexion);
             pedidos.MdiParent = this;
             pedidos.SetDesktopLocation(-1, -1); // saldra en la esquina
             pedidos.WindowState = FormWindowState.Normal;
             pedidos.Show();
+        }
+
+        private void PrincipalForm_Load(object sender, EventArgs e)
+        {
+            if (rol == 3)
+            {
+                historialToolStripMenuItem.Visible = false;
+            }
         }
     }
 }

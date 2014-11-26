@@ -12,7 +12,7 @@ namespace MySleepy
 {
     public partial class AccesoForm : Form
     {
-        static int idRol;
+        int idRol;
         ConnectDB conexion;
         public AccesoForm()
         {
@@ -20,15 +20,17 @@ namespace MySleepy
             conexion = new ConnectDB();
             txtUsuario.LostFocus += new EventHandler(txtUsuarios_lostFocus);
             txtPassword.LostFocus += new EventHandler(txtPassword_lostFocus);
+            btnAceptar.NotifyDefault(true);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            PrincipalForm principal= new PrincipalForm();
             if (validarUsuario(txtUsuario.Text))
             {
                 if (validarPass())
                 {
+                    conseguirIdRol();
+                    PrincipalForm principal = new PrincipalForm(idRol, conexion);
                     principal.Show();
                     this.Visible = false;
                 }
@@ -41,8 +43,11 @@ namespace MySleepy
             {
                 MessageBox.Show("Compruebe su usuario y contraseña");
             }
-            
-            
+        }
+
+        private void conseguirIdRol()
+        {
+            idRol = Convert.ToInt32(conexion.DLookUp("IDROL", "USUARIOS", " WHERE  UPPER(NOMBRE)='" + txtUsuario.Text.ToUpper() + "'"));
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -76,7 +81,6 @@ namespace MySleepy
             {
                 if (BCrypt.Net.BCrypt.Verify(pass, p))
                 {
-                    //Console.WriteLine("Aqui");
                     return true;
                 }
             }

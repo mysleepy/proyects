@@ -16,13 +16,14 @@ namespace MySleepy
         private int idUsuario;
         private int señal; //dependiendo de si se pulsa el boton añadir -> señal = 0 // modificar ->  señal = 1
                    //determina la accion del boton Aceptar del formulario AddUsuario
-        private int idRol = -1;
+        private int rolUsuario = -1;
         private string nombre ="";
-        static ConnectDB conexion;
-        public UsuariosForm()
+        ConnectDB conexion;
+        public UsuariosForm(int idRol, ConnectDB c)
         {
             InitializeComponent();
-            conexion = new ConnectDB();
+            this.conexion = c;
+            this.rolUsuario = idRol;
             dgvUsuarios.ClearSelection();
             cargarTablaInicio();
             rellenarCombo();
@@ -211,7 +212,7 @@ namespace MySleepy
             }
             if (cbRoles.SelectedIndex != -1)
             {
-                select += " and IDROL like '%" + idRol+"%'";
+                select += " and IDROL like '%" + rolUsuario+"%'";
             }
             select += " order by IDUSUARIO";
 
@@ -243,7 +244,7 @@ namespace MySleepy
             //extraer idRol
             String rol = cbRoles.SelectedItem.ToString();
             String select = "Select idROL from ROLES where NOMBREROL = '" + rol + "'";
-            idRol = extraerIDRol(select);
+            rolUsuario = extraerIDRol(select);
             filtrar();
         }
         public int extraerIDRol(String select)
@@ -264,7 +265,7 @@ namespace MySleepy
         {
             txtNombre.Text = "";
             nombre = "";
-            idRol = -1;
+            rolUsuario = -1;
             cargarTablaInicio();
             rbNoEliminados.Checked = true;
             rbEliminados.Checked = false;

@@ -16,10 +16,12 @@ namespace MySleepy
         ConnectDB conexion;
         String referencia,nombre,composicion,medida,precio;
         Boolean mostrado;
-        public ArticulosForm()
+        int rolUsuario;
+        public ArticulosForm(int idRol, ConnectDB c)
         {
             InitializeComponent();
-            this.conexion = new ConnectDB() ;
+            this.conexion = c ;
+            rolUsuario = idRol;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
