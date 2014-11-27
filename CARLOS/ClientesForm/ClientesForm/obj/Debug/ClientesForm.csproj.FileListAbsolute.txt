@@ -1,9 +1,0 @@
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\bin\Debug\ClientesForm.exe.config
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\bin\Debug\ClientesForm.exe
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\bin\Debug\ClientesForm.pdb
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\obj\Debug\ClientesForm.csprojResolveAssemblyReference.cache
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\obj\Debug\ClientesForm.ClientesForm.resources
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\obj\Debug\ClientesForm.Properties.Resources.resources
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\obj\Debug\ClientesForm.csproj.GenerateResource.Cache
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\obj\Debug\ClientesForm.exe
-D:\INSTITUTOS\D.A.M. GRADO SUPERIOR\DAM 2\DESARROLLO DE INTERFACES\PROYECTOS\EVA_1\ClientesForm\ClientesForm\obj\Debug\ClientesForm.pdb
