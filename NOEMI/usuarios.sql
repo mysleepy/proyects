@@ -1,6 +1,8 @@
 --------------------------------------------------------
--- Archivo creado  - miércoles-noviembre-26-2014   
+-- Archivo creado  - jueves-noviembre-27-2014   
 --------------------------------------------------------
+DROP TABLE "AD"."USUARIOS" cascade constraints;
+DROP TABLE "AD"."ROLES" cascade constraints;
 --------------------------------------------------------
 --  DDL for Table USUARIOS
 --------------------------------------------------------
@@ -28,6 +30,21 @@
    COMMENT ON COLUMN "AD"."USUARIOS"."ELIMINADO" IS '0 -> NO ELIMINADO 1-> ELIMINADO';
  
    COMMENT ON COLUMN "AD"."USUARIOS"."IDROL" IS 'PERMISOS DEL USUARIO';
+--------------------------------------------------------
+--  DDL for Table ROLES
+--------------------------------------------------------
+
+  CREATE TABLE "AD"."ROLES" 
+   (	"IDROL" NUMBER(1,0), 
+	"NOMBREROL" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+ 
+
+   COMMENT ON COLUMN "AD"."ROLES"."IDROL" IS 'IDENTIFICADOR DEL ROL';
 REM INSERTING into AD.USUARIOS
 SET DEFINE OFF;
 Insert into AD.USUARIOS (IDUSUARIO,NOMBRE,PASSWORD,ELIMINADO,IDROL) values ('4','Luis','$2a$10$Dg4/aLcoINVyl7q.GEaxIOx.1SgwI4WaU/rXwdqRmbh7V0smWD7Um','0','2');
