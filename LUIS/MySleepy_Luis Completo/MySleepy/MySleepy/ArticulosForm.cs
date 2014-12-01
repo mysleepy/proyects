@@ -51,7 +51,7 @@ namespace MySleepy
 
         private void filtrar(String medida, String nombre, String referencia, String precio)
         {
-            String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0 ";
+            String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0";
 
             if (rbEliminados.Checked == true)
             {
@@ -61,25 +61,25 @@ namespace MySleepy
 
             if (medida != "")
             {
-                 sentencia = sentencia + " AND MEDIDA='" + medida + "'";
+                 sentencia = sentencia + " AND MEDIDA LIKE '%'" + medida + "%'";
                 
             }
 
             if (nombre != "")
             {
-                sentencia = sentencia + " AND NOMBRE='" + nombre + "'";
+                sentencia = sentencia + " AND NOMBRE LIKE '%" + nombre + "%'";
                
             }
 
             if (referencia != "")
             {
-                sentencia = sentencia + " AND REFERENCIA="+ Convert.ToInt32(referencia);
+                sentencia = sentencia + " AND REFERENCIA LIKE '%"+ Convert.ToInt32(referencia)+"%'";
                 
             }
 
             if (precio != "")
             {
-                sentencia = sentencia + " AND PRECIO=" + precio;
+                sentencia = sentencia + " AND PRECIO LIKE '%" + precio+"%'";
                 
             }
             actualizarDGV(sentencia);
@@ -125,7 +125,7 @@ namespace MySleepy
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            limpiarSeleccion();
+           // limpiarSeleccion();
             if (dgvArticulos.CurrentRow != null)
             {
                 AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1);
@@ -141,15 +141,21 @@ namespace MySleepy
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            dgvArticulos.ClearSelection();
-            if (dgvArticulos.CurrentRow != null && dgvArticulos.SelectedRows!=null)
+            this.dgvArticulos.ClearSelection();
+            if (dgvArticulos.RowCount == 0)
+            {
+                MessageBox.Show("No hay articulos para borrar");
+                return;
+            }
+            if (dgvArticulos.CurrentRow!=null)
             {
                 DialogResult result = MessageBox.Show("¿Seguro que desea eliminar el articulo?", "Eliminar", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     eliminarRegistro(dgvArticulos.CurrentRow);
                     // Actualiza tabla
-                    dgvArticulos.Rows.RemoveAt(dgvArticulos.CurrentRow.Index);
+                    cargarDGVInicio();
+                    //dgvArticulos.Rows.RemoveAt(dgvArticulos.CurrentRow.Index);
                     limpiarSeleccion();
                 } 
             }
@@ -186,11 +192,6 @@ namespace MySleepy
             filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
-        private void ArticulosForm_Load(object sender, EventArgs e)
-        {
-            limpiarSeleccion();
-        }
-
         private void limpiarSeleccion()
         {
             dgvArticulos.ClearSelection();
@@ -199,8 +200,13 @@ namespace MySleepy
 
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
-            limpiarSeleccion();
-            if (dgvArticulos.CurrentRow != null)
+            this.dgvArticulos.ClearSelection();
+            if (dgvArticulos.RowCount == 0)
+            {
+                MessageBox.Show("No hay articulos para borrar");
+                return;
+            }
+            if (dgvArticulos.CurrentRow!=null)
             {
                 DialogResult result = MessageBox.Show("¿Seguro que desea restaurar el articulo?", "Restaurar", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -236,6 +242,33 @@ namespace MySleepy
             limpiarSeleccion();
             btnBorrar.Enabled = true;
             btnRestaurar.Enabled = false;
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void ArticulosForm_Shown(object sender, EventArgs e)
+        {
+            dgvArticulos.ClearSelection();
+            dgvArticulos.Update();
+            
+        }
+
+        private void txtReferencia_KeyUp(object sender, KeyEventArgs e)
+        {
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void txtNombre_KeyUp(object sender, KeyEventArgs e)
+        {
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void txtMedida_KeyUp(object sender, KeyEventArgs e)
+        {
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void txtPrecio_KeyUp(object sender, KeyEventArgs e)
+        {
             filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
     }

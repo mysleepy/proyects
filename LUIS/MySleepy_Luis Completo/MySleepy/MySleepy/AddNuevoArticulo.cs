@@ -152,7 +152,12 @@ namespace MySleepy
 
         private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar))
+            if (Char.GetNumericValue(e.KeyChar) == -1)
+            {
+                e.Handled = false;
+                return;
+            }
+            if (Char.IsLetter(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -160,15 +165,60 @@ namespace MySleepy
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsLetter(e.KeyChar))
+            if (Char.GetNumericValue(e.KeyChar) == -1)
+            {
+                e.Handled = false;
+                return;
+            }
+            if (!Char.IsLetter(e.KeyChar) || Char.IsWhiteSpace(e.KeyChar))
             {
                 e.Handled = true;
             }
+            
         }
 
         private void AddNuevoArticulo_Load(object sender, EventArgs e)
         {
             btnAnadir.NotifyDefault(true);
+        }
+
+        private void txtComposicion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.GetNumericValue(e.KeyChar) == -1)
+            {
+                e.Handled = false;
+                return;
+            }
+            if (!Char.IsLetter(e.KeyChar) || Char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.GetNumericValue(e.KeyChar) == -1 || Char.IsPunctuation(e.KeyChar))
+            {
+                e.Handled = false;
+                return;
+            }
+            if (!Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtMedida_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.GetNumericValue(e.KeyChar) == -1 || e.KeyChar=='x')
+            {
+                e.Handled = false;
+                return;
+            }
+            if (!Char.IsDigit(e.KeyChar) || Char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

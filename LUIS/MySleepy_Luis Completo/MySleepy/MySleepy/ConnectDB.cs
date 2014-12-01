@@ -95,7 +95,7 @@ namespace MySleepy
 
         public int siguienteID(String campo, String tabla)
         {
-           String sentencia= "SELECT MAX("+campo+") from"+tabla;
+           String sentencia= "SELECT MAX("+campo+") from "+tabla;
            DataSet resultado=getData(sentencia,tabla);
            DataTable tTabla = resultado.Tables[tabla];
 

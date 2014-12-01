@@ -29,8 +29,12 @@ namespace MySleepy
             {
                 if (validarPass())
                 {
+                    //establecemos el rol con el que se ha conectado el usuario
                     conseguirIdRol();
-                    PrincipalForm principal = new PrincipalForm(idRol, conexion, txtUsuario.Text);
+                    String nombre = txtUsuario.Text;
+                    int idUsuario = Convert.ToInt32
+                                    (conexion.DLookUp("IDUSUARIO", "USUARIOS", " NOMBRE = '" + nombre + "'"));
+                    PrincipalForm principal = new PrincipalForm(idUsuario,idRol, conexion,nombre);
                     principal.Show();
                     this.Visible = false;
                 }
@@ -47,12 +51,12 @@ namespace MySleepy
 
         private void conseguirIdRol()
         {
-            String sentencia = "SELECT IDUSUARIO FROM USUARIOS WHERE UPPER(NOMBRE)='" + txtUsuario.Text.ToUpper() + "' AND ELIMINADO=0";
+            String sentencia = "SELECT IDROL FROM USUARIOS WHERE UPPER(NOMBRE)='" + txtUsuario.Text.ToUpper() + "' AND ELIMINADO=0";
             DataSet data = conexion.getData(sentencia, "tUsuarios");
             DataTable tUsuarios = data.Tables["tUsuarios"];
             foreach (DataRow row in tUsuarios.Rows)
             {
-                idRol = Convert.ToInt32(row["IDUSUARIO"]);
+                idRol = Convert.ToInt32(row["IDROL"]);
             }
         }
 

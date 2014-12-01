@@ -58,6 +58,7 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 20);
             this.txtPrecio.TabIndex = 5;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // label4
             // 
@@ -102,6 +103,7 @@
             this.txtComposicion.Name = "txtComposicion";
             this.txtComposicion.Size = new System.Drawing.Size(100, 20);
             this.txtComposicion.TabIndex = 13;
+            this.txtComposicion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtComposicion_KeyPress);
             // 
             // label1
             // 
@@ -118,6 +120,7 @@
             this.txtMedida.Name = "txtMedida";
             this.txtMedida.Size = new System.Drawing.Size(100, 20);
             this.txtMedida.TabIndex = 11;
+            this.txtMedida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMedida_KeyPress);
             // 
             // label2
             // 
