@@ -215,3 +215,4 @@ d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Noemi\MySleepy\MySleepy\obj\Debug\MySle
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Noemi\MySleepy\MySleepy\obj\Debug\MySleepy.PrincipalForm.es.resources
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Noemi\MySleepy\MySleepy\obj\Debug\MySleepy.csproj.GenerateResource.Cache
 d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Noemi\MySleepy\MySleepy\obj\Debug\es\MySleepy.resources.dll
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy_Noemi\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache

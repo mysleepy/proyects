@@ -35,10 +35,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.pbCUsuario = new System.Windows.Forms.PictureBox();
-            this.pbCPass = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCUsuario)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCPass)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,14 +69,19 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(170, 116);
+            this.txtUsuario.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsuario.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtUsuario.Location = new System.Drawing.Point(170, 112);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(147, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(147, 21);
             this.txtUsuario.TabIndex = 3;
             // 
             // txtPassword
             // 
-            this.txtPassword.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.ForeColor = System.Drawing.SystemColors.Window;
             this.txtPassword.Location = new System.Drawing.Point(170, 178);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -107,30 +108,12 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // pbCUsuario
-            // 
-            this.pbCUsuario.Location = new System.Drawing.Point(323, 116);
-            this.pbCUsuario.Name = "pbCUsuario";
-            this.pbCUsuario.Size = new System.Drawing.Size(20, 17);
-            this.pbCUsuario.TabIndex = 7;
-            this.pbCUsuario.TabStop = false;
-            // 
-            // pbCPass
-            // 
-            this.pbCPass.Location = new System.Drawing.Point(323, 180);
-            this.pbCPass.Name = "pbCPass";
-            this.pbCPass.Size = new System.Drawing.Size(20, 17);
-            this.pbCPass.TabIndex = 8;
-            this.pbCPass.TabStop = false;
-            // 
             // AccesoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 324);
             this.ControlBox = false;
-            this.Controls.Add(this.pbCPass);
-            this.Controls.Add(this.pbCUsuario);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtPassword);
@@ -142,8 +125,6 @@
             this.MinimizeBox = false;
             this.Name = "AccesoForm";
             this.Text = "Inicio";
-            ((System.ComponentModel.ISupportInitialize)(this.pbCUsuario)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbCPass)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,7 +139,5 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.PictureBox pbCUsuario;
-        private System.Windows.Forms.PictureBox pbCPass;
     }
 }

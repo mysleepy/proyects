@@ -53,7 +53,7 @@ namespace MySleepy
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Visible = false;
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
