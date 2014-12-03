@@ -160,6 +160,9 @@
     <EmbeddedResource Include="PedidosForm.resx">
       <DependentUpon>PedidosForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrincipalForm.es-AR.resx">
+      <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrincipalForm.es.resx">
       <DependentUpon>PrincipalForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -243,6 +246,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\iconosApp\lupa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\mas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\adwords_editor-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\papelera-de-reciclaje.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\fondo-atardecer-en-el-caribe.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

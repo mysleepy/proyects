@@ -18,10 +18,16 @@ namespace MySleepy
         public PrincipalForm(int idUsuario,int idRol, ConnectDB c,String nombre)
         {
             InitializeComponent();
+            this.BackColor = Color.Azure;
             this.conexion = c;
             this.idRol = idRol;
             this.idUsuario = idUsuario;
             tipoRol(nombre);
+        }
+
+        public PrincipalForm()
+        {
+            // TODO: Complete member initialization
         }
 
         private void tipoRol(String nombre)
@@ -88,6 +94,8 @@ namespace MySleepy
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
+            this.BackgroundImage = Properties.Resources.fondo_atardecer_en_el_caribe;
+         
             if (idRol == 3)
             {
                 historialToolStripMenuItem.Visible = false;

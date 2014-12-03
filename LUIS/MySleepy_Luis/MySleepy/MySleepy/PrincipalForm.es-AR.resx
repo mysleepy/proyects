@@ -117,33 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="historialToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 27</value>
-  </data>
-  <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 28</value>
-  </data>
-  <data name="clientesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 28</value>
-  </data>
-  <data name="articulosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 28</value>
-  </data>
-  <data name="cerrarSesiónToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cerrar sesión</value>
-  </data>
-  <data name="salirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 28</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblTipoUsuario.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>My Sleepy</value>
   </data>
 </root>

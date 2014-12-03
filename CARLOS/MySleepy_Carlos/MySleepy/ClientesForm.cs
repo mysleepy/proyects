@@ -15,18 +15,29 @@ namespace MySleepy
         ConnectDB conexion;
         private int rolUsuario;
         private int ckEliminado;
+        private AddPedido addPedido;
+        private int numero; // Almacena si lo llama el formulario Add pedido
         //Atributo que almacena la sentencia BASE sin filtros
         private const String SQL = "SELECT * FROM CLIENTES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA AND C.ELIMINADO = 0";
 
-        public ClientesForm(int idRol, ConnectDB c)
+        public ClientesForm(int idRol,int señal, ConnectDB c,AddPedido a)
         {
             InitializeComponent();
             conexion = c;
             rolUsuario = idRol;
             ckEliminado = 0;
             cargarTabla(SQL);
-            
+            numero = señal;
+            addPedido = a;
         }
+
+        public ClientesForm(int idRol, ConnectDB conexion)
+        {
+            // TODO: Complete member initialization
+            this.rolUsuario = idRol;
+            this.conexion = conexion;
+        }
+
         //Con este modo se limpia la tabla
         public void limpiarTabla()
         {
@@ -262,6 +273,16 @@ namespace MySleepy
             private void btnLimpiar_Click(object sender, EventArgs e)
             {
                 limpiar();
+            }
+
+            private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+            {
+                if (numero == 1)
+                {
+                    addPedido.cargarCliente(dgvClientes.CurrentRow.Cells[0].Value.ToString(), dgvClientes.CurrentRow.Cells[1].Value.ToString(), dgvClientes.CurrentRow.Cells[2].Value.ToString(), dgvClientes.CurrentRow.Cells[2].Value.ToString(), dgvClientes.CurrentRow.Cells[4].Value.ToString(), dgvClientes.CurrentRow.Cells[5].Value.ToString());
+                    MessageBox.Show("Cliente añadido al pedido");
+                    this.Close();
+                }
             }
         }
     }

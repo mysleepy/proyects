@@ -103,7 +103,7 @@ namespace MySleepy
 
         private void btnAnadir_Click(object sender, EventArgs e)
         {
-            pedido.nuevoArticulo(dgvArticulos.CurrentRow.Cells[0].Value.ToString(),dgvArticulos.CurrentRow.Cells[1].Value.ToString(),dgvArticulos.CurrentRow.Cells[3].Value.ToString());
+            
         }
         private void añadirArticulo(int id)
         {

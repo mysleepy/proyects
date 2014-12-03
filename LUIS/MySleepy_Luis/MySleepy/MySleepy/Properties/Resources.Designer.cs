@@ -63,6 +63,16 @@ namespace MySleepy.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap adwords_editor_128 {
+            get {
+                object obj = ResourceManager.GetObject("adwords_editor-128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap cerrarSesion {
             get {
                 object obj = ResourceManager.GetObject("cerrarSesion", resourceCulture);
@@ -113,6 +123,16 @@ namespace MySleepy.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap fondo_atardecer_en_el_caribe {
+            get {
+                object obj = ResourceManager.GetObject("fondo_atardecer_en_el_caribe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap gestion {
             get {
                 object obj = ResourceManager.GetObject("gestion", resourceCulture);
@@ -126,6 +146,26 @@ namespace MySleepy.Properties {
         public static System.Drawing.Bitmap historial {
             get {
                 object obj = ResourceManager.GetObject("historial", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap images {
+            get {
+                object obj = ResourceManager.GetObject("images", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap images1 {
+            get {
+                object obj = ResourceManager.GetObject("images1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,6 +203,16 @@ namespace MySleepy.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap mas {
+            get {
+                object obj = ResourceManager.GetObject("mas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap materias {
             get {
                 object obj = ResourceManager.GetObject("materias", resourceCulture);
@@ -176,6 +226,16 @@ namespace MySleepy.Properties {
         public static System.Drawing.Bitmap multas {
             get {
                 object obj = ResourceManager.GetObject("multas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap papelera_de_reciclaje {
+            get {
+                object obj = ResourceManager.GetObject("papelera-de-reciclaje", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -216,6 +276,16 @@ namespace MySleepy.Properties {
         public static System.Drawing.Bitmap tick_converted {
             get {
                 object obj = ResourceManager.GetObject("tick_converted", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap tick_converted1 {
+            get {
+                object obj = ResourceManager.GetObject("tick_converted1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

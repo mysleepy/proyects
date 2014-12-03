@@ -263,3 +263,6 @@ C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\obj\Debug\MySleepy.PrincipalFor
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\obj\Debug\MySleepy.csproj.GenerateResource.Cache
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\obj\Debug\es\MySleepy.resources.dll
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\obj\Debug\MySleepy.exe
+D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\bin\Debug\MySleepy.exe.config
+D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\obj\Debug\MySleepy.exe
+D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\obj\Debug\MySleepy.pdb

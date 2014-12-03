@@ -62,7 +62,7 @@ namespace MySleepy
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
         public Boolean validarPass()
@@ -130,27 +130,26 @@ namespace MySleepy
         {
             if (validarUsuario(txtUsuario.Text))
             {
-               // pbCUsuario.Image = Properties.Resources.tick_converted;
+                txtUsuario.BackColor = Color.Green;
                 if (txtPassword.Text != "") {
-                    txtUsuario.BackColor = Color.Green;
                     txtPassword_lostFocus(sender, e);
                 }
             }
             else
             {
                 txtUsuario.BackColor = Color.Red;
-              //  pbCUsuario.Image = Properties.Resources.red_green_OK_not_OK_Icons_converted;
             }
         }
         public void txtPassword_lostFocus(object sender, EventArgs e)
         {
             if (validarPass())
             {
+                txtUsuario.BackColor = Color.Green;
                 txtPassword.BackColor = Color.Green;
-                //pbCPass.Image = Properties.Resources.tick_converted;
             }
             else
             {
+                txtUsuario.BackColor = Color.Red;
                 txtPassword.BackColor = Color.Red;
                 //pbCPass.Image = Properties.Resources.red_green_OK_not_OK_Icons_converted;
             }

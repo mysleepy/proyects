@@ -57,7 +57,7 @@
             this.txtPrecio.Location = new System.Drawing.Point(92, 171);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 20);
-            this.txtPrecio.TabIndex = 5;
+            this.txtPrecio.TabIndex = 4;
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // label4
@@ -74,7 +74,7 @@
             this.txtNombre.Location = new System.Drawing.Point(92, 82);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 7;
+            this.txtNombre.TabIndex = 2;
             this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // btnAnadir
@@ -82,7 +82,7 @@
             this.btnAnadir.Location = new System.Drawing.Point(45, 260);
             this.btnAnadir.Name = "btnAnadir";
             this.btnAnadir.Size = new System.Drawing.Size(75, 23);
-            this.btnAnadir.TabIndex = 8;
+            this.btnAnadir.TabIndex = 7;
             this.btnAnadir.Text = "Añadir";
             this.btnAnadir.UseVisualStyleBackColor = true;
             this.btnAnadir.Click += new System.EventHandler(this.btnAnadir_Click);
@@ -93,7 +93,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 9;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -102,7 +102,7 @@
             this.txtComposicion.Location = new System.Drawing.Point(92, 129);
             this.txtComposicion.Name = "txtComposicion";
             this.txtComposicion.Size = new System.Drawing.Size(100, 20);
-            this.txtComposicion.TabIndex = 13;
+            this.txtComposicion.TabIndex = 3;
             this.txtComposicion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtComposicion_KeyPress);
             // 
             // label1
@@ -119,7 +119,7 @@
             this.txtMedida.Location = new System.Drawing.Point(92, 211);
             this.txtMedida.Name = "txtMedida";
             this.txtMedida.Size = new System.Drawing.Size(100, 20);
-            this.txtMedida.TabIndex = 11;
+            this.txtMedida.TabIndex = 6;
             this.txtMedida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMedida_KeyPress);
             // 
             // label2
@@ -136,7 +136,7 @@
             this.txtReferencia.Location = new System.Drawing.Point(92, 38);
             this.txtReferencia.Name = "txtReferencia";
             this.txtReferencia.Size = new System.Drawing.Size(100, 20);
-            this.txtReferencia.TabIndex = 15;
+            this.txtReferencia.TabIndex = 1;
             this.txtReferencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReferencia_KeyPress);
             // 
             // label5

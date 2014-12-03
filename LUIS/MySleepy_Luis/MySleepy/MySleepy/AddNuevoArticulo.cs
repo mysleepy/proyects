@@ -15,18 +15,21 @@ namespace MySleepy
         ConnectDB conexion;
         int numero;
         int idmodificar;
-        public AddNuevoArticulo(ConnectDB c,int señal)
+        ArticulosForm articulos;
+        public AddNuevoArticulo(ConnectDB c,int señal,ArticulosForm articulos)
         {
             InitializeComponent();
             activarReferencia(true);
             this.idmodificar = 0;
             this.conexion = c;
+            this.articulos = articulos;
             numero = señal;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+            articulos.actualizarTabla();
         }
 
         private void btnAnadir_Click(object sender, EventArgs e)
@@ -37,6 +40,7 @@ namespace MySleepy
                 {
                     añadirArticulo(idmodificar);
                     MessageBox.Show("Articulo añadido");
+                    articulos.actualizarTabla();
                 }
                 else
                 {

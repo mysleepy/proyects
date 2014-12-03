@@ -44,59 +44,59 @@
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sistemaToolStripMenuItem,
             this.pedidosToolStripMenuItem,
             this.historialToolStripMenuItem});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // sistemaToolStripMenuItem
             // 
-            resources.ApplyResources(this.sistemaToolStripMenuItem, "sistemaToolStripMenuItem");
             this.sistemaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.usuariosToolStripMenuItem,
             this.clientesToolStripMenuItem,
             this.articulosToolStripMenuItem,
             this.cerrarSesiónToolStripMenuItem,
             this.salirToolStripMenuItem});
+            resources.ApplyResources(this.sistemaToolStripMenuItem, "sistemaToolStripMenuItem");
             this.sistemaToolStripMenuItem.Image = global::MySleepy.Properties.Resources.mantenimiento;
             this.sistemaToolStripMenuItem.Name = "sistemaToolStripMenuItem";
             // 
             // usuariosToolStripMenuItem
             // 
-            resources.ApplyResources(this.usuariosToolStripMenuItem, "usuariosToolStripMenuItem");
             this.usuariosToolStripMenuItem.Image = global::MySleepy.Properties.Resources.socios;
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            resources.ApplyResources(this.usuariosToolStripMenuItem, "usuariosToolStripMenuItem");
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
-            resources.ApplyResources(this.clientesToolStripMenuItem, "clientesToolStripMenuItem");
             this.clientesToolStripMenuItem.Image = global::MySleepy.Properties.Resources.clientes;
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            resources.ApplyResources(this.clientesToolStripMenuItem, "clientesToolStripMenuItem");
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // articulosToolStripMenuItem
             // 
-            resources.ApplyResources(this.articulosToolStripMenuItem, "articulosToolStripMenuItem");
             this.articulosToolStripMenuItem.Image = global::MySleepy.Properties.Resources.materias;
             this.articulosToolStripMenuItem.Name = "articulosToolStripMenuItem";
+            resources.ApplyResources(this.articulosToolStripMenuItem, "articulosToolStripMenuItem");
             this.articulosToolStripMenuItem.Click += new System.EventHandler(this.articulosToolStripMenuItem_Click);
             // 
             // cerrarSesiónToolStripMenuItem
             // 
-            resources.ApplyResources(this.cerrarSesiónToolStripMenuItem, "cerrarSesiónToolStripMenuItem");
             this.cerrarSesiónToolStripMenuItem.Image = global::MySleepy.Properties.Resources.cerrarSesion;
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
+            resources.ApplyResources(this.cerrarSesiónToolStripMenuItem, "cerrarSesiónToolStripMenuItem");
             this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
-            resources.ApplyResources(this.salirToolStripMenuItem, "salirToolStripMenuItem");
             this.salirToolStripMenuItem.Image = global::MySleepy.Properties.Resources.Door_converted;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            resources.ApplyResources(this.salirToolStripMenuItem, "salirToolStripMenuItem");
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // pedidosToolStripMenuItem
@@ -122,10 +122,12 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Yellow;
+            this.BackgroundImage = global::MySleepy.Properties.Resources.gestion;
             this.Controls.Add(this.lblTipoUsuario);
             this.Controls.Add(this.menuStrip1);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cursor = System.Windows.Forms.Cursors.PanNW;
+            this.DoubleBuffered = true;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PrincipalForm";
@@ -148,8 +150,8 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem historialToolStripMenuItem;
-        private System.Windows.Forms.Label lblTipoUsuario;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
+        private System.Windows.Forms.Label lblTipoUsuario;
     }
 }
 

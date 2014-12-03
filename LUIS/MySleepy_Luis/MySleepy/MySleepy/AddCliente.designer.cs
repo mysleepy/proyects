@@ -242,6 +242,7 @@
             this.cbProvincia.Name = "cbProvincia";
             this.cbProvincia.Size = new System.Drawing.Size(147, 21);
             this.cbProvincia.TabIndex = 20;
+            this.cbProvincia.Tag = "";
             this.cbProvincia.SelectedIndexChanged += new System.EventHandler(this.cbProvincia_SelectedIndexChanged);
             // 
             // cbPoblacion
