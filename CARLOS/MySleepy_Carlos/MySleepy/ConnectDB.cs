@@ -52,7 +52,7 @@ namespace MySleepy
             objConexion = new OracleConnection(driver);
             objConexion.Open();
             objComando = new OracleCommand(sentencia, objConexion);
-
+            
             objComando.ExecuteNonQuery();
             objComando.Connection.Close();
         }

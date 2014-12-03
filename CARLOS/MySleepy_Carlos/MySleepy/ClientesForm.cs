@@ -15,6 +15,8 @@ namespace MySleepy
         ConnectDB conexion;
         private int rolUsuario;
         private int ckEliminado;
+        //Atributo que almacena la sentencia BASE sin filtros
+        private const String SQL = "SELECT * FROM CLIENTES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA AND C.ELIMINADO = 0";
 
         public ClientesForm(int idRol, ConnectDB c)
         {
@@ -22,7 +24,7 @@ namespace MySleepy
             conexion = c;
             rolUsuario = idRol;
             ckEliminado = 0;
-            cargarTabla();
+            cargarTabla(SQL);
             
         }
         //Con este modo se limpia la tabla
@@ -35,15 +37,15 @@ namespace MySleepy
             }
         }
         //Con este metodo cargo la tabla Clientes
-        public void cargarTabla()
+        public void cargarTabla(String sql)
         {
             limpiarTabla();
             int idCliente,telefono;
             String nombre, apellido, direccion, poblacion, email;
 
-            String sentencia = "SELECT * FROM CLIENTES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA AND C.ELIMINADO ="+this.ckEliminado+" order by C.IDCLIENTE";
+            sql = sql + " AND ELIMINADO = "+this.ckEliminado+" order by C.IDCLIENTE";
             DataSet data;
-            data = conexion.getData(sentencia, "CLIENTES");
+            data = conexion.getData(sql, "CLIENTES");
 
             DataTable tClientes = data.Tables["CLIENTES"];
             
@@ -63,7 +65,7 @@ namespace MySleepy
             dgvClientes.ClearSelection();
             dgvClientes.Update();
         }
-
+        //Boton salir
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -71,21 +73,16 @@ namespace MySleepy
         //Abro la ventana añadir clientes
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddCliente add = new AddCliente(conexion);
+            AddCliente add = new AddCliente(conexion,this);
             add.Show();
-            if (add.IsDisposed)
-            {
-                cargarTabla();
-            }
-            
         }
-
+        //Metodo que es llamado cuando se carga la interfaz
         private void ClientesForm_Load(object sender, EventArgs e)
         {
             dgvClientes.ClearSelection();
             dgvClientes.Update();
         }
-
+        //Metodo que es llamado cada vez que se produce un cambio en el checkbox
         private void ckbBorrar_CheckedChanged(object sender, EventArgs e)
         {
             
@@ -99,7 +96,7 @@ namespace MySleepy
                 this.ckEliminado = 0;
                 btnBorrar.Text = "Borrar";
             }
-            cargarTabla();
+            filtrar();
         }
         //Metodo para extraer id
         public int extraerIDTabla()
@@ -108,21 +105,17 @@ namespace MySleepy
             int id = Convert.ToInt32(fila.Cells[0].Value);
             return id;
         }
-
+        //Boton modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (dgvClientes.SelectedRows != null)
             {
                 int idClienteSel =extraerIDTabla();
-                AddCliente add = new AddCliente(conexion, idClienteSel);
+                AddCliente add = new AddCliente(conexion, this, idClienteSel);
                 add.Show();
-                if (add.IsDisposed)
-                {
-                    cargarTabla();
-                }
             }
         }
-
+        //Boton borrar y restaurar
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             String mensaje,mensajeConf;
@@ -165,9 +158,110 @@ namespace MySleepy
             public void limpiar()
             {
                 txtNombre.Text = "";
-                txtReferencia.Text = "";
                 txtPoblacion.Text = "";
-                cargarTabla();
+                txtApellido.Text = "";
+                txtCM.Text = "";
+                txtProvincia.Text = "";
+                ckbBorrar.Checked = false;
+                cargarTabla(SQL);
+            }
+            //Metodo usado para filtrar la tabla
+            private void filtrar()
+            {
+                String sentencia = "SELECT * FROM CLIENTES C, POBLACIONES P, COMUNIDADES M, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R"+
+                    " WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA"+
+                    " AND M.IDCOMUNIDAD = R.REFCOMUNIDAD";
+                if (txtNombre.Text.Length > 0)
+                {
+                    sentencia = sentencia + " AND UPPER(C.NOMBRE) LIKE '%" + txtNombre.Text.ToUpper() + "%'";
+                }
+                if (txtApellido.Text.Length > 0)
+                {
+                    sentencia = sentencia + " AND UPPER(C.APELLIDO1) LIKE '%" + txtApellido.Text.ToUpper() + "%'";
+                }
+                if (txtPoblacion.Text.Length > 0)
+                {
+                    sentencia = sentencia + " AND UPPER(P.POBLACION) LIKE '%" + txtPoblacion.Text.ToUpper() +"%'";
+                }
+                if (txtProvincia.Text.Length > 0)
+                {
+                    sentencia = sentencia + " AND UPPER(R.PROVINCIA) LIKE '%" + txtProvincia.Text.ToUpper() + "%'";
+                }
+                if (txtCM.Text.Length > 0)
+                {
+                    sentencia = sentencia + " AND UPPER(M.COMUNIDAD) LIKE '%" + txtCM.Text.ToUpper() + "%'";
+                }
+                cargarTabla(sentencia);
+            }
+        //Metodo que controlo el textBox de Nombre
+            private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtNombre.Text.Length >= 30)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                    filtrar();
+                }                
+            }
+        //Metodo que controla el textBox de Apellido
+            private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtApellido.Text.Length >= 20)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                    filtrar();
+                }                
+            }
+        //Metodo que controla el textBox de Poblacion
+            private void txtPoblacion_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtCM.Text.Length >= 50)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                    filtrar();
+                }
+            }
+        //Metodo que controla el textBox de Provincia
+            private void txtProvincia_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtProvincia.Text.Length >= 50)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                    filtrar();
+                }
+            }
+        //Metodo que controla el textBox de Comunidad Autonoma
+            private void txtCM_KeyPress(object sender, KeyPressEventArgs e)
+            {
+                if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtCM.Text.Length >= 50)
+                {
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Handled = false;
+                    filtrar();
+                }
+            }
+        //Boton limpiar filtros
+            private void btnLimpiar_Click(object sender, EventArgs e)
+            {
+                limpiar();
             }
         }
     }
