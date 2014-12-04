@@ -284,7 +284,6 @@ C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\bin\Debug\es\MySleepy.
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\bin\Debug\BCrypt.Net.dll
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\bin\Debug\BCrypt.Net.pdb
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\bin\Debug\BCrypt.Net.xml
-C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.AccesoForm.resources
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.AddArticulo.resources
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.AddCliente.resources
@@ -303,3 +302,7 @@ C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.Pri
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.csproj.GenerateResource.Cache
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\es-AR\MySleepy.resources.dll
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\es\MySleepy.resources.dll
+C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache
+C:\Users\Norman\Documents\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\MySleepy\bin\Debug\MySleepy.exe.config
+C:\Users\Norman\Documents\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.exe
+C:\Users\Norman\Documents\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.pdb

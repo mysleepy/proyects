@@ -73,6 +73,16 @@ namespace MySleepy.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap cancel {
+            get {
+                object obj = ResourceManager.GetObject("cancel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap cerrarSesion {
             get {
                 object obj = ResourceManager.GetObject("cerrarSesion", resourceCulture);
@@ -121,6 +131,16 @@ namespace MySleepy.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        public static System.Drawing.Icon folder_customer_256 {
+            get {
+                object obj = ResourceManager.GetObject("folder_customer_256", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap fondo_atardecer_en_el_caribe {
@@ -136,6 +156,16 @@ namespace MySleepy.Properties {
         public static System.Drawing.Bitmap gestion {
             get {
                 object obj = ResourceManager.GetObject("gestion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap guardar {
+            get {
+                object obj = ResourceManager.GetObject("guardar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

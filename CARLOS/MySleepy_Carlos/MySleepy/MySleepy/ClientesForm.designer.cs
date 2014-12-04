@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientesForm));
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.IDCLIENTE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Poblacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,39 +84,42 @@
             // dgvClientes
             // 
             this.dgvClientes.AllowUserToAddRows = false;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClientes.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvClientes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDCLIENTE,
+            this.dni,
             this.Nombre,
-            this.Apellido,
+            this.Apellido1,
+            this.Apellido2,
             this.Telefono,
             this.Direccion,
             this.Poblacion,
             this.Email});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Constantia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Constantia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvClientes.GridColor = System.Drawing.Color.LightSalmon;
-            this.dgvClientes.Location = new System.Drawing.Point(38, 225);
+            this.dgvClientes.Location = new System.Drawing.Point(12, 225);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersVisible = false;
+            this.dgvClientes.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(862, 252);
+            this.dgvClientes.Size = new System.Drawing.Size(968, 252);
             this.dgvClientes.TabIndex = 4;
             // 
             // IDCLIENTE
@@ -123,6 +129,12 @@
             this.IDCLIENTE.ReadOnly = true;
             this.IDCLIENTE.Visible = false;
             // 
+            // dni
+            // 
+            this.dni.HeaderText = "DNI";
+            this.dni.Name = "dni";
+            this.dni.ReadOnly = true;
+            // 
             // Nombre
             // 
             this.Nombre.FillWeight = 100.6677F;
@@ -131,13 +143,19 @@
             this.Nombre.ReadOnly = true;
             this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // Apellido
+            // Apellido1
             // 
-            this.Apellido.FillWeight = 107.8276F;
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            this.Apellido.ReadOnly = true;
-            this.Apellido.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Apellido1.FillWeight = 107.8276F;
+            this.Apellido1.HeaderText = "1ºApellido";
+            this.Apellido1.Name = "Apellido1";
+            this.Apellido1.ReadOnly = true;
+            this.Apellido1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Apellido2
+            // 
+            this.Apellido2.HeaderText = "2ºApellido";
+            this.Apellido2.Name = "Apellido2";
+            this.Apellido2.ReadOnly = true;
             // 
             // Telefono
             // 
@@ -183,7 +201,7 @@
             // ckbBorrar
             // 
             this.ckbBorrar.AutoSize = true;
-            this.ckbBorrar.Location = new System.Drawing.Point(560, 37);
+            this.ckbBorrar.Location = new System.Drawing.Point(634, 34);
             this.ckbBorrar.Name = "ckbBorrar";
             this.ckbBorrar.Size = new System.Drawing.Size(68, 17);
             this.ckbBorrar.TabIndex = 15;
@@ -194,7 +212,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(440, 74);
+            this.label1.Location = new System.Drawing.Point(514, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 13);
             this.label1.TabIndex = 16;
@@ -203,7 +221,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(222, 74);
+            this.label2.Location = new System.Drawing.Point(261, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 18;
@@ -221,7 +239,7 @@
             // 
             // txtCM
             // 
-            this.txtCM.Location = new System.Drawing.Point(560, 71);
+            this.txtCM.Location = new System.Drawing.Point(634, 71);
             this.txtCM.Name = "txtCM";
             this.txtCM.Size = new System.Drawing.Size(125, 20);
             this.txtCM.TabIndex = 5;
@@ -230,7 +248,7 @@
             // 
             // txtProvincia
             // 
-            this.txtProvincia.Location = new System.Drawing.Point(282, 71);
+            this.txtProvincia.Location = new System.Drawing.Point(321, 71);
             this.txtProvincia.Name = "txtProvincia";
             this.txtProvincia.Size = new System.Drawing.Size(134, 20);
             this.txtProvincia.TabIndex = 4;
@@ -240,7 +258,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(219, 41);
+            this.label3.Location = new System.Drawing.Point(258, 41);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 21;
@@ -248,7 +266,7 @@
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(282, 38);
+            this.txtApellido.Location = new System.Drawing.Point(321, 38);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(134, 20);
             this.txtApellido.TabIndex = 2;
@@ -271,7 +289,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(38, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(862, 123);
+            this.groupBox1.Size = new System.Drawing.Size(910, 123);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
@@ -279,7 +297,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
-            this.btnLimpiar.Location = new System.Drawing.Point(750, 34);
+            this.btnLimpiar.Location = new System.Drawing.Point(808, 34);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(71, 57);
             this.btnLimpiar.TabIndex = 10;
@@ -289,7 +307,7 @@
             // btnSalir
             // 
             this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
-            this.btnSalir.Location = new System.Drawing.Point(872, 492);
+            this.btnSalir.Location = new System.Drawing.Point(918, 500);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(62, 54);
             this.btnSalir.TabIndex = 14;
@@ -299,9 +317,9 @@
             // btnBorrar
             // 
             this.btnBorrar.Image = global::MySleepy.Properties.Resources.papelera_de_reciclaje;
-            this.btnBorrar.Location = new System.Drawing.Point(262, 151);
+            this.btnBorrar.Location = new System.Drawing.Point(196, 160);
             this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(63, 58);
+            this.btnBorrar.Size = new System.Drawing.Size(47, 43);
             this.btnBorrar.TabIndex = 13;
             this.btnBorrar.UseVisualStyleBackColor = true;
             this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
@@ -309,9 +327,9 @@
             // btnModificar
             // 
             this.btnModificar.Image = global::MySleepy.Properties.Resources.adwords_editor_128;
-            this.btnModificar.Location = new System.Drawing.Point(162, 151);
+            this.btnModificar.Location = new System.Drawing.Point(123, 160);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(60, 58);
+            this.btnModificar.Size = new System.Drawing.Size(45, 43);
             this.btnModificar.TabIndex = 12;
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -319,9 +337,9 @@
             // btnAñadir
             // 
             this.btnAñadir.Image = global::MySleepy.Properties.Resources.mas;
-            this.btnAñadir.Location = new System.Drawing.Point(68, 151);
+            this.btnAñadir.Location = new System.Drawing.Point(50, 160);
             this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(57, 58);
+            this.btnAñadir.Size = new System.Drawing.Size(45, 43);
             this.btnAñadir.TabIndex = 11;
             this.btnAñadir.UseVisualStyleBackColor = true;
             this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
@@ -330,13 +348,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 549);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(992, 566);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAñadir);
             this.Controls.Add(this.dgvClientes);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ClientesForm";
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.ClientesForm_Load);
@@ -366,14 +387,16 @@
         private System.Windows.Forms.TextBox txtProvincia;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDCLIENTE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Poblacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

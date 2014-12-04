@@ -56,26 +56,26 @@ namespace MySleepy
         {
             limpiarTabla();
             int idCliente,telefono;
-            String nombre, apellido, direccion, poblacion, email;
+            String nombre, dni, apellido1,apellido2, direccion, poblacion, email;
 
             sql = sql + " AND ELIMINADO = "+this.ckEliminado+" order by C.IDCLIENTE";
             DataSet data;
             data = conexion.getData(sql, "CLIENTES");
 
             DataTable tClientes = data.Tables["CLIENTES"];
-            
-
             foreach (DataRow row in tClientes.Rows)
             {
                 idCliente = Convert.ToInt32(row["IDCLIENTE"]);
+                dni = Convert.ToString(row["DNI"]);
                 nombre = Convert.ToString(row["NOMBRE"]);
-                apellido = Convert.ToString(row["APELLIDO1"]);
+                apellido1 = Convert.ToString(row["APELLIDO1"]);
+                apellido2 = Convert.ToString(row["APELLIDO2"]);
                 telefono = Convert.ToInt32(row["TELEFONO"]);
                 direccion = Convert.ToString(row["DIRECCION"]);
                 poblacion = Convert.ToString(row["POBLACION"]);
                 email = Convert.ToString(row["EMAIL"]);
 
-                dgvClientes.Rows.Add(idCliente,nombre,apellido,telefono,direccion,poblacion,email);
+                dgvClientes.Rows.Add(idCliente,dni,nombre,apellido1,apellido2,telefono,direccion,poblacion,email);
             } // Fin del bucle for each
             dgvClientes.ClearSelection();
             dgvClientes.Update();
@@ -94,7 +94,6 @@ namespace MySleepy
         //Metodo que es llamado cuando se carga la interfaz
         private void ClientesForm_Load(object sender, EventArgs e)
         {
-
             dgvClientes.ClearSelection();
             dgvClientes.Update();
             tooltip();
@@ -156,37 +155,44 @@ namespace MySleepy
         //Boton modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.SelectedRows != null)
+            if (dgvClientes.SelectedRows.Count != 0)
             {
                 int idClienteSel =extraerIDTabla();
                 AddCliente add = new AddCliente(conexion, this, idClienteSel);
                 add.Show();
             }
+            else{
+                MessageBox.Show(this, "No hay ningún Cliente seleccionado", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
         //Boton borrar y restaurar
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            String mensaje,mensajeConf;
-            int eliminar_rest;
-            if(this.ckEliminado == 0){
-                mensaje = "¿Desea borrar al cliente?";
-                mensajeConf = "Cliente borrado correctamente";
-                eliminar_rest = 1;
-            }
-            else{
-                mensaje = "¿Desea restaurar al cliente?";
-                mensajeConf = "Cliente restaurado correctamente";
-                eliminar_rest = 0;
-            }
-            int idCliente;
-            dgvClientes.ClearSelection();
-            //pedimos confirmacion
-            DialogResult opcion = MessageBox.Show(mensaje, "Confirmación",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (opcion == DialogResult.OK)
+            if (dgvClientes.SelectedRows.Count != 0)
             {
-                idCliente = extraerIDTabla();
-                if (dgvClientes.CurrentRow == null)
+                String mensaje, mensajeConf;
+                int eliminar_rest;
+                if (this.ckEliminado == 0)
+                {
+                    mensaje = "¿Desea borrar al cliente?";
+                    mensajeConf = "Cliente borrado correctamente";
+                    eliminar_rest = 1;
+                }
+                else
+                {
+                    mensaje = "¿Desea restaurar al cliente?";
+                    mensajeConf = "Cliente restaurado correctamente";
+                    eliminar_rest = 0;
+                }
+                int idCliente;
+                dgvClientes.ClearSelection();
+                //pedimos confirmacion
+                DialogResult opcion = MessageBox.Show(mensaje, "Confirmación",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (opcion == DialogResult.OK)
+                {
+                    idCliente = extraerIDTabla();
+                    if (dgvClientes.CurrentRow == null)
                     {
                         MessageBox.Show("Debe seleccionar una fila");
                     }
@@ -196,13 +202,18 @@ namespace MySleepy
                         conexion.setData(update);
 
                         //Actualizar los usuarios visualizados en el data grid view
-                        MessageBox.Show(mensajeConf,"Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        MessageBox.Show(mensajeConf, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         limpiar();
                     }
 
                 }
             }
-            //Metodo que limpia la interfaz
+            else
+            {
+                MessageBox.Show(this, "No hay ningún Cliente seleccionado", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+          }
+           //Metodo que limpia la interfaz
             public void limpiar()
             {
                 txtNombre.Text = "";
