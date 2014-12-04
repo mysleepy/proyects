@@ -26,9 +26,17 @@ namespace MySleepy
         private String mensaje;
         //Atributo que almacena el mensaje de confirmación
         private String confirmacion;
-        public AddCliente(ConnectDB conexion)
+        //Atributo que indica si se ha de modificar o insertar en la BBDD
+        private Boolean mod;
+        //Atributo que almacena el id a controlar
+        private int idCliente;
+        //Atributo que almacena la ventana padre
+        private ClientesForm padre;
+        public AddCliente(ConnectDB conexion,ClientesForm padre)
         {
             InitializeComponent();
+            this.mod = false;
+            this.confirmacion = "¿Desea añadir el cliente?";
             //iniciamos la conexion 
             this.conexion = conexion;
             DataSet data = new DataSet();
@@ -40,25 +48,54 @@ namespace MySleepy
             {
                 cbCAutonoma.Items.Add(Convert.ToString(row["COMUNIDAD"]));
             }
-            
+            this.padre = padre;
             txtEmail.LostFocus += new EventHandler(txtEmail_lostFocus);
+            txtTelefono.LostFocus += new EventHandler(txtTelefono_lostFocus);
         }
-        public AddCliente(ConnectDB conexion,int id)
+        public AddCliente(ConnectDB conexion,ClientesForm padre,int id)
         {
             InitializeComponent();
+            this.mod = true;
+            this.confirmacion = "¿Desea modificar al cliente?";
             //iniciamos la conexion 
             this.conexion = conexion;
             txtEmail.LostFocus += new EventHandler(txtEmail_lostFocus);
-            rellenaDatos(id);
+            txtTelefono.LostFocus += new EventHandler(txtTelefono_lostFocus);
+            idCliente = id;
+            this.padre = padre;
+            rellenaDatos();
         }
-        private void rellenaDatos(int id){
+        //Metodo que rellena los campos segun el id pasado
+        private void rellenaDatos(){
             String sentencia = "SELECT C.IDCLIENTE,C.NOMBRE,C.APELLIDO1,C.APELLIDO2,C.TELEFONO,C.EMAIL,C.DIRECCION,"+
                 "P.POBLACION,R.PROVINCIA,M.COMUNIDAD,L.CODIGOPOSTAL"+
-                "FROM CLIENTES C, POBLACIONES P, PROVINCIAS V, COMUNIDADES M,CODIGOSPOSTALES L,CODIGOSPOSTALESPOBLACIONES X"+
-                "WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPROVINCIA = R.IDPROVINCIA AND R.REFCOMUNIDAD = M.IDCOMUNIDAD"+
-                "AND X.REFPOBLACION = P.IDPOBLACION AND X.REFCODIGOPOSTAL = L.IDCODIGOPOSTAL AND C.IDCLIENTE ="+id;
+                " FROM CLIENTES C, POBLACIONES P, PROVINCIAS R, COMUNIDADES M,CODIGOSPOSTALES L,CODIGOSPOSTALESPOBLACIONES X"+
+                " WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPROVINCIA = R.IDPROVINCIA AND R.REFCOMUNIDAD = M.IDCOMUNIDAD"+
+                " AND X.REFPOBLACION = P.IDPOBLACION AND X.REFCODIGOPOSTAL = L.IDCODIGOPOSTAL AND C.IDCLIENTE = "+idCliente;
+            String nombre = "", apellido1="", apellido2="", telefono="", email="", direccion="",comunidad ="",provincia="",poblacion ="",cp ="";
             DataSet data = new DataSet();
             DataTable tabla = new DataTable();
+            data = conexion.getData(sentencia,"CLIENTES");
+            tabla = data.Tables["CLIENTES"];
+            foreach(DataRow row in tabla.Rows){
+                nombre= Convert.ToString(row["NOMBRE"]);
+                apellido1= Convert.ToString(row["APELLIDO1"]);
+                apellido2=Convert.ToString(row["APELLIDO2"]);
+                telefono = Convert.ToString(row["TELEFONO"]);
+                email = Convert.ToString(row["EMAIL"]);
+                direccion = Convert.ToString(row["DIRECCION"]);
+                comunidad = Convert.ToString(row["COMUNIDAD"]);
+                provincia = Convert.ToString(row["PROVINCIA"]);
+                poblacion = Convert.ToString(row["POBLACION"]);
+                cp = Convert.ToString(row["CODIGOPOSTAL"]);
+            }
+            
+            txtNombre.Text = nombre;
+            txtApellido1.Text = apellido1;
+            txtApellido2.Text = apellido2;
+            txtTelefono.Text = telefono;
+            txtEmail.Text = email;
+            txtDireccion.Text = direccion;
             //Cargo el combo box de comunidades autonomas
             data = conexion.getData("SELECT COMUNIDAD FROM COMUNIDADES ORDER BY ORDEN", "COMUNIDADES");
             tabla = data.Tables["COMUNIDADES"];
@@ -66,26 +103,56 @@ namespace MySleepy
             {
                 cbCAutonoma.Items.Add(Convert.ToString(row["COMUNIDAD"]));
             }
+            cbCAutonoma.SelectedItem = comunidad;
+            cbProvincia.SelectedItem = provincia;
+            cbPoblacion.SelectedItem = poblacion;
+            cbCP.SelectedItem = cp;
         }
-
+        //Boton guardar
         private void btnGuardar_Click(object sender, EventArgs e)
         {             
             if (compruebaCampos() == false)
             {
-                MessageBox.Show(this,confirmacion,"Confirmación",MessageBoxButtons.YesNo);
-                //Busco el id correspondientede la tabla conjunta CODIGOSPOSTALESPOBLACIONES
-                int refCpProPo = Convert.ToInt32(conexion.DLookUp("IDCODIGOPOSTALPOB", "CODIGOSPOSTALESPOBLACIONES",
-                    "REFCODIGOPOSTAL =" + this.idCodigoPostal + " REFPOBLACION =" + this.idPoblacion + " REFPROVINCIA =" + this.idProvincia));
-                //Busco el ultimo id existente en la tabla clientes y lo aumento en 1
-                int idCliente = Convert.ToInt32(conexion.DLookUp("MAX(IDCLIENTE)", "CLIENTES", "")) + 1;
-                //Almaceno los datos en la base de datos
-                conexion.setData("INSERT INTO CLIENTES VALUES(" + idCliente + ",'" + txtNombre.Text + "','" + txtApellido1.Text + "','" +
-                    txtApellido2.Text + "','" + txtDireccion.Text + "'," + refCpProPo + "," + Convert.ToInt32(txtTelefono.Text) + ",'" +
-                    txtEmail.Text + "'," + 0);
-                MessageBox.Show(this, "Cliente añadido");
-            }
-            else { MessageBox.Show(this,mensaje);}
+                confirmacion = confirmacion + "\n-" + txtNombre.Text + "  " + txtApellido1.Text + " " + txtApellido2.Text;
+                //Se pide la confirmacion al usuario para realizar dicho cambio en la BBDD
+                DialogResult option = MessageBox.Show(this, this.confirmacion, "Confirmación", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                if (option == DialogResult.Yes)
+                {
+                    String nombre = txtNombre.Text, apellido1 = txtApellido1.Text, apellido2 = txtApellido2.Text, email = txtEmail.Text,
+                            direccion = txtDireccion.Text;
+                    int telefono = Convert.ToInt32(txtTelefono.Text);
+                    //Busco el id correspondientede la tabla conjunta CODIGOSPOSTALESPOBLACIONES
+                    int refCpProPo = Convert.ToInt32(conexion.DLookUp("IDCODIGOPOSTALPOB", "CODIGOSPOSTALESPOBLACIONES",
+                        "REFCODIGOPOSTAL =" + this.idCodigoPostal + " AND REFPOBLACION =" + this.idPoblacion + " AND REFPROVINCIA =" + this.idProvincia));
+                    //Console.WriteLine(refCpProPo);
+                    if (this.mod == false)
+                    {
+                        //Busco el ultimo id existente en la tabla clientes y lo aumento en 1
+                        idCliente = Convert.ToInt32(conexion.DLookUp("MAX(IDCLIENTE)", "CLIENTES", "")) + 1;
+                        //Console.WriteLine(idCliente);
+                        //Almaceno los datos en la base de datos
+                        conexion.setData("INSERT INTO CLIENTES (IDCLIENTE,NOMBRE,APELLIDO1,APELLIDO2,DIRECCION,REFCPPOBLACIONES,TELEFONO,EMAIL,ELIMINADO)"+
+                            " VALUES("+idCliente+",'"+nombre+"','"+ apellido1 +"','"+apellido2+"','"+direccion+ 
+                            "',"+ refCpProPo+","+telefono+",'"+email + "'," +0+")");
+                        MessageBox.Show(this, "Cliente añadido", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiar();
+                    }//fin if añadir
+                    else
+                    {
+                        //Actualizo los datos del cliente
+                        String update = "UPDATE CLIENTES set NOMBRE = '"+nombre+"', APELLIDO1 = '"+apellido1+
+                            "',APELLIDO2 = '"+apellido2+"', DIRECCION = '"+direccion+"', REFCPPOBLACIONES = "+refCpProPo+
+                            ",TELEFONO = "+telefono+", EMAIL = '"+email+"' WHERE IDCLIENTE=" +idCliente;
+                        MessageBox.Show(update);
+                        conexion.setData(update);
+                        MessageBox.Show(this, "Cliente modificado", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }//fin else modificar
+
+                }//fin if permiso
+            }//fin if comprobar campos
+            else { MessageBox.Show(this,mensaje,"Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);}
         }
+        //Metodo que si alguno de los campos estan vacios
         private Boolean compruebaCampos()
         {
             Boolean vacio = false;
@@ -94,7 +161,6 @@ namespace MySleepy
             if(txtApellido1.Text.Equals("")){mensaje = mensaje + "-Primer Apellido \n";vacio = true;}
             if(txtApellido2.Text.Equals("")){mensaje = mensaje + "-Segundo Apellido \n";vacio = true;}
             if(txtTelefono.Text.Equals("")){mensaje = mensaje + "-Teléfono \n";vacio = true;}
-            if(txtEmail.Text.Equals("")){mensaje = mensaje + "-Email \n";vacio = true;}
             if(txtDireccion.Text.Equals("")){mensaje = mensaje + "-Direccion \n";vacio = true;}
             if(cbCAutonoma.SelectedIndex == -1){mensaje = mensaje +"-Comunidad Autonoma \n";vacio = true;}
             if(cbProvincia.SelectedIndex == -1){mensaje = mensaje +"-Provincia \n";vacio = true;}
@@ -105,7 +171,7 @@ namespace MySleepy
         //Metodo para controlar que solo se escriban caracteres alfabeticos en  en campo nombre
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\''))
+            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtNombre.Text.Length >= 30)
             {
                 e.Handled = true;
             }
@@ -117,7 +183,7 @@ namespace MySleepy
         //Metodo para controlar que solo se escriban caracteres alfabeticos en  en campo Apellido1
         private void txtApellido1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\''))
+            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'')|| txtApellido1.Text.Length >=20)
             {
                 e.Handled = true;
             }
@@ -129,7 +195,7 @@ namespace MySleepy
         //Metodo para controlar que solo se escriban caracteres alfabeticos en  en campo Apellido2
         private void txtApellido2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\''))
+            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'')||txtApellido2.Text.Length >=20)
             {
                 e.Handled = true;
             }
@@ -141,7 +207,7 @@ namespace MySleepy
         //Metodo para controlar que solo se escriban caracteres numericos en  en campo telefono
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsLetter(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\''))
+            if (Char.IsLetter(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtTelefono.Text.Length >= 9)
             {
                 e.Handled = true;
             }
@@ -152,7 +218,7 @@ namespace MySleepy
         }
         private void txtEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar.Equals('\''))
+            if (e.KeyChar.Equals('\'') || txtEmail.Text.Length >= 30)
             {
                 e.Handled = true;
             }
@@ -161,73 +227,109 @@ namespace MySleepy
                 e.Handled = false;
             }
         }
+        //Metodo que comprueba si el email introducido es el correcto
         public void txtEmail_lostFocus(object sender, EventArgs e)
         {
-            if (MetodosAuxiliares.emailCorrecto(txtEmail.Text)==false)
+            if (txtEmail.Text != "")
             {
-                txtEmail.Text = "";
-                MessageBox.Show(this, "La estructura del email introducido es incorrecta");
+                if (MetodosAuxiliares.emailCorrecto(txtEmail.Text) == false)
+                {
+                    txtEmail.Text = "";
+                    txtEmail.Focus();
+                    MessageBox.Show(this, "La estructura del email introducido es incorrecta", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        //Metodo que Controla que se ha introducido el numero correcto(longitud)
+        public void txtTelefono_lostFocus(object sender, EventArgs e)
+        {
+            if (txtTelefono.Text.Length < 9)
+            {
+                txtTelefono.Text = "";
+                MessageBox.Show(this, "El número de telefono introducido es incorrecto","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                txtTelefono.Focus();
+                
             }
         }
         //Metodo que carga el combobox de provincias dependiendo de la comunidad autonoma seleccionada
         private void cbCAutonoma_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbProvincia.Items.Clear();
-            String cautonoma = cbCAutonoma.SelectedItem.ToString();
-            this.idCAutonoma = Convert.ToInt32(conexion.DLookUp("IDCOMUNIDAD", "COMUNIDADES", "COMUNIDAD = '"+ cautonoma+"'"));
-            DataSet data = new DataSet();
-            DataTable tabla = new DataTable();
-            //Cargo el combo box de comunidades autonomas
-            data = conexion.getData("SELECT * FROM PROVINCIAS WHERE REFCOMUNIDAD = " + idCAutonoma + " ORDER BY ORDEN", "PROVINCIAS");
-            tabla = data.Tables["PROVINCIAS"];
-            foreach (DataRow row in tabla.Rows)
+            if (cbCAutonoma.SelectedIndex > 0)
             {
-                cbProvincia.Items.Add(row["PROVINCIA"]);
+                String cautonoma = cbCAutonoma.SelectedItem.ToString();
+                this.idCAutonoma = Convert.ToInt32(conexion.DLookUp("IDCOMUNIDAD", "COMUNIDADES", "COMUNIDAD = '" + cautonoma + "'"));
+                rellenarComboBox(cbProvincia, "PROVINCIAS", "PROVINCIA", "REFCOMUNIDAD =" + idCAutonoma + " ORDER BY ORDEN");
+                cbProvincia.SelectedIndex = 0;
             }
         }
         //Metodo que carga el combobox de poblaciones dependiendo de la provincia seleccionada
         private void cbProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbPoblacion.Items.Clear();
-            String provincia = cbProvincia.SelectedItem.ToString();
-            this.idProvincia = Convert.ToInt32(conexion.DLookUp("IDPROVINCIA", "PROVINCIAS", "PROVINCIA ='" + provincia+"'"));
-            DataSet data = new DataSet();
-            DataTable tabla = new DataTable();
-            //Cargo el combo box de comunidades autonomas
-            data = conexion.getData("SELECT * FROM POBLACIONES WHERE IDPOBLACION = (SELECT REFPOBLACION FROM CODIGOSPOSTALESPOBLACIONES WHERE "+
-            "REFPROVINCIA ="+idProvincia+")", "POBLACIONES");
-            tabla = data.Tables["POBLACIONES"];
-            foreach (DataRow row in tabla.Rows)
+            if (cbProvincia.SelectedIndex >= 0)
             {
-                cbProvincia.Items.Add(row["POBLACION"]);
+                String provincia = cbProvincia.SelectedItem.ToString();
+                this.idProvincia = Convert.ToInt32(conexion.DLookUp("IDPROVINCIA", "PROVINCIAS", "PROVINCIA ='" + provincia + "'"));
+                rellenarComboBox(cbPoblacion, "POBLACIONES", "POBLACION", "IDPOBLACION IN (SELECT REFPOBLACION FROM CODIGOSPOSTALESPOBLACIONES WHERE " +
+                "REFPROVINCIA =" + idProvincia + ") ORDER BY POBLACION");
+                cbPoblacion.SelectedIndex = 0;
             }
+            
         }
         //Metodo que carga el combobox de codigos postales dependiendo de la poblacion seleccionada
         private void cbPoblacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbCP.Items.Clear();
-            String poblacion = cbPoblacion.SelectedItem.ToString();
-            this.idPoblacion = Convert.ToInt32(conexion.DLookUp("IDPOBLACION", "POBLACIONES", "POBLACION ='" + poblacion+"'"));
-            DataSet data = new DataSet();
-            DataTable tabla = new DataTable();
-            //Cargo el combo box de comunidades autonomas
-            data = conexion.getData("SELECT * FROM CODIGOSPOSTALES WHERE IDCODIGOPOSTAL = (SELECT REFCODIGOPOSTAL FROM CODIGOSPOSTALESPOBLACIONES WHERE " +
-            "REFPROVINCIA =" +idProvincia + " AND REFPOBLACION = idPoblacion)", "CODIGOSPOSTALES");
-            tabla = data.Tables["CODIGOSPOSTALES"];
-            foreach (DataRow row in tabla.Rows)
+            if (cbPoblacion.SelectedIndex >= 0)
             {
-                cbProvincia.Items.Add(row["CODIGOPOSTAL"]);
+                String poblacion = cbPoblacion.SelectedItem.ToString();
+                this.idPoblacion = Convert.ToInt32(conexion.DLookUp("IDPOBLACION", "POBLACIONES", "POBLACION ='" + poblacion + "'"));
+                rellenarComboBox(cbCP, "CODIGOSPOSTALES", "CODIGOPOSTAL", "IDCODIGOPOSTAL IN (SELECT REFCODIGOPOSTAL FROM CODIGOSPOSTALESPOBLACIONES WHERE " +
+                "REFPOBLACION = " + idPoblacion + ") ORDER BY CODIGOPOSTAL");
+                cbCP.SelectedIndex = 0;
             }
+            
         }
         //Metodo que recoge el id del codigo postal seleccionado
         private void cbCP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.idCodigoPostal = Convert.ToInt32(conexion.DLookUp("IDCODIGOPOSTAL", "CODIGOPOSTALES", "CODIGOPOSTAL =" + cbCP.SelectedItem));
+            this.idCodigoPostal = Convert.ToInt32(conexion.DLookUp("IDCODIGOPOSTAL", "CODIGOSPOSTALES", "CODIGOPOSTAL ='" + cbCP.SelectedItem.ToString()+"'"));
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            String sentencia = "SELECT * FROM CLIENTES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA";
+            padre.cargarTabla(sentencia);
             this.Close();
         }
+        //Metodo para rellenar los combobox en base al anterior
+        private void rellenarComboBox(ComboBox combo,String tabla,String columna, String condicion)
+        {
+            DataSet data = new DataSet();
+            DataTable table = new DataTable();
+            //Cargo el combo box de comunidades autonomas
+            data = conexion.getData("SELECT * FROM "+tabla+" WHERE "+condicion, tabla);
+            table = data.Tables[tabla];
+            foreach (DataRow row in table.Rows)
+            {
+                combo.Items.Add(row[columna]);
+            }
+        }
+        //Metodo que limpia los campos
+        private void limpiar()
+        {
+            txtNombre.Text = "";
+            txtApellido1.Text = "";
+            txtApellido2.Text = "";
+            txtEmail.Text = "";
+            txtTelefono.Text = "";
+            txtDireccion.Text = "";
+            cbCAutonoma.SelectedIndex = 0;
+            cbCP.Items.Clear();
+            cbPoblacion.Items.Clear();
+            this.confirmacion = "¿Desea añadir el cliente?";
+        }
+        
     }
 }

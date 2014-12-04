@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySleepy;
+     
 
 namespace MySleepy
 {
@@ -19,6 +20,7 @@ namespace MySleepy
         private int rolUsuario = -1;
         private string nombre ="";
         ConnectDB conexion;
+        int tipoCambio;
         public UsuariosForm(int idRol, ConnectDB c)
         {
             InitializeComponent();
@@ -88,16 +90,18 @@ namespace MySleepy
         private void rbNoEliminados_CheckedChanged(object sender, EventArgs e)
         {
             rbEliminados.Checked = false;
+            btnBorrar.Enabled = true;
             btnRestaurar.Enabled = false;
             filtrar();
         }
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddUsuario add = new AddUsuario(this);
+            tipoCambio = 1; //tipo de cambio -> añadir
+            AddUsuario add = new AddUsuario(this,0,tipoCambio,idUsuario);
             //comprobar que no este abierto los formularios addClientes etc
             add.Show();
-
+            
             if (add.IsDisposed)
             {
                 cargarTablaInicio();
@@ -107,32 +111,41 @@ namespace MySleepy
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-           
-            
+            tipoCambio = 2;
+             if (idUsuario == 1)
+             {
+                 MessageBox.Show("El usuario ROOT no se puede modificar");
+             }
+             else
+             {
+                 AddUsuario modificar = new AddUsuario(this, 1,tipoCambio,idUsuario);
+                 modificar.Show();
+             }            
         }
 
         private void dvgUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            DataGridViewRow fila = extraerFilaSeleccionada();
-            idUsuario = Convert.ToInt32(fila.Cells[0].Value); //columna referente al idUsuario
-            //MessageBox.Show(""+idUsuario);
-            
-
+            idUsuario = extraerIDTabla();
         }
-        public DataGridViewRow extraerFilaSeleccionada()
+
+        public int extraerIDTabla()
         {
-            return dgvUsuarios.CurrentRow;
-            
+            DataGridViewRow fila = dgvUsuarios.CurrentRow;
+            int id = Convert.ToInt32(fila.Cells[0].Value); //columna referente al idUsuario
+            return id;
+            //MessageBox.Show(""+idUsuario);
         }
+
         private void btnBorrar_Click(object sender, EventArgs e)
         {
+            tipoCambio = 3;
             dgvUsuarios.ClearSelection();
             //pedimos confirmacion
             DialogResult opcion = MessageBox.Show("¿Desea borrar el usuario?", "Confirmación",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (opcion == DialogResult.OK)
             {
+                idUsuario = extraerIDTabla();
                 if (idUsuario == 1)
                 {
                     //El usuario root no se puede borrar
@@ -140,7 +153,7 @@ namespace MySleepy
                 }
                 else
                 {
-                    if ( extraerFilaSeleccionada()== null)
+                    if (dgvUsuarios.CurrentRow == null)
                     {
                         MessageBox.Show("Debe seleccionar una fila");
                     }
@@ -148,10 +161,12 @@ namespace MySleepy
                     {
                         String update = " update USUARIOS  set ELIMINADO = " + 1 + " where IDUSUARIO=" + idUsuario;
                         conexion.setData(update);
-                        MessageBox.Show("Usuario eliminado");
-
+                        
                         //Actualizar los usuarios visualizados en el data grid view
                         cargarTablaInicio();
+                        insertHistorialCambio(tipoCambio, idUsuario);
+                        MessageBox.Show("Usuario eliminado");
+                        limpiar();
                     }
                     
                 } 
@@ -160,12 +175,13 @@ namespace MySleepy
 
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
+            tipoCambio = 4;
             //pedimos confirmacion
             DialogResult opcion = MessageBox.Show("¿Desea restaurar el usuario?", "Confirmación",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (opcion == DialogResult.OK)
             {
-                if (extraerFilaSeleccionada() == null)
+                if (dgvUsuarios.CurrentRow == null)
                 {
                     MessageBox.Show("Debe seleccionar una fila");
                 }
@@ -173,18 +189,18 @@ namespace MySleepy
                 {
                     String update = " update USUARIOS  set ELIMINADO = " + 0 + " where IDUSUARIO=" + idUsuario;
                     conexion.setData(update);
+                    insertHistorialCambio(tipoCambio, idUsuario);
                     MessageBox.Show("Usuario restaurado");
 
                     //Actualizar los usuarios visualizados en el data grid view
                     cargarTablaInicio();
+                    limpiar() ;
                 }
             }
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            nombre = txtNombre.Text;
-            nombre = nombre.ToUpper();
             filtrar();
         }
         public void filtrar()
@@ -201,7 +217,7 @@ namespace MySleepy
 
             if (txtNombre.Text != "")
             {
-                select += " and NOMBRE like '%" + txtNombre.Text.ToUpper() + "%'";
+                select += " and upper(NOMBRE) like '%" + txtNombre.Text.ToUpper() + "%'";
             }
             if (cbRoles.SelectedIndex != -1)
             {
@@ -234,27 +250,35 @@ namespace MySleepy
 
         private void cbRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //extraer idRol
-            String rol = cbRoles.SelectedItem.ToString();
-            String select = "Select idROL from ROLES where NOMBREROL = '" + rol + "'";
-            rolUsuario = extraerIDRol(select);
-            filtrar();
+            if (cbRoles.SelectedIndex != -1)
+            {
+                //extraer idRol
+                String rol = cbRoles.SelectedItem.ToString();
+                String select = "Select idROL from ROLES where NOMBREROL = '" + rol + "'";
+                rolUsuario = extraerID(select, "IDROL", "ROLES");
+                filtrar();
+            }
+            
         }
-        public int extraerIDRol(String select)
+        public int extraerID(String select, String idTabla,String tabla)
         {
-            DataSet data = conexion.getData(select, "ROLES");
+            DataSet data = conexion.getData(select, tabla);
 
-            DataTable tRoles = data.Tables["ROLES"];
+            DataTable tRoles = data.Tables[tabla];
 
             int id = 0;
             foreach (DataRow row in tRoles.Rows)
             {
-                id = Convert.ToInt32(row["IDROL"]);
+                id = Convert.ToInt32(row[idTabla]);
 
             } // Fin del bucle for each
             return id;
         }
         private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiar() ;
+        }
+        public void limpiar()
         {
             txtNombre.Text = "";
             nombre = "";
@@ -262,12 +286,62 @@ namespace MySleepy
             cargarTablaInicio();
             rbNoEliminados.Checked = true;
             rbEliminados.Checked = false;
+            cbRoles.SelectedIndex = -1;
+            btnBorrar.Enabled = true;
+            btnRestaurar.Enabled = false;
         }
-
         private void UsuariosForm_Load(object sender, EventArgs e)
         {
             dgvUsuarios.ClearSelection();
             dgvUsuarios.Update();
+        }
+
+
+
+        //METODOS DE HISTORIAL DE CAMBIOS -> CLASE A PARTE
+        public void insertHistorialCambio(int tipoCambio,int idUsuario)
+        {
+            String mensaje = "";
+            if (tipoCambio == 1)
+            {
+                mensaje = "Añadido nuevo usuario";
+            }
+            if (tipoCambio == 2)
+            {
+                mensaje = "Usuario modificado";
+            }
+            if (tipoCambio == 3)
+            {
+                mensaje = "Usuario borrado";
+            }
+            if(tipoCambio == 4){
+                mensaje = "Usuario restaurado";
+            }
+            String date = System.DateTime.Today.ToString("d");
+            String insert = "INSERT INTO HISTORIALCAMBIOS VALUES (" + (ultimoIDHistorial() + 1) + ", " + idUsuario +
+                            " , '" + date + "', " + tipoCambio + ", '"+mensaje+"')";
+            conexion.setData(insert);
+            //MessageBox.Show(insert);
+
+        }
+
+
+        public int ultimoIDHistorial()
+        {
+            //Extraemos el id del rol seleccionado en el comboBox
+            String extraerID = "Select IDHISTOCAMBIO from HISTORIALCAMBIOS";
+            DataSet data = conexion.getData(extraerID, "HISTORIALCAMBIOS");
+
+            DataTable tUsuarios = data.Tables["HISTORIALCAMBIOS"];
+
+            int idUser = 0;
+            foreach (DataRow row in tUsuarios.Rows)
+            {
+                idUser = Convert.ToInt16(row["IDHISTOCAMBIO"]);
+
+            } // Fin del bucle for each
+
+            return idUser;
         }
     }
 }

@@ -74,9 +74,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 100);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 13);
+            this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Repetir contraseña:";
+            this.label3.Text = "Repita contraseña:";
             // 
             // txtRepetirPassword
             // 
@@ -108,7 +108,7 @@
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 8;
-            this.btnCrear.Text = "Crear";
+            this.btnCrear.Text = "Aceptar";
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
             // 

@@ -121,8 +121,8 @@
   <data name="editoriales" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\editoriales.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="prestamos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\iconosApp\prestamos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="historial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\historial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,8 +133,20 @@
   <data name="materias" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\materias.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cerrarSesion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\cerrarSesion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="adwords_editor-128" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\adwords_editor-128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="images" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\images.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gestion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\gestion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\mas.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mantenimiento" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\mantenimiento.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,8 +154,26 @@
   <data name="libros" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\libros.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lupa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\lupa.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tick_converted1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\tick_converted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="socios" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\socios.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red_green_OK_not_OK_Icons_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\red_green_OK_not_OK_Icons_converted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="prestamos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\prestamos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="papelera-de-reciclaje" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\papelera-de-reciclaje.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tick_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\tick_converted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="multas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\multas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,10 +181,13 @@
   <data name="Door_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\iconosApp\Door_converted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tick_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\iconosApp\tick_converted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="images1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\images.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="red_green_OK_not_OK_Icons_converted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\iconosApp\red_green_OK_not_OK_Icons_converted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fondo_atardecer_en_el_caribe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\iconosApp\fondo-atardecer-en-el-caribe.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="restaurar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\restaurar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

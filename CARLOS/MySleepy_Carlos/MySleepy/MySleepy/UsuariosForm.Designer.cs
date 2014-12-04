@@ -39,9 +39,6 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
-            this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rbEliminados = new System.Windows.Forms.RadioButton();
             this.rbNoEliminados = new System.Windows.Forms.RadioButton();
             this.cbRoles = new System.Windows.Forms.ComboBox();
@@ -49,6 +46,9 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnRestaurar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,36 +133,6 @@
             this.dgvUsuarios.TabIndex = 7;
             this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgUsuarios_CellClick);
             // 
-            // Origen
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Origen.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Origen.FillWeight = 27.7374F;
-            this.Origen.HeaderText = "Ref.Usuario";
-            this.Origen.Name = "Origen";
-            this.Origen.ReadOnly = true;
-            // 
-            // Destino
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Destino.FillWeight = 58.25584F;
-            this.Destino.HeaderText = "Nombre";
-            this.Destino.Name = "Destino";
-            this.Destino.ReadOnly = true;
-            // 
-            // Texto
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Texto.FillWeight = 105.2801F;
-            this.Texto.HeaderText = "Password";
-            this.Texto.Name = "Texto";
-            this.Texto.ReadOnly = true;
-            // 
             // rbEliminados
             // 
             this.rbEliminados.AutoSize = true;
@@ -235,6 +205,37 @@
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // Origen
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Origen.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Origen.FillWeight = 27.7374F;
+            this.Origen.HeaderText = "Ref.Usuario";
+            this.Origen.Name = "Origen";
+            this.Origen.ReadOnly = true;
+            // 
+            // Destino
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Destino.FillWeight = 58.25584F;
+            this.Destino.HeaderText = "Nombre";
+            this.Destino.Name = "Destino";
+            this.Destino.ReadOnly = true;
+            // 
+            // Texto
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Texto.FillWeight = 105.2801F;
+            this.Texto.HeaderText = "Password";
+            this.Texto.Name = "Texto";
+            this.Texto.ReadOnly = true;
+            this.Texto.Visible = false;
+            // 
             // UsuariosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,9 +271,6 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
         private System.Windows.Forms.RadioButton rbEliminados;
         private System.Windows.Forms.RadioButton rbNoEliminados;
         private System.Windows.Forms.ComboBox cbRoles;
@@ -280,5 +278,8 @@
         private System.Windows.Forms.Button btnRestaurar;
         private System.Windows.Forms.Button btnLimpiar;
         public System.Windows.Forms.DataGridView dgvUsuarios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
     }
 }

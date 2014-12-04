@@ -16,7 +16,7 @@ namespace MySleepy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PedidosForm(3,new ConnectDB()));
+            Application.Run(new AccesoForm());
         }
     }
 }

@@ -55,6 +55,12 @@
     <Compile Include="AccesoForm.Designer.cs">
       <DependentUpon>AccesoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddArticulo.designer.cs">
+      <DependentUpon>AddArticulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,14 +70,14 @@
     <Compile Include="AddNuevoArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddNuevoArticulo.Designer.cs">
+    <Compile Include="AddNuevoArticulo.designer.cs">
       <DependentUpon>AddNuevoArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddArticulo.cs">
+    <Compile Include="AddPedido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddArticulo.Designer.cs">
-      <DependentUpon>AddArticulo.cs</DependentUpon>
+    <Compile Include="AddPedido.designer.cs">
+      <DependentUpon>AddPedido.cs</DependentUpon>
     </Compile>
     <Compile Include="AddUsuario.cs">
       <SubType>Form</SubType>
@@ -92,11 +98,11 @@
       <DependentUpon>ClientesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectDB.cs" />
-    <Compile Include="AddPedido.cs">
+    <Compile Include="HistorialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddPedido.Designer.cs">
-      <DependentUpon>AddPedido.cs</DependentUpon>
+    <Compile Include="HistorialForm.Designer.cs">
+      <DependentUpon>HistorialForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MetodosAuxiliares.cs" />
     <Compile Include="PedidosForm.cs">
@@ -127,14 +133,17 @@
     <EmbeddedResource Include="AccesoForm.resx">
       <DependentUpon>AccesoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddArticulo.resx">
+      <DependentUpon>AddArticulo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddCliente.resx">
       <DependentUpon>AddCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddNuevoArticulo.resx">
       <DependentUpon>AddNuevoArticulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddArticulo.resx">
-      <DependentUpon>AddArticulo.cs</DependentUpon>
+    <EmbeddedResource Include="AddPedido.resx">
+      <DependentUpon>AddPedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddUsuario.resx">
       <DependentUpon>AddUsuario.cs</DependentUpon>
@@ -142,14 +151,20 @@
     <EmbeddedResource Include="ArticulosForm.resx">
       <DependentUpon>ArticulosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddPedido.resx">
-      <DependentUpon>AddPedido.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ClientesForm.resx">
       <DependentUpon>ClientesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HistorialForm.resx">
+      <DependentUpon>HistorialForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PedidosForm.resx">
       <DependentUpon>PedidosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrincipalForm.es-AR.resx">
+      <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrincipalForm.es.resx">
+      <DependentUpon>PrincipalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrincipalForm.resx">
       <DependentUpon>PrincipalForm.cs</DependentUpon>
@@ -219,6 +234,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\iconosApp\red_green_OK_not_OK_Icons_converted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\historial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\cerrarSesion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\lupa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\mas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\adwords_editor-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\papelera-de-reciclaje.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\images.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\iconosApp\fondo-atardecer-en-el-caribe.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restaurar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

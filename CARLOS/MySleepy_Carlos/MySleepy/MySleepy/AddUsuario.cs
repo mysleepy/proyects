@@ -16,16 +16,25 @@ namespace MySleepy
         MySleepy.ConnectDB conexion;
         String pass;
         UsuariosForm usuario;
+        int señal,tipoCambio,idUsuario;
         String mensajeError = "Por favor rellene los campos vacíos : ";
-        public AddUsuario(UsuariosForm u)
+        public AddUsuario(UsuariosForm u,int señal,int tipoCambio, int idUsuario)
         {
             InitializeComponent();
             usuario = u;
             txtRepetirPassword.LostFocus += new EventHandler(txtRepetirPassword_lostFocus);
             txtNombre.LostFocus += new EventHandler(txtNombre_lostFocus);
             conexion = new MySleepy.ConnectDB();
-
+            this.señal = señal;
+            this.idUsuario = idUsuario;
+            this.tipoCambio = tipoCambio;
             rellenarCombo();
+
+            if (señal == 1)
+            {
+                //partimos del boton modificar del formulario anterior
+                asignarAForm();
+            }
         }
 
 
@@ -56,15 +65,88 @@ namespace MySleepy
             }
 
         }
-        
-        private void chbMostrar_CheckedChanged(object sender, EventArgs e)
-        {
-            //txtPassword.PasswordChar;
-
-        }
-        //comprueba que todos los campos tengan datos -> todos son necesarios excepto el checkBox Mostrar
-        
+                
         private void btnCrear_Click(object sender, EventArgs e)
+        {
+            if (señal == 0)
+            {
+                //añadir
+                añadirRegistro();
+                usuario.insertHistorialCambio(tipoCambio, idUsuario);
+               
+            }
+            else
+            {
+
+                //modificar
+                modificarRegistro();
+                usuario.insertHistorialCambio(tipoCambio, idUsuario);
+                usuario.cargarTablaInicio();
+
+            }
+        }
+        public void asignarAForm()
+        {
+            //extraemos los datos de la fila seleccionada
+            int idUsuario = usuario.extraerIDTabla();
+
+            String select = "Select NOMBRE,IDROL from USUARIOS where IDUSUARIO = " + idUsuario;
+
+            DataSet data = conexion.getData(select, "USUARIOS");
+
+            DataTable tTabla = data.Tables["USUARIOS"];
+
+            int idRol = 0;
+            String nombre = "";//,pass="";
+
+            foreach (DataRow row in tTabla.Rows)
+            {
+                idRol = Convert.ToInt32(row["IDROL"]);
+                nombre = Convert.ToString(row["NOMBRE"]);
+                //pass = Convert.ToString(row["PASSWORD"]);
+
+            } // Fin del bucle for each
+           
+            //asignamos
+            txtNombre.Text = nombre;
+            //txtPassword.Text = encriptarPassword(pass,false); no pondremos la contraseña, solo se podrá cambiar, no obtener
+            cbRoles.SelectedItem = getNombreRol(idRol);
+            
+        }
+        public String getNombreRol(int idRol)
+        {
+            String nombreRol = conexion.DLookUp("NOMBREROL", "ROLES", " IDROL = " + idRol).ToString();  
+            return nombreRol;
+        }
+        public void modificarRegistro()
+        {
+            if (vacio())
+            {
+                MessageBox.Show(mensajeError);
+            }
+            else
+            {
+                //Pedimos confirmacion
+                DialogResult opcion = MessageBox.Show("¿Desea modificar el usuario?", "Confirmación",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (opcion == DialogResult.OK)
+                {
+                    String passEncriptada = encriptarPassword(txtPassword.Text);    //en este metodo veo si coinciden ambas contraseñas
+                    String nombre = txtNombre.Text;
+                    int idRol = Convert.ToInt32(conexion.DLookUp("IDROL", "ROLES", " NOMBREROL = '" + cbRoles.SelectedItem.ToString()+"'"));
+                    //update
+                    String update = " update USUARIOS set NOMBRE = '" + nombre + "' ," + " PASSWORD = '"
+                                    + passEncriptada + "' ,IDROL = " + idRol + " where IDUSUARIO = " + usuario.extraerIDTabla()
+                                                               + " and ELIMINADO = " + 0;
+                    //MessageBox.Show(update);
+                    conexion.setData(update);
+                    MessageBox.Show("Usuario modificado");
+                }
+            }    
+           
+        }
+
+        public void añadirRegistro()
         {
             if (vacio())
             {
@@ -80,12 +162,12 @@ namespace MySleepy
                     int idRol = extraerIDRol();
                     //Creamos el usuario, por defecto a no eliminado
                     String insert = "Insert into USUARIOS values ( " + (ultimoIDUser() + 1) + ", '"
-                                       + txtNombre.Text + "' , '" + encriptarPassword() + "' ," + 0 + "," + idRol + ")";
+                                       + txtNombre.Text + "' , '" + encriptarPassword(txtPassword.Text) + "' ," + 0 + "," + idRol + ")";
                     //Console.WriteLine(insert);
                     //realizamos el insert
                     conexion.setData(insert);
                     MessageBox.Show("Usuario creado");
-                }         
+                }
             }
         }
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -106,17 +188,17 @@ namespace MySleepy
             Boolean vacio = false;
             if (txtNombre.Text.Equals(""))
             {
-                mensajeError += " nombre  ";
+                mensajeError += " nombre,";
                 vacio = true;
             }
             if (txtPassword.Text.Equals(""))
             {
-                mensajeError += " password  ";
+                mensajeError += "contraseña,";
                 vacio = true;
             }
             if (txtRepetirPassword.Equals(""))
             {
-                mensajeError += " confirmación contraseña";
+                mensajeError += "confirmación contraseña,";
                 vacio = true;
             }
             if (cbRoles.SelectedIndex == -1)
@@ -160,19 +242,18 @@ namespace MySleepy
                 return true;
             }
         }
-        public String encriptarPassword()
+        public String encriptarPassword(String pass)
         {
-            String passEncriptada = "";
-            //Extraemos el texto de la caja contraseña (si ambos textos de las cajas coinciden)
-            if (coincidenciaPassword())
-            {
-                String pass = txtPassword.Text;
-                passEncriptada = BCrypt.Net.BCrypt.HashPassword(pass, BCrypt.Net.BCrypt.GenerateSalt());
-            }
-            return passEncriptada;
+            String password = "";
+            string codificacion = BCrypt.Net.BCrypt.GenerateSalt();
+            //encriptamos
+            password = BCrypt.Net.BCrypt.HashPassword(pass, codificacion);
+      
+            return password;
 
         }
 
+     
         //metodo rellenar comboBox
         public void rellenarCombo()
         {
@@ -196,21 +277,8 @@ namespace MySleepy
         }
         public int extraerIDRol()
         {
-            //Extraemos el id del rol seleccionado en el comboBox
-            String extraerID = "Select IDROL from ROLES where NOMBREROL = '" + cbRoles.SelectedItem+"'";
-            DataSet data = conexion.getData(extraerID, "ROLES");
-
-            DataTable tRoles = data.Tables["ROLES"];
-
-            int idRol = 0;
-            foreach (DataRow row in tRoles.Rows)
-            {
-                idRol = Convert.ToInt16(row["IDROL"]);
-
-            } // Fin del bucle for each
-
+            int idRol = Convert.ToInt32(conexion.DLookUp("IDROL", "ROLES", "NOMBREROL = '" + cbRoles.SelectedItem + "'"));
             return idRol;
-
         }
 
         public int ultimoIDUser()
@@ -230,8 +298,5 @@ namespace MySleepy
 
             return idUser;
         }
-
-        
-        
     }
 }

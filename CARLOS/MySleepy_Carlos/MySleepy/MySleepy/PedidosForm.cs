@@ -12,12 +12,16 @@ namespace MySleepy
 {
     public partial class PedidosForm : Form
     {
+        // Atributos de la clase
         ConnectDB conexion;
         int rolUsuario, refPedido, refCliente;
         String nombreCliente;
         DateTime fecha;
         float cantidad;
  
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// CONSTRUCTORES /////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
         public PedidosForm(int idRol, ConnectDB c)
         {
             InitializeComponent();
@@ -27,17 +31,13 @@ namespace MySleepy
             refCliente = -1;
         }
 
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// LISTENERS BOTONES /////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddPedido añadir = new AddPedido(conexion);
+            AddPedido añadir = new AddPedido(conexion,rolUsuario);
             añadir.Show();
-        }
-
-        private void Pedidos_Load(object sender, EventArgs e)
-        {
-            dgvPedidos.ClearSelection();
-            dgvPedidos.Update();
-            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -45,6 +45,36 @@ namespace MySleepy
             limpiarCampos();
         }
 
+        private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txtReferencia_KeyUp(object sender, KeyEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            buscarFecha(fecha);
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// CARGA FORMULARIO /////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        private void Pedidos_Load(object sender, EventArgs e)
+        {
+            dgvPedidos.ClearSelection();
+            dgvPedidos.Update();
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// METODOS QUE USA EL FORMULARIO ///////////////////
+        ///////////////////////////////////////////////////////////////////////
+        
+        // Limpia los campos de los filtros
         private void limpiarCampos()
         {
             txtNombre.Text = "";
@@ -52,6 +82,7 @@ namespace MySleepy
             txtReferencia.Text = "";
         }
 
+        // Comprueba los campos, y asigna los valores
         public void comprobarCampos()
         {
             refPedido = Convert.ToInt32(txtReferencia.Text);
@@ -60,6 +91,7 @@ namespace MySleepy
             cantidad = float.Parse(txtPrecio.Text);
         }
 
+        // Busca el cliente en la base de datos y los pedidos que tiene asociados
         private void buscarCliente()
         {
             String sentencia = "SELECT P.REFCLIENTE FROM PEDIDOS P,CLIENTE C WHERE P.REFCLIENTE=C.IDCLIENTE AND C.NOMBRE='" + txtNombre.Text.ToUpper() + "'";
@@ -72,11 +104,15 @@ namespace MySleepy
             }
         }
 
+        // Busca pedidos filtrando por fecha
         private void buscarFecha(DateTime fecha)
         {
             MessageBox.Show(fecha.ToString());
             
         }
+
+        ///////////////////////////////////////////////////////
+        // Metodo que filtra
         public void filtrar()
         {
             comprobarCampos();
@@ -98,26 +134,27 @@ namespace MySleepy
             actualizarDGV(sentencia);
         }
 
+        // Metodo que actualiza el DATAGRIDVIEW
         private void actualizarDGV(string sentencia)
         {
             limpiarTabla();
             DataSet resultado = conexion.getData(sentencia, "PEDIDOS");
-            dgvPedidos.DataSource = resultado;
-            //DataTable tArticulos = resultado.Tables["ARTICULOS"];
-            //foreach (DataRow row in tArticulos.Rows)
-            //{
-            //    int referencia = Convert.ToInt32(row["REFERENCIA"]);
-            //    String nombre = Convert.ToString(row["NOMBRE"]);
-            //    String composicion = Convert.ToString(row["COMPOSICION"]);
-            //    String medida = Convert.ToString(row["MEDIDA"]);
-            //    String precio = Convert.ToString(row["PRECIO"]);
-            //    dgvPedidos.Rows.Add(referencia, nombre, composicion,medida,precio);
-                
-            //} // Fin del bucle for each
+            DataTable tPedidos = resultado.Tables["PEDIDOSs"];
+            foreach (DataRow row in tPedidos.Rows)
+            {
+                int referencia = Convert.ToInt32(row["REFERENCIA"]);
+                String nombre = Convert.ToString(row["NOMBRE"]);
+                String composicion = Convert.ToString(row["COMPOSICION"]);
+                String medida = Convert.ToString(row["MEDIDA"]);
+                String precio = Convert.ToString(row["PRECIO"]);
+                dgvPedidos.Rows.Add(referencia, nombre, composicion, medida, precio);
+
+            } // Fin del bucle for each
         
        
         }
 
+        // Limpia la tabla
         private void limpiarTabla()
         {
             // Limpiamos el datagridView
@@ -127,6 +164,7 @@ namespace MySleepy
             }
         }
 
+        // Devuelve una fecha seleccionada en el calendario 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             fecha=e.Start;
@@ -136,19 +174,6 @@ namespace MySleepy
             fecha = new DateTime(anio, mes, dia);
         }
 
-        private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void txtReferencia_KeyUp(object sender, KeyEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            buscarFecha(fecha);
-        }
+        
     }
 }

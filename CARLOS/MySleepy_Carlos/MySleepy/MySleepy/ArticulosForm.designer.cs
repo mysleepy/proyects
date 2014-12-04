@@ -28,19 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
-            this.txtReferencia = new System.Windows.Forms.TextBox();
-            this.lblReferencia = new System.Windows.Forms.Label();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,21 +46,28 @@
             this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.txtMedida = new System.Windows.Forms.TextBox();
-            this.lblMedida = new System.Windows.Forms.Label();
+            this.btnRestaurar = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbNoEliminados = new System.Windows.Forms.RadioButton();
+            this.rbEliminados = new System.Windows.Forms.RadioButton();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblPrecio = new System.Windows.Forms.Label();
-            this.rbEliminados = new System.Windows.Forms.RadioButton();
-            this.rbNoEliminados = new System.Windows.Forms.RadioButton();
-            this.btnRestaurar = new System.Windows.Forms.Button();
+            this.txtMedida = new System.Windows.Forms.TextBox();
+            this.lblMedida = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.txtReferencia = new System.Windows.Forms.TextBox();
+            this.lblReferencia = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
+            this.txtCantidad = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCantidad)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(44, 136);
+            this.btnLimpiar.Location = new System.Drawing.Point(64, 186);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 12;
@@ -72,7 +77,7 @@
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(526, 136);
+            this.btnBorrar.Location = new System.Drawing.Point(546, 186);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(75, 23);
             this.btnBorrar.TabIndex = 11;
@@ -82,7 +87,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(285, 136);
+            this.btnModificar.Location = new System.Drawing.Point(305, 186);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 10;
@@ -92,7 +97,7 @@
             // 
             // btnAñadir
             // 
-            this.btnAñadir.Location = new System.Drawing.Point(163, 136);
+            this.btnAñadir.Location = new System.Drawing.Point(183, 186);
             this.btnAñadir.Name = "btnAñadir";
             this.btnAñadir.Size = new System.Drawing.Size(75, 23);
             this.btnAñadir.TabIndex = 9;
@@ -100,32 +105,14 @@
             this.btnAñadir.UseVisualStyleBackColor = true;
             this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
-            // txtReferencia
-            // 
-            this.txtReferencia.Location = new System.Drawing.Point(97, 25);
-            this.txtReferencia.Name = "txtReferencia";
-            this.txtReferencia.Size = new System.Drawing.Size(153, 20);
-            this.txtReferencia.TabIndex = 8;
-            this.txtReferencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReferencia_KeyPress);
-            this.txtReferencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencia_KeyUp);
-            // 
-            // lblReferencia
-            // 
-            this.lblReferencia.AutoSize = true;
-            this.lblReferencia.Location = new System.Drawing.Point(29, 28);
-            this.lblReferencia.Name = "lblReferencia";
-            this.lblReferencia.Size = new System.Drawing.Size(62, 13);
-            this.lblReferencia.TabIndex = 7;
-            this.lblReferencia.Text = "Referencia:";
-            // 
             // dgvArticulos
             // 
             this.dgvArticulos.AllowUserToAddRows = false;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvArticulos.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvArticulos.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -136,18 +123,18 @@
             this.Destino,
             this.Texto,
             this.Telefono});
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvArticulos.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvArticulos.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.dgvArticulos.Location = new System.Drawing.Point(44, 176);
+            this.dgvArticulos.Location = new System.Drawing.Point(64, 225);
             this.dgvArticulos.MultiSelect = false;
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.ReadOnly = true;
@@ -155,12 +142,13 @@
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulos.Size = new System.Drawing.Size(557, 190);
             this.dgvArticulos.TabIndex = 14;
+            this.dgvArticulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulos_CellDoubleClick);
             // 
             // Origen
             // 
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Origen.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Origen.DefaultCellStyle = dataGridViewCellStyle9;
             this.Origen.FillWeight = 71.06599F;
             this.Origen.HeaderText = "Ref.Articulo";
             this.Origen.Name = "Origen";
@@ -168,18 +156,18 @@
             // 
             // Nombre
             // 
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle10;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
             // Destino
             // 
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle11;
             this.Destino.FillWeight = 58.28161F;
             this.Destino.HeaderText = "Composicion";
             this.Destino.Name = "Destino";
@@ -187,9 +175,9 @@
             // 
             // Texto
             // 
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle12;
             this.Texto.FillWeight = 61.92574F;
             this.Texto.HeaderText = "Medida";
             this.Texto.Name = "Texto";
@@ -197,9 +185,9 @@
             // 
             // Telefono
             // 
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Telefono.DefaultCellStyle = dataGridViewCellStyle13;
             this.Telefono.FillWeight = 94.99262F;
             this.Telefono.HeaderText = "Precio";
             this.Telefono.Name = "Telefono";
@@ -208,96 +196,17 @@
             // btnSalir
             // 
             this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
-            this.btnSalir.Location = new System.Drawing.Point(557, 389);
+            this.btnSalir.Location = new System.Drawing.Point(577, 439);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(63, 52);
             this.btnSalir.TabIndex = 13;
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(97, 66);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(153, 20);
-            this.txtNombre.TabIndex = 17;
-            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
-            this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(31, 69);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(47, 13);
-            this.lblNombre.TabIndex = 16;
-            this.lblNombre.Text = "Nombre:";
-            // 
-            // txtMedida
-            // 
-            this.txtMedida.Location = new System.Drawing.Point(348, 25);
-            this.txtMedida.Name = "txtMedida";
-            this.txtMedida.Size = new System.Drawing.Size(153, 20);
-            this.txtMedida.TabIndex = 19;
-            this.txtMedida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMedida_KeyPress);
-            this.txtMedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMedida_KeyUp);
-            // 
-            // lblMedida
-            // 
-            this.lblMedida.AutoSize = true;
-            this.lblMedida.Location = new System.Drawing.Point(280, 28);
-            this.lblMedida.Name = "lblMedida";
-            this.lblMedida.Size = new System.Drawing.Size(45, 13);
-            this.lblMedida.TabIndex = 18;
-            this.lblMedida.Text = "Medida:";
-            // 
-            // txtPrecio
-            // 
-            this.txtPrecio.Location = new System.Drawing.Point(348, 70);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(153, 20);
-            this.txtPrecio.TabIndex = 21;
-            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
-            this.txtPrecio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPrecio_KeyUp);
-            // 
-            // lblPrecio
-            // 
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(282, 73);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
-            this.lblPrecio.TabIndex = 20;
-            this.lblPrecio.Text = "Precio:";
-            // 
-            // rbEliminados
-            // 
-            this.rbEliminados.AutoSize = true;
-            this.rbEliminados.Location = new System.Drawing.Point(557, 28);
-            this.rbEliminados.Name = "rbEliminados";
-            this.rbEliminados.Size = new System.Drawing.Size(75, 17);
-            this.rbEliminados.TabIndex = 22;
-            this.rbEliminados.TabStop = true;
-            this.rbEliminados.Text = "Eliminados";
-            this.rbEliminados.UseVisualStyleBackColor = true;
-            this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
-            // 
-            // rbNoEliminados
-            // 
-            this.rbNoEliminados.AutoSize = true;
-            this.rbNoEliminados.Checked = true;
-            this.rbNoEliminados.Location = new System.Drawing.Point(557, 72);
-            this.rbNoEliminados.Name = "rbNoEliminados";
-            this.rbNoEliminados.Size = new System.Drawing.Size(92, 17);
-            this.rbNoEliminados.TabIndex = 23;
-            this.rbNoEliminados.TabStop = true;
-            this.rbNoEliminados.Text = "No Eliminados";
-            this.rbNoEliminados.UseVisualStyleBackColor = true;
-            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
-            // 
             // btnRestaurar
             // 
             this.btnRestaurar.Enabled = false;
-            this.btnRestaurar.Location = new System.Drawing.Point(411, 136);
+            this.btnRestaurar.Location = new System.Drawing.Point(431, 186);
             this.btnRestaurar.Name = "btnRestaurar";
             this.btnRestaurar.Size = new System.Drawing.Size(75, 23);
             this.btnRestaurar.TabIndex = 24;
@@ -305,32 +214,163 @@
             this.btnRestaurar.UseVisualStyleBackColor = true;
             this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbNoEliminados);
+            this.groupBox1.Controls.Add(this.rbEliminados);
+            this.groupBox1.Controls.Add(this.txtPrecio);
+            this.groupBox1.Controls.Add(this.lblPrecio);
+            this.groupBox1.Controls.Add(this.txtMedida);
+            this.groupBox1.Controls.Add(this.lblMedida);
+            this.groupBox1.Controls.Add(this.txtNombre);
+            this.groupBox1.Controls.Add(this.lblNombre);
+            this.groupBox1.Controls.Add(this.txtReferencia);
+            this.groupBox1.Controls.Add(this.lblReferencia);
+            this.groupBox1.Location = new System.Drawing.Point(24, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(673, 100);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Buscar";
+            // 
+            // rbNoEliminados
+            // 
+            this.rbNoEliminados.AutoSize = true;
+            this.rbNoEliminados.Checked = true;
+            this.rbNoEliminados.Location = new System.Drawing.Point(534, 69);
+            this.rbNoEliminados.Name = "rbNoEliminados";
+            this.rbNoEliminados.Size = new System.Drawing.Size(92, 17);
+            this.rbNoEliminados.TabIndex = 33;
+            this.rbNoEliminados.TabStop = true;
+            this.rbNoEliminados.Text = "No Eliminados";
+            this.rbNoEliminados.UseVisualStyleBackColor = true;
+            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
+            // 
+            // rbEliminados
+            // 
+            this.rbEliminados.AutoSize = true;
+            this.rbEliminados.Location = new System.Drawing.Point(534, 25);
+            this.rbEliminados.Name = "rbEliminados";
+            this.rbEliminados.Size = new System.Drawing.Size(75, 17);
+            this.rbEliminados.TabIndex = 32;
+            this.rbEliminados.TabStop = true;
+            this.rbEliminados.Text = "Eliminados";
+            this.rbEliminados.UseVisualStyleBackColor = true;
+            this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Location = new System.Drawing.Point(325, 67);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(153, 20);
+            this.txtPrecio.TabIndex = 31;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
+            this.txtPrecio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPrecio_KeyUp);
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(259, 70);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(40, 13);
+            this.lblPrecio.TabIndex = 30;
+            this.lblPrecio.Text = "Precio:";
+            // 
+            // txtMedida
+            // 
+            this.txtMedida.Location = new System.Drawing.Point(325, 22);
+            this.txtMedida.Name = "txtMedida";
+            this.txtMedida.Size = new System.Drawing.Size(153, 20);
+            this.txtMedida.TabIndex = 29;
+            this.txtMedida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMedida_KeyPress);
+            this.txtMedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMedida_KeyUp);
+            // 
+            // lblMedida
+            // 
+            this.lblMedida.AutoSize = true;
+            this.lblMedida.Location = new System.Drawing.Point(257, 25);
+            this.lblMedida.Name = "lblMedida";
+            this.lblMedida.Size = new System.Drawing.Size(45, 13);
+            this.lblMedida.TabIndex = 28;
+            this.lblMedida.Text = "Medida:";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(74, 63);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(153, 20);
+            this.txtNombre.TabIndex = 27;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
+            this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(8, 66);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(47, 13);
+            this.lblNombre.TabIndex = 26;
+            this.lblNombre.Text = "Nombre:";
+            // 
+            // txtReferencia
+            // 
+            this.txtReferencia.Location = new System.Drawing.Point(74, 22);
+            this.txtReferencia.Name = "txtReferencia";
+            this.txtReferencia.Size = new System.Drawing.Size(153, 20);
+            this.txtReferencia.TabIndex = 25;
+            this.txtReferencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReferencia_KeyPress);
+            this.txtReferencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencia_KeyUp);
+            // 
+            // lblReferencia
+            // 
+            this.lblReferencia.AutoSize = true;
+            this.lblReferencia.Location = new System.Drawing.Point(6, 25);
+            this.lblReferencia.Name = "lblReferencia";
+            this.lblReferencia.Size = new System.Drawing.Size(62, 13);
+            this.lblReferencia.TabIndex = 24;
+            this.lblReferencia.Text = "Referencia:";
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Location = new System.Drawing.Point(199, 138);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(52, 13);
+            this.lblCantidad.TabIndex = 34;
+            this.lblCantidad.Text = "Cantidad:";
+            this.lblCantidad.Visible = false;
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(279, 136);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(120, 20);
+            this.txtCantidad.TabIndex = 35;
+            this.txtCantidad.Visible = false;
+            // 
             // ArticulosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 453);
+            this.ClientSize = new System.Drawing.Size(709, 528);
+            this.Controls.Add(this.txtCantidad);
+            this.Controls.Add(this.lblCantidad);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnRestaurar);
-            this.Controls.Add(this.rbNoEliminados);
-            this.Controls.Add(this.rbEliminados);
-            this.Controls.Add(this.txtPrecio);
-            this.Controls.Add(this.lblPrecio);
-            this.Controls.Add(this.txtMedida);
-            this.Controls.Add(this.lblMedida);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.dgvArticulos);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAñadir);
-            this.Controls.Add(this.txtReferencia);
-            this.Controls.Add(this.lblReferencia);
             this.Name = "ArticulosForm";
             this.Text = "Articulos";
+            this.Load += new System.EventHandler(this.ArticulosForm_Load);
             this.Shown += new System.EventHandler(this.ArticulosForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,22 +383,25 @@
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAñadir;
-        private System.Windows.Forms.TextBox txtReferencia;
-        private System.Windows.Forms.Label lblReferencia;
         private System.Windows.Forms.DataGridView dgvArticulos;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.TextBox txtMedida;
-        private System.Windows.Forms.Label lblMedida;
-        private System.Windows.Forms.TextBox txtPrecio;
-        private System.Windows.Forms.Label lblPrecio;
-        private System.Windows.Forms.RadioButton rbEliminados;
-        private System.Windows.Forms.RadioButton rbNoEliminados;
         private System.Windows.Forms.Button btnRestaurar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
         private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbNoEliminados;
+        private System.Windows.Forms.RadioButton rbEliminados;
+        private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Label lblPrecio;
+        private System.Windows.Forms.TextBox txtMedida;
+        private System.Windows.Forms.Label lblMedida;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox txtReferencia;
+        private System.Windows.Forms.Label lblReferencia;
+        private System.Windows.Forms.Label lblCantidad;
+        private System.Windows.Forms.NumericUpDown txtCantidad;
     }
 }

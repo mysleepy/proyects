@@ -16,12 +16,24 @@ namespace MySleepy
         ConnectDB conexion;
         Boolean mostrado;
         int rolUsuario;
-        public ArticulosForm(int idRol, ConnectDB c)
+        int numero;
+        AddPedido pedido;
+        private int idRol;
+        public ArticulosForm(int idRol, int numero,AddPedido ped,ConnectDB c)
         {
             InitializeComponent();
             this.conexion = c ;
             rolUsuario = idRol;
+            this.numero = numero;
+            this.pedido = ped;
             cargarDGVInicio();
+        }
+
+        public ArticulosForm(int idRol, ConnectDB conexion)
+        {
+            // TODO: Complete member initialization
+            this.idRol = idRol;
+            this.conexion = conexion;
         }
 
         private void cargarDGVInicio()
@@ -49,7 +61,7 @@ namespace MySleepy
             txtNombre.Text = "";
         }
 
-        private void filtrar(String medida, String nombre, String referencia, String precio)
+        public void filtrar(String medida, String nombre, String referencia, String precio)
         {
             String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0";
 
@@ -85,7 +97,7 @@ namespace MySleepy
             actualizarDGV(sentencia);
         }
 
-        private void actualizarDGV(String sentencia)
+        public void actualizarDGV(String sentencia)
         {
             limpiarTabla();
             DataSet resultado = conexion.getData(sentencia, "ARTICULOS");
@@ -119,8 +131,12 @@ namespace MySleepy
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddNuevoArticulo add = new AddNuevoArticulo(conexion,0);
+            AddNuevoArticulo add = new AddNuevoArticulo(conexion,0,this);
             add.Show();
+            if (add.IsDisposed)
+            {
+                filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -128,7 +144,7 @@ namespace MySleepy
            // limpiarSeleccion();
             if (dgvArticulos.CurrentRow != null)
             {
-                AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1);
+                AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1,this);
                 add.activarReferencia(false);
                 add.rellenar(dgvArticulos.CurrentRow);
                 add.Show();
@@ -157,6 +173,7 @@ namespace MySleepy
                     cargarDGVInicio();
                     //dgvArticulos.Rows.RemoveAt(dgvArticulos.CurrentRow.Index);
                     limpiarSeleccion();
+                    filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
                 } 
             }
             else
@@ -270,6 +287,41 @@ namespace MySleepy
         private void txtPrecio_KeyUp(object sender, KeyEventArgs e)
         {
             filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        internal void actualizarTabla()
+        {
+            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void dgvArticulos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            String cantidad="";
+            if (numero == 1)
+            {
+                if (txtCantidad.Value!=0){
+                    cantidad = Convert.ToString(txtCantidad.Value);
+                    pedido.nuevoArticulo(dgvArticulos.CurrentRow.Cells[0].Value.ToString(), dgvArticulos.CurrentRow.Cells[1].Value.ToString(), dgvArticulos.CurrentRow.Cells[2].Value.ToString(), dgvArticulos.CurrentRow.Cells[3].Value.ToString(), dgvArticulos.CurrentRow.Cells[4].Value.ToString(), cantidad);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("La cantidad no puede tener un valor de 0");
+                    dgvArticulos.ClearSelection();
+                    return;
+                }
+                // Referencia,Nombre,Composicion,Medida,Precio
+                
+            }
+        }
+
+        private void ArticulosForm_Load(object sender, EventArgs e)
+        {
+            if (numero == 1)
+            {
+                txtCantidad.Visible = true;
+                lblCantidad.Visible = true;
+            }
         }
     }
 }
