@@ -142,6 +142,7 @@
     <Compile Include="UsuariosForm.Designer.cs">
       <DependentUpon>UsuariosForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="XML_proveedor.cs" />
     <EmbeddedResource Include="AccesoForm.resx">
       <DependentUpon>AccesoForm.cs</DependentUpon>
     </EmbeddedResource>
