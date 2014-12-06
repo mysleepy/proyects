@@ -79,6 +79,12 @@
     <Compile Include="AddPedido.designer.cs">
       <DependentUpon>AddPedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddProveedor.Designer.cs">
+      <DependentUpon>AddProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Proveedores.Designer.cs">
+      <DependentUpon>Proveedores.cs</DependentUpon>
+    </Compile>
     <Compile Include="UsuariosForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddPedido.resx">
       <DependentUpon>AddPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddProveedor.resx">
+      <DependentUpon>AddProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddUsuario.resx">
       <DependentUpon>AddUsuario.cs</DependentUpon>
@@ -173,6 +188,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Proveedores.resx">
+      <DependentUpon>Proveedores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsuariosForm.resx">
       <DependentUpon>UsuariosForm.cs</DependentUpon>

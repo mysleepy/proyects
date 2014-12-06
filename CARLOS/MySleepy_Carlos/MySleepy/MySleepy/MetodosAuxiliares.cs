@@ -29,17 +29,19 @@ namespace MySleepy
         {
             String aux = null;
             valor = valor.ToUpper();
-
             // ponemos la letra en mayúscula
             aux = valor.Substring(0, valor.Length - 1);
             // quitamos la letra del NIF
             if (aux.Length >= 7 && CadenaEsNumero(aux))
+            {
                 aux = CalculaNIF(aux); // calculamos la letra del NIF para comparar con la que tenemos
+            }
             else
+            {
                 return false;
-
+            }
             // comparamos las letras
-            return (valor != aux);
+            return (valor.Equals(aux));
         }
 
         /// <summary>
@@ -52,10 +54,10 @@ namespace MySleepy
             const String cCADENA = "TRWAGMYFPDXBNJZSQVHLCKE";
             const String cNUMEROS = "0123456789";
 
-            Int32 a = 0;
-            Int32 b = 0;
-            Int32 c = 0;
-            Int32 NIF = 0;
+            int a = 0;
+            int b = 0;
+            int c = 0;
+            int NIF = 0;
             StringBuilder sb = new StringBuilder();
 
             strA = strA.Trim();
