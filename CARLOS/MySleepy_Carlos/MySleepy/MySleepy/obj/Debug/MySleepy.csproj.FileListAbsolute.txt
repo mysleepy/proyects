@@ -303,6 +303,4 @@ C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.csp
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\es-AR\MySleepy.resources.dll
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\es\MySleepy.resources.dll
 C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache
-C:\Users\Norman\Documents\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\MySleepy\bin\Debug\MySleepy.exe.config
-C:\Users\Norman\Documents\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.exe
-C:\Users\Norman\Documents\GitHub\proyects\CARLOS\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.pdb
+C:\Users\Norman\Desktop\MySleepy_Carlos\MySleepy\MySleepy\obj\Debug\MySleepy.Proveedores.resources
