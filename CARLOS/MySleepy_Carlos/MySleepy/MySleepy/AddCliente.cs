@@ -135,16 +135,16 @@ namespace MySleepy
                         {
                             if (isExist() == false)
                             {
-                                //Busco el ultimo id existente en la tabla clientes y lo aumento en 1
-                                idCliente = Convert.ToInt32(conexion.DLookUp("MAX(IDCLIENTE)", "CLIENTES", "")) + 1;
-                                //Console.WriteLine(idCliente);
-                                //Almaceno los datos en la base de datos
-                                conexion.setData("INSERT INTO CLIENTES (IDCLIENTE,NOMBRE,APELLIDO1,APELLIDO2,DIRECCION,REFCPPOBLACIONES,TELEFONO,EMAIL,ELIMINADO,DNI)" +
-                                    " VALUES(" + idCliente + ",'" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + direccion +
-                                    "'," + refCpProPo + "," + telefono + ",'" + email + "'," + 0 + ",'"+dni+"')");
-                                MessageBox.Show(this, "Cliente añadido", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                limpiar();
-                            }//fin if existe cliente
+                            //Busco el ultimo id existente en la tabla clientes y lo aumento en 1
+                            idCliente = Convert.ToInt32(conexion.DLookUp("MAX(IDCLIENTE)", "CLIENTES", "")) + 1;
+                            //Console.WriteLine(idCliente);
+                            //Almaceno los datos en la base de datos
+                            conexion.setData("INSERT INTO CLIENTES (IDCLIENTE,NOMBRE,APELLIDO1,APELLIDO2,DIRECCION,REFCPPOBLACIONES,TELEFONO,EMAIL,ELIMINADO,DNI)" +
+                                " VALUES(" + idCliente + ",'" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + direccion +
+                                "'," + refCpProPo + "," + telefono + ",'" + email + "'," + 0 + ",'"+dni+"')");
+                            MessageBox.Show(this, "Cliente añadido", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            limpiar();
+                        }
                         }//fin if añadir
                         else
                         {
@@ -242,24 +242,10 @@ namespace MySleepy
                 e.Handled = false;
             }
         }
-        //Metodo que controla el textbox del email
         private void txtEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
             int codigo = Convert.ToInt32(e.KeyChar);
             if ((e.KeyChar.Equals('\'') || txtEmail.Text.Length >= 30)&& (codigo != 8))
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-            }
-        }
-        //Metodo que controla el textbox de direccion
-        private void txtDireccion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            int codigo = Convert.ToInt32(e.KeyChar);
-            if ((Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtDireccion.Text.Length >= 30) && (codigo != 8))
             {
                 e.Handled = true;
             }
@@ -389,7 +375,7 @@ namespace MySleepy
         //Metodo que comprueba si ese cliente ya existe
         private Boolean isExist()
         {
-            String sentencia = "SELECT DNI FROM CLIENTES WHERE UPPER(DNI) = " + txtDNI.Text.ToUpper();
+            String sentencia = "SELECT DNI FROM CLIENTES WHERE DNI = " + txtDNI.Text;
             DataSet data = new DataSet();
             data = conexion.getData(sentencia,"CLIENTES");
             if (data != null)
@@ -399,7 +385,7 @@ namespace MySleepy
             }
             return false;
         }
-        //Metodo que durante la carga de la interfaz genera los tooltips
+
         private void AddCliente_Load(object sender, EventArgs e)
         {
             tooltip();
@@ -419,6 +405,7 @@ namespace MySleepy
             toolTip1.SetToolTip(this.cbProvincia, "Ha de seleccionar primero la Comunidad Autonoma");
             toolTip1.SetToolTip(this.cbPoblacion, "Ha de seleccionar primero la Provincia");
             toolTip1.SetToolTip(this.cbCP, "Ha de seleccionar primero la Poblacion");
-        }        
+        }
+        
     }
 }
