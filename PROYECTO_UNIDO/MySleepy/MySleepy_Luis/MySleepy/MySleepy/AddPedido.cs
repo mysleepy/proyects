@@ -119,7 +119,14 @@ namespace MySleepy
 
         private void btnRealizar_Click(object sender, EventArgs e)
         {
-            guardarPedido();
+            if (cbFormaPago.SelectedIndex != -1)
+            {
+                guardarPedido();
+            }
+            else
+            {
+                MessageBox.Show("Tienes que rellenar la forma de pago");
+            }
         }
 
         public int calcularPrecio(String cantidad, String precio)
@@ -142,11 +149,11 @@ namespace MySleepy
                 String n_pedido, cliente, articulos, cantidad, precio;
                 while (dgvPedidos.RowCount > 0)
                 {
-                    n_pedido = dgvPedidos.Rows[0].Cells[0].Value.ToString();
-                    cliente = dgvPedidos.Rows[0].Cells[1].Value.ToString();
-                    articulos = dgvPedidos.Rows[0].Cells[2].Value.ToString();
-                    cantidad = dgvPedidos.Rows[0].Cells[3].Value.ToString();
-                    precio = dgvPedidos.Rows[0].Cells[4].Value.ToString();
+                    n_pedido = txtNumeroPedido.Text;
+                    cliente = dgvPedidos.Rows[0].Cells[0].Value.ToString();
+                    articulos = dgvPedidos.Rows[0].Cells[1].Value.ToString();
+                    cantidad = dgvPedidos.Rows[0].Cells[2].Value.ToString();
+                    precio = dgvPedidos.Rows[0].Cells[3].Value.ToString();
                     añadirPedido(n_pedido, cliente, articulos, cantidad, precio);
                     dgvPedidos.Rows.RemoveAt(0);
 
@@ -169,7 +176,7 @@ namespace MySleepy
                 pagado = 'S';
             }
             String select = "INSERT INTO PEDIDOS (IDPEDIDO,REFCLIENTE,REFUSUARIO,FECHA,REFFORMAPAGO,TOTAL,PAGADO,N_PEDIDO " +
-                                "VALUES(" + conexion.siguienteID("IDPEDIDO", "PEDIDOS") + "," + conexion.DLookUp("IDCLIENTE", "CLIENTES", "WHERE NOMBRE='" + cliente + "'") + ",'" + dpFecha.Value.ToString() + "'," + conexion.DLookUp("IDPAGO", "FORMASDEPAGO", "WHERE FORMAPAGO='" + fpago + "'") + ",'" + precio + "','" + pagado + "','" + n_pedido + "')";
+                                "VALUES(" + conexion.siguienteID("IDPEDIDO", "PEDIDOS") + "," + conexion.DLookUp("IDCLIENTE", "CLIENTES", "WHERE NOMBRE='" + cliente + "'") + ",'" + dpFecha.Value.ToString() + "'," + conexion.DLookUp("IDPAGO", "FORMASDEPAGO", "WHERE IDFORMAPAGO='" + cbFormaPago.SelectedIndex + "'") + ",'" + precio + "','" + pagado + "','" + n_pedido + "')";
             // Añade el pedido
 
             //insert en tabla historial cambios

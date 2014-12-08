@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtCantidad = new System.Windows.Forms.NumericUpDown();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -113,6 +113,7 @@
             this.rbNoEliminados.TabStop = true;
             this.rbNoEliminados.Text = "No Eliminados";
             this.rbNoEliminados.UseVisualStyleBackColor = true;
+            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
             // 
             // rbEliminados
             // 
@@ -124,6 +125,7 @@
             this.rbEliminados.TabStop = true;
             this.rbEliminados.Text = "Eliminados";
             this.rbEliminados.UseVisualStyleBackColor = true;
+            this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
             // 
             // txtPrecio
             // 
@@ -131,6 +133,8 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(153, 20);
             this.txtPrecio.TabIndex = 31;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
+            this.txtPrecio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPrecio_KeyUp);
             // 
             // lblPrecio
             // 
@@ -147,6 +151,8 @@
             this.txtMedida.Name = "txtMedida";
             this.txtMedida.Size = new System.Drawing.Size(153, 20);
             this.txtMedida.TabIndex = 29;
+            this.txtMedida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMedida_KeyPress);
+            this.txtMedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMedida_KeyUp);
             // 
             // lblMedida
             // 
@@ -163,6 +169,8 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(153, 20);
             this.txtNombre.TabIndex = 27;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
+            this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
             // 
             // lblNombre
             // 
@@ -179,6 +187,8 @@
             this.txtReferencia.Name = "txtReferencia";
             this.txtReferencia.Size = new System.Drawing.Size(153, 20);
             this.txtReferencia.TabIndex = 25;
+            this.txtReferencia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReferencia_KeyPress);
+            this.txtReferencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencia_KeyUp);
             // 
             // lblReferencia
             // 
@@ -198,15 +208,16 @@
             this.btnRestaurar.TabIndex = 42;
             this.btnRestaurar.Text = "Restaurar";
             this.btnRestaurar.UseVisualStyleBackColor = true;
+            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
             // dgvArticulos
             // 
             this.dgvArticulos.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvArticulos.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvArticulos.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -217,14 +228,14 @@
             this.Destino,
             this.Texto,
             this.Telefono});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle21;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvArticulos.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvArticulos.ImeMode = System.Windows.Forms.ImeMode.Off;
@@ -236,12 +247,13 @@
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulos.Size = new System.Drawing.Size(675, 187);
             this.dgvArticulos.TabIndex = 41;
+            this.dgvArticulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulos_CellDoubleClick);
             // 
             // Origen
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Origen.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Origen.DefaultCellStyle = dataGridViewCellStyle16;
             this.Origen.FillWeight = 71.06599F;
             this.Origen.HeaderText = "Ref.Articulo";
             this.Origen.Name = "Origen";
@@ -249,18 +261,18 @@
             // 
             // Nombre
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle17;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
             // Destino
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle18;
             this.Destino.FillWeight = 58.28161F;
             this.Destino.HeaderText = "Composicion";
             this.Destino.Name = "Destino";
@@ -268,9 +280,9 @@
             // 
             // Texto
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle19;
             this.Texto.FillWeight = 61.92574F;
             this.Texto.HeaderText = "Medida";
             this.Texto.Name = "Texto";
@@ -278,9 +290,9 @@
             // 
             // Telefono
             // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Telefono.DefaultCellStyle = dataGridViewCellStyle20;
             this.Telefono.FillWeight = 94.99262F;
             this.Telefono.HeaderText = "Precio";
             this.Telefono.Name = "Telefono";
@@ -294,6 +306,7 @@
             this.btnSalir.Size = new System.Drawing.Size(63, 52);
             this.btnSalir.TabIndex = 40;
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnLimpiar
             // 
@@ -303,6 +316,7 @@
             this.btnLimpiar.Size = new System.Drawing.Size(52, 47);
             this.btnLimpiar.TabIndex = 39;
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click_1);
             // 
             // btnBorrar
             // 
@@ -312,6 +326,7 @@
             this.btnBorrar.Size = new System.Drawing.Size(47, 45);
             this.btnBorrar.TabIndex = 38;
             this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // btnModificar
             // 
@@ -321,6 +336,7 @@
             this.btnModificar.Size = new System.Drawing.Size(48, 45);
             this.btnModificar.TabIndex = 37;
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnAñadir
             // 
@@ -330,6 +346,7 @@
             this.btnAñadir.Size = new System.Drawing.Size(44, 45);
             this.btnAñadir.TabIndex = 36;
             this.btnAñadir.UseVisualStyleBackColor = true;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // ArticulosForm
             // 

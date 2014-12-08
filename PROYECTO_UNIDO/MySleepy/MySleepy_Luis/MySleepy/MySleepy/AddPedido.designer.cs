@@ -29,22 +29,15 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPedido));
             this.dpFecha = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
-            this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtApellido2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtApellido1 = new System.Windows.Forms.TextBox();
@@ -71,6 +64,10 @@
             this.btnBuscarArticulo = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnRealizar = new System.Windows.Forms.Button();
+            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.gbCliente.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -106,20 +103,18 @@
             this.dgvPedidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Origen,
-            this.Nombre,
             this.Destino,
             this.Texto,
             this.cant,
             this.Telefono});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPedidos.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPedidos.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvPedidos.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvPedidos.Location = new System.Drawing.Point(40, 272);
             this.dgvPedidos.Name = "dgvPedidos";
@@ -127,55 +122,6 @@
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPedidos.Size = new System.Drawing.Size(762, 190);
             this.dgvPedidos.TabIndex = 29;
-            // 
-            // Origen
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Origen.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Origen.FillWeight = 71.06599F;
-            this.Origen.HeaderText = "NºPedido";
-            this.Origen.Name = "Origen";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Fecha";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Destino
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Destino.FillWeight = 58.28161F;
-            this.Destino.HeaderText = "Cliente";
-            this.Destino.Name = "Destino";
-            // 
-            // Texto
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Texto.FillWeight = 61.92574F;
-            this.Texto.HeaderText = "Articulos";
-            this.Texto.Name = "Texto";
-            // 
-            // cant
-            // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.cant.DefaultCellStyle = dataGridViewCellStyle5;
-            this.cant.HeaderText = "Cantidad";
-            this.cant.Name = "cant";
-            // 
-            // Telefono
-            // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Telefono.FillWeight = 94.99262F;
-            this.Telefono.HeaderText = "Precio";
-            this.Telefono.Name = "Telefono";
             // 
             // txtApellido2
             // 
@@ -429,6 +375,41 @@
             this.btnRealizar.UseVisualStyleBackColor = true;
             this.btnRealizar.Click += new System.EventHandler(this.btnRealizar_Click);
             // 
+            // Destino
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Destino.FillWeight = 58.28161F;
+            this.Destino.HeaderText = "Cliente";
+            this.Destino.Name = "Destino";
+            // 
+            // Texto
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Texto.FillWeight = 61.92574F;
+            this.Texto.HeaderText = "Articulos";
+            this.Texto.Name = "Texto";
+            // 
+            // cant
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.cant.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cant.HeaderText = "Cantidad";
+            this.cant.Name = "cant";
+            // 
+            // Telefono
+            // 
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Telefono.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Telefono.FillWeight = 94.99262F;
+            this.Telefono.HeaderText = "Precio";
+            this.Telefono.Name = "Telefono";
+            // 
             // AddPedido
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,17 +466,15 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnBuscarCliente;
         private System.Windows.Forms.Button btnBuscarArticulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cant;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.Button btnAddArticulo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtPoblacion;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancelarPedido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
     }
 }
 

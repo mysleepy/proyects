@@ -122,6 +122,7 @@
             this.btnCancelar.TabIndex = 26;
             this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAnadir
             // 
@@ -131,6 +132,7 @@
             this.btnAnadir.TabIndex = 25;
             this.btnAnadir.Text = "Añadir";
             this.btnAnadir.UseVisualStyleBackColor = true;
+            this.btnAnadir.Click += new System.EventHandler(this.btnAnadir_Click);
             // 
             // txtNombre
             // 

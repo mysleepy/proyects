@@ -242,6 +242,7 @@
             this.btnAñadir.Size = new System.Drawing.Size(48, 49);
             this.btnAñadir.TabIndex = 40;
             this.btnAñadir.UseVisualStyleBackColor = true;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // PedidosForm
             // 

@@ -44,7 +44,8 @@ namespace MySleepy
 
         private void cargarDGVInicio()
         {
-            String sentencia = "SELECT A.REFERENCIA,A.PRECIO,A.NOMBRE,C.COMPOSICION,M.MEDIDA FROM ARTICULOS A, COMPOSICIONES C, MEDIDA M  WHERE A.REFCOMPOSICION=C.IDCOMPOSICION AND A.REFMEDIDA=M.IDMEDIDA  ELIMINADO=0";
+            String sentencia = "SELECT A.REFERENCIA,A.PRECIO,A.NOMBRE,C.COMPOSICION,M.MEDIDA FROM ARTICULOS A, COMPOSICIONES C, MEDIDAS M  WHERE A.REFCOMPOSICION=C.IDCOMPOSICION AND A.REFMEDIDA=M.IDMEDIDA  AND A.ELIMINADO=0";
+            Console.WriteLine(sentencia);
             actualizarDGV(sentencia);
             dgvArticulos.ClearSelection();
         }
@@ -110,11 +111,11 @@ namespace MySleepy
             DataTable tArticulos = resultado.Tables["ARTICULOS"];
             foreach (DataRow row in tArticulos.Rows)
             {
-                int referencia = Convert.ToInt32(row["A.REFERENCIA"]);
-                String nombre = Convert.ToString(row["A.NOMBRE"]);
-                String composicion = Convert.ToString(row["C.COMPOSICION"]);
-                String medida = Convert.ToString(row["M.MEDIDA"]);
-                String precio = Convert.ToString(row["A.PRECIO"]);
+                int referencia = Convert.ToInt32(row["REFERENCIA"]);
+                String nombre = Convert.ToString(row["NOMBRE"]);
+                String composicion = Convert.ToString(row["COMPOSICION"]);
+                String medida = Convert.ToString(row["MEDIDA"]);
+                String precio = Convert.ToString(row["PRECIO"]);
                 dgvArticulos.Rows.Add(referencia, nombre, composicion, medida, precio);
 
             } // Fin del bucle for each
@@ -339,5 +340,6 @@ namespace MySleepy
                 lblCantidad.Visible = true;
             }
         }
+
     }
 }

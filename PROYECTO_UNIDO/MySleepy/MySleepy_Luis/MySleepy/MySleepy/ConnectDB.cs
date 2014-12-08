@@ -15,8 +15,8 @@ namespace MySleepy
         ////////////////////////////////////////////////////////////
         const String driver = "Data Source=(DESCRIPTION ="
         + "(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = LOCALHOST)(PORT = 1521)))"
-        + "(CONNECT_DATA = (SERVICE_NAME = orcl))); "
-        + "User Id=ad; Password=ad;";
+        + "(CONNECT_DATA = (SERVICE_NAME = ORADAM2))); "
+        + "User Id=C##EJEMPLO1; Password=3907;";
 
         ////////////////////////////////////////////////////////////
 

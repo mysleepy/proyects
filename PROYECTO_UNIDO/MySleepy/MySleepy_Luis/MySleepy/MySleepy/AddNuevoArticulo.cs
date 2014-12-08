@@ -119,7 +119,7 @@ namespace MySleepy
             Label[] idsLabel = { lblReferencia, lblNombre, lblStock, lblComposicion, lblMedida, lblPrecio };
             TextBox[] idsTextBox = { txtReferencia, txtNombre, txtPrecio };
             ComboBox[] idsCombos = { cboMedida, cboComposicion };
-            if (idsCombos[0].SelectedText != "")
+            if (idsCombos[0].SelectedIndex ==-1)
             {
                 idsLabel[4].ForeColor = Color.Red;
             }
@@ -127,7 +127,7 @@ namespace MySleepy
             {
                 idsLabel[4].ForeColor = Color.Green;
             }
-            if (idsCombos[1].SelectedText != "")
+            if (idsCombos[1].SelectedIndex == -1)
             {
                 idsLabel[3].ForeColor = Color.Red;
             }
@@ -318,5 +318,8 @@ namespace MySleepy
                 e.Handled = true;
             }
         }
+
+       
+
     }
 }
