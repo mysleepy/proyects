@@ -14,10 +14,8 @@ namespace MySleepy
     {
         // Atributos de la clase
         ConnectDB conexion;
-        int rolUsuario, refPedido, refCliente;
-        DateTime fecha;
-        float cantidad;
-        int idUsuario;
+        int rolUsuario, refPedido, refCliente, idUsuario;
+
         //patron singleton
         private static PedidosForm instance;
 
@@ -69,7 +67,14 @@ namespace MySleepy
 
         private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            filtrar();
+            if (e.KeyChar != '\'')
+            {
+                filtrar();
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtReferencia_KeyUp(object sender, KeyEventArgs e)
@@ -89,17 +94,71 @@ namespace MySleepy
 
         private void rbEliminados_Click(object sender, EventArgs e)
         {
-
+            filtrar();
         }
 
         private void rbNoEliminados_Click(object sender, EventArgs e)
         {
+            filtrar();
+        }
 
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+
+        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue != '\'')
+            {
+                filtrar();
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecio_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue != '\'')
+            {
+                filtrar();
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\'')
+            {
+                filtrar();
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            filtrar();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-
+            if (dgvPedidos.CurrentRow == null || dgvPedidos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay ninguna fila seleccionada");
+            }
+            else
+            {
+                dgvPedidos.Rows.RemoveAt(dgvPedidos.CurrentRow.Index);
+            }
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
@@ -182,48 +241,6 @@ namespace MySleepy
                 dgvPedidos.Rows.Remove(dgvPedidos.CurrentRow);
             }
         }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-
-        private void txtReferencia_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void txtPrecio_KeyDown(object sender, KeyEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            filtrar();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            filtrar();
-        }
-
-        private void txtReferencia_KeyUp_1(object sender, KeyEventArgs e)
-        {
-            filtrar();
-        }
-
-        
 
     }
 }

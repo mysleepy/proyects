@@ -237,9 +237,14 @@ namespace MySleepy
             conexion.setData(sentencia);
 
             //insert en la tabla historial de cambios
+            //pedimos confirmacion
             String nombreArticulo = Convert.ToString
                             (conexion.DLookUp("NOMBRE", "USUARIOS", " IDARTICULO = " + idarticuloseleccionado));
-            insert.insertHistorialCambio(idUsuario, 3, "Articulo eliminado ->" + nombreArticulo);
+
+            String mensaje = Interaction.InputBox("¿Motivo por el cual se elimina?", "Motivo", "");
+            mensaje = "Articulo borrado ->" + nombreArticulo + " Motivo ->" + mensaje;
+            
+            insert.insertHistorialCambio(idUsuario, 3, mensaje);
         }
 
         private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)

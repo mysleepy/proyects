@@ -16,7 +16,9 @@ namespace MySleepy
         InsertHistorial insert;
         int id_pedido, id_articulo_añadir, precio, id_cliente, id_rol, totalpedido, idUsuario, señal;
         String n_pedido, cliente, nombre_articulo_añadir, cantidad;
-        ////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// CONSTRUCTORES /////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
 
         public AddPedido(ConnectDB c, int idrol, int idUsuario, int señal)
         {
@@ -27,22 +29,6 @@ namespace MySleepy
             this.idUsuario = idUsuario;
             insert = new InsertHistorial(conexion);
             this.señal = señal;
-        }
-
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        public void cargarCliente(String id_cliente, String nombre, String ape1, String ape2, String direccion, String poblacion)
-        {
-            this.id_cliente = Convert.ToInt32(id_cliente);
-            txtNombre.Text = nombre;
-            txtDireccion.Text = direccion;
-            txtApellido1.Text = ape1;
-            txtApellido2.Text = ape2;
-            txtPoblacion.Text = poblacion;
         }
 
         private void AddPedido_Load(object sender, EventArgs e)
@@ -56,11 +42,85 @@ namespace MySleepy
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// LISTENER BOTONES  //////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void btnBuscarArticulo_Click(object sender, EventArgs e)
         {
             ArticulosForm add = ArticulosForm.Instance(id_rol, conexion, idUsuario);
             add.Show();
         }
+
+        private void btnRealizar_Click(object sender, EventArgs e)
+        {
+            if (cbFormaPago.SelectedIndex == -1)
+            {
+                guardarPedido();
+            }
+            else
+            {
+                MessageBox.Show("Tienes que rellenar la forma de pago");
+            }
+        }
+
+        private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            ClientesForm clientes = ClientesForm.Instance(id_rol, 1, conexion, this, idUsuario);
+            clientes.Show();
+        }
+
+        private void btnAddArticulo_Click(object sender, EventArgs e)
+        {
+            if (txtNombre.Text != "")
+            {
+                ArticulosForm articulos = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
+                articulos.Show();
+            }
+            else
+            {
+                MessageBox.Show("Debes seleccionar un cliente, porfavor");
+            }
+        }
+
+        private void dpFecha_ValueChanged(object sender, EventArgs e)
+        {
+            generarNumero();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (dgvPedidos.CurrentRow == null || dgvPedidos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay ninguna fila seleccionada");
+            }
+            else
+            {
+                disminuirTotalPedido(Convert.ToInt32(dgvPedidos.Rows[dgvPedidos.CurrentRow.Index].Cells[3].Value));
+                dgvPedidos.Rows.RemoveAt(dgvPedidos.CurrentRow.Index);
+            }
+
+        }
+
+        public void cargarCliente(String id_cliente, String nombre, String ape1, String ape2, String direccion, String poblacion)
+        {
+            this.id_cliente = Convert.ToInt32(id_cliente);
+            txtNombre.Text = nombre;
+            txtDireccion.Text = direccion;
+            txtApellido1.Text = ape1;
+            txtApellido2.Text = ape2;
+            txtPoblacion.Text = poblacion;
+        }
+
+
+
+
 
         public void nuevoArticulo(int id_articulo, String refArticulo, String nombre, String composicion, String medida, String precio, String cantidad)
         {
@@ -69,10 +129,13 @@ namespace MySleepy
             this.precio = calcularPrecio(cantidad, precio);
             aumentarTotalPedido(this.precio);
             this.cantidad = cantidad;
-            MessageBox.Show("Articulo con referencia " + id_articulo_añadir + " y nombre " + nombre + " ha sido añadido");
+            MessageBox.Show("Articulo añadido");
             actualizarDGV();
         }
 
+        ////////////////////////////////////////////////////////////////////////
+        ///////////////// METODOS PROGRAMA /////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
         public void obtenerDatosCliente()
         {
             cliente = txtNombre.Text;
@@ -106,7 +169,6 @@ namespace MySleepy
             }
             else
             {
-                recuperarIdPedido();
                 String fcientifica = "";
                 fcientifica = devFCientifica() + id_pedido;
                 txtNumeroPedido.Text = fcientifica;
@@ -122,17 +184,7 @@ namespace MySleepy
             return fcientifica;
         }
 
-        private void btnRealizar_Click(object sender, EventArgs e)
-        {
-            if (cbFormaPago.SelectedIndex != -1)
-            {
-                guardarPedido();
-            }
-            else
-            {
-                MessageBox.Show("Tienes que rellenar la forma de pago");
-            }
-        }
+
 
         public int calcularPrecio(String cantidad, String precio)
         {
@@ -147,6 +199,7 @@ namespace MySleepy
             this.totalpedido = this.totalpedido + p;
             txtTotalPedido.Text = " " + this.totalpedido;
         }
+
         private void guardarPedido()
         {
             if (dgvPedidos.RowCount > 0 || cbFormaPago.SelectedIndex > 0)
@@ -194,45 +247,14 @@ namespace MySleepy
 
         private void recuperarIdPedido()
         {
-            id_pedido = conexion.siguienteID("IDPEDIDO", "PEDIDOS") - 1;
-        }
-        private void btnBuscarCliente_Click(object sender, EventArgs e)
-        {
-            ClientesForm clientes = ClientesForm.Instance(id_rol, 1, conexion, this, idUsuario);
-            clientes.Show();
+            id_pedido = conexion.siguienteID("IDPEDIDO", "PEDIDOS");
         }
 
-        private void btnAddArticulo_Click(object sender, EventArgs e)
-        {
-            if (txtNombre.Text != "")
-            {
-                ArticulosForm articulos = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
-                articulos.Show();
-            }
-            else
-            {
-                MessageBox.Show("Debes seleccionar un cliente, porfavor");
-            }
-        }
 
-        private void dpFecha_ValueChanged(object sender, EventArgs e)
+        private void disminuirTotalPedido(int p)
         {
-            generarNumero();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-            if (dgvPedidos.CurrentRow == null || dgvPedidos.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("No hay ninguna fila seleccionada");
-            }
-            else
-            {
-                aumentarTotalPedido(-Convert.ToInt32(dgvPedidos.Rows[dgvPedidos.CurrentRow.Index].Cells[3].ToString()));
-                dgvPedidos.Rows.RemoveAt(dgvPedidos.CurrentRow.Index);
-            }
-
+            totalpedido = totalpedido - p;
+            txtTotalPedido.Text = "" + totalpedido;
         } 
     }
 }
