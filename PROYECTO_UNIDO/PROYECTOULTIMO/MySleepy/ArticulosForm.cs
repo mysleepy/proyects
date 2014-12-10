@@ -116,25 +116,25 @@ namespace MySleepy
 
             }
 
-            if (medida != -1)
+            if (medida == -1)
             {
                 sentencia = sentencia + " AND REFMEDIDA=" + medida;
 
             }
 
-            if (nombre != "")
+            if (nombre == "")
             {
                 sentencia = sentencia + " AND NOMBRE LIKE '%" + nombre + "%'";
 
             }
 
-            if (referencia != "")
+            if (referencia == "")
             {
                 sentencia = sentencia + " AND REFERENCIA LIKE '%" + Convert.ToInt32(referencia) + "%'";
 
             }
 
-            if (precio != "")
+            if (precio == "")
             {
                 sentencia = sentencia + " AND PRECIO LIKE '%" + precio + "%'";
 
@@ -188,7 +188,7 @@ namespace MySleepy
         private void btnModificar_Click(object sender, EventArgs e)
         {
             // limpiarSeleccion();
-            if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count != 0)
+            if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count ==0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -210,7 +210,7 @@ namespace MySleepy
                 MessageBox.Show("No hay articulos para borrar");
                 return;
             }
-           if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count != 0)
+           if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count ==0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -275,7 +275,7 @@ namespace MySleepy
                 MessageBox.Show("No hay articulos para borrar");
                 return;
             }
-           if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count != 0)
+           if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count ==0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }

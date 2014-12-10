@@ -44,9 +44,7 @@ namespace MySleepy
 
         public void cargarInicio()
         {
-            String sentencia = " Select N_PEDIDO,REFCLIENTE,FECHA,TOTAL,PAGADO" +
-                                " from PEDIDOS" +
-                                " where ELIMINADO=0";
+            String sentencia = " Select * from PEDIDOS where ELIMINADO=0";
             actualizarDGV(sentencia);
         }
         ////////////////////////////////////////////////////////////////////////
@@ -56,6 +54,10 @@ namespace MySleepy
         {
             AddPedido añadir = new AddPedido(conexion, rolUsuario,idUsuario,0);
             añadir.Show();
+            if (añadir.IsDisposed)
+            {
+                filtrar();
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -86,13 +88,13 @@ namespace MySleepy
         private void rbEliminados_Click(object sender, EventArgs e)
         {
             filtrar();
-            rbNoEliminados.Enabled = false;
+            rbNoEliminados.Checked = false;
         }
 
         private void rbNoEliminados_Click(object sender, EventArgs e)
         {
             filtrar();
-            rbEliminados.Enabled = false;
+            rbEliminados.Checked = false;
         }
 
         private void btnModificar_Click(object sender, EventArgs e)

@@ -116,7 +116,7 @@ namespace MySleepy
         {
             tipoCambio = 2;
 
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -142,17 +142,12 @@ namespace MySleepy
         public int extraerIDTabla()
         {
             int id = 0;
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
-            {
-                MessageBox.Show("No hay ninguna fila seleccionada");
-            }
-            else
-            {
+          
                 DataGridViewRow fila = dgvUsuarios.CurrentRow;
                 id = Convert.ToInt32(fila.Cells[0].Value); //columna referente al idUsuario
                 
                 //MessageBox.Show(""+idUsuario);
-            }
+            
             return id;
         }
 
@@ -160,7 +155,7 @@ namespace MySleepy
         {
             tipoCambio = 3;
             dgvUsuarios.ClearSelection();
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -204,7 +199,7 @@ namespace MySleepy
         {
             tipoCambio = 4;
             dgvUsuarios.ClearSelection();
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }

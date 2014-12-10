@@ -82,7 +82,7 @@
     <Compile Include="AddUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddUsuario.Designer.cs">
+    <Compile Include="AddUsuario.designer.cs">
       <DependentUpon>AddUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="ArticulosForm.cs">
@@ -134,7 +134,7 @@
     <Compile Include="UsuariosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UsuariosForm.Designer.cs">
+    <Compile Include="UsuariosForm.designer.cs">
       <DependentUpon>UsuariosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="XML_proveedor.cs" />

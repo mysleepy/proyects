@@ -121,7 +121,7 @@ namespace MySleepy
         public int extraerIDTabla()
         {
             int id = 0;
-            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count != 0)
+            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ninguna fila");
             }
@@ -137,7 +137,7 @@ namespace MySleepy
         //Boton modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count != 0)
+            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ninguna fila");
             }
@@ -151,7 +151,7 @@ namespace MySleepy
         //Boton borrar y restaurar
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count != 0)
+            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ninguna fila");
             }

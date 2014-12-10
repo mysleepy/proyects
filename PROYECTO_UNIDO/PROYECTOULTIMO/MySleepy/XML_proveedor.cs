@@ -41,7 +41,7 @@ namespace MySleepy
 
         /// <summary>
         /// Metodo que lee el archivo indicado y devuelve un
-        /// array de String con los valores de los campos
+            /// array de String con los valores de los campos
         /// </summary>
         /// <param name="direccionXml">ruta del archivo a leer</param>
         /// <param name="tabla">tabla a leer de la BBDD</param>
