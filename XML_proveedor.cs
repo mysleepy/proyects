@@ -8,37 +8,37 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Data;
 
-namespace MySleepy
+namespace testXml
 {
     class XML_proveedor
-    {   
+    {
         //-----------------------------------------------------
         /// <summary>
         /// Atributo que representa al tipo int
         /// </summary>
-        public static const int INT = 1;
+        public  const int INT = 1;
         /// <summary>
         /// Atributo que representa al tipo string
         /// </summary>
-        public static const int STRING = 2;
+        public  const int STRING = 2;
         /// <summary>
         /// Atributo que representa al tipo boolean
         /// </summary>
-        public static const int BOOLEAN = 3;
+        public const int BOOLEAN = 3;
         /// <summary>
         /// Atributo que representa al tipo double
         /// </summary>
-        public static const int DOUBLE = 4;
+        public  const int DOUBLE = 4;
         /// <summary>
         /// Atributo que representa al tipo char
         /// </summary>
-        public static const int CHAR = 5;
+        public  const int CHAR = 5;
         /// <summary>
         /// Atributo que representa al tipo float
         /// </summary>
-        public static const int FLOAT = 6;
+        public  const int FLOAT = 6;
         //-------------------------------------------------
-        
+
         /// <summary>
         /// Metodo que lee el archivo indicado y devuelve un
         /// array de String con los valores de los campos
@@ -47,7 +47,7 @@ namespace MySleepy
         /// <param name="tabla">tabla a leer de la BBDD</param>
         /// <param name="campos">cantidad de campos que contiene la tabla a leer</param>
         /// <returns>un array de String con todos los nodos</returns>
-        public static String[,] Leerxml(String direccionXml,String tabla,int campos)
+        public static String[,] Leerxml(String direccionXml, String tabla, int campos)
         {
             XmlDataDocument xmldoc = new XmlDataDocument();
             XmlNodeList xmlnode;
@@ -56,7 +56,7 @@ namespace MySleepy
             FileStream fs = new FileStream(direccionXml, FileMode.Open, FileAccess.Read);
             xmldoc.Load(fs);
             xmlnode = xmldoc.GetElementsByTagName(tabla);
-            resultado = new String[xmlnode.Count,campos];
+            resultado = new String[xmlnode.Count, campos];
             for (i = 0; i < xmlnode.Count - 1; i++)
             {
                 xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
@@ -74,19 +74,19 @@ namespace MySleepy
         /// <param name="nombreElemento">Nombre usado para los nodos</param>
         /// <param name="nombreColumnas">Nombres usados para los nodos hijos</param>
         /// <param name="valorCampos">Valores a almacenar en cada nodo hijo</param>
-        public static void escribirXml(String rutaXml, String nombreElemento,String[] nombreColumnas,String[,] valorCampos)
+        public static void escribirXml(String rutaXml, String nombreElemento, String[] nombreColumnas, String[,] valorCampos)
         {
             XmlTextWriter writer = new XmlTextWriter(rutaXml, System.Text.Encoding.UTF8);
             writer.WriteStartDocument(true);
             writer.Formatting = Formatting.Indented;
             writer.Indentation = 2;
             writer.WriteStartElement("Table");
-            for (int i = 0; i < valorCampos.GetUpperBound(0); i++)
+            for (int i = 0; i <2; i++)
             {
-                String[] registro = new String[valorCampos.GetUpperBound(1)];
+                String[] registro = new String[nombreColumnas.Length];
                 for (int j = 0; j < registro.Length; j++)
                 {
-                    registro[j] = valorCampos[i, j];                  
+                    registro[j] = valorCampos[i, j];
                 }
                 crearNodo(writer, nombreElemento, nombreColumnas, registro);
             }
@@ -102,7 +102,7 @@ namespace MySleepy
         /// <param name="nombreElemento">Nombre usado para los nodos</param>
         /// <param name="nombreColumnas">Nombres para los nodos hijo (ChildNode)</param>
         /// <param name="valorCampos">Valores a almacenar en cada nodo hijo</param>
-        private static void crearNodo(XmlTextWriter writer,String nombreElemento, String[] nombreColumnas, String[] valorCampos)
+        private static void crearNodo(XmlTextWriter writer, String nombreElemento, String[] nombreColumnas, String[] valorCampos)
         {
             writer.WriteStartElement(nombreElemento);
             for (int i = 0; i < nombreColumnas.Length; i++)
@@ -121,11 +121,12 @@ namespace MySleepy
         /// <param name="nombreColumnas">nombre de las columnas/hijos de los que se compondra el elemento principal</param>
         /// <param name="valorCampos">valor que contendran las columnas/hijos del elemento padre</param>
         /// <returns></returns>
-        private static XmlNode crearNodo(XmlDocument documento,String nombreElemento, String[] nombreColumnas, String[] valorCampos)
+        private static XmlNode crearNodo(XmlDocument documento, String nombreElemento, String[] nombreColumnas, String[] valorCampos)
         {
             XmlElement elemento = documento.CreateElement(nombreElemento);
             int j = 0, valorLength = valorCampos.Length;
-            foreach(String i in nombreColumnas){
+            foreach (String i in nombreColumnas)
+            {
                 if (j < valorLength)
                 {
                     XmlElement columna = documento.CreateElement(i);
@@ -144,31 +145,45 @@ namespace MySleepy
         /// <param name="nombreColumnas">array con el nombre de las columnas</param>
         /// <param name="tipoColumnas">array con los tipos que soportara cada columna</param>
         /// <param name="valoresColumnas">array con los valores que tendra cada columna en su respectiva fila</param>
-        public static void crearXMLDataSet(String nombreDataSet,String rutaXml,String[] nombreColumnas, Int32[] tipoColumnas, Object[,] valoresColumnas)
+        public static void crearXMLDataSet(String nombreDataSet, String rutaXml, String[] nombreColumnas, Int32[] tipoColumnas, Object[,] valoresColumnas)
         {
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
             //Genera las columnas del datatable
-            for(int i=0; i < nombreColumnas.Length;i++)
+            for (int i = 0; i < nombreColumnas.Length; i++)
             {
-                dt.Columns.Add(new DataColumn(nombreColumnas[i],Type.GetType(tipoDato(tipoColumnas[i]))));
+                dt.Columns.Add(new DataColumn(nombreColumnas[i], Type.GetType(tipoDato(tipoColumnas[i]))));
             }
             //Genero un array con los valores de un registro y los añado a una fila y así sucesivamente
-            for(int j = 0; j < nombreColumnas.Length;j++){
+            for (int j = 0; j < nombreColumnas.Length; j++)
+            {
                 Object[] row = new Object[nombreColumnas.Length];
                 int x = 0;
                 if (x >= row.Length)
                 {
                     rellenaFilas(dt, nombreColumnas, row);
-                    
+
                 }
-                else 
-                { 
+                else
+                {
                     row[x] = valoresColumnas[j, x];
                     j = j - 1;
                 }
-                
+
             }
+            ds.Tables.Add(dt);
+            ds.Tables[0].TableName = nombreDataSet;
+            ds.WriteXml(rutaXml);
+        }
+        /// <summary>
+        /// Metodo que escribe en el fichero Xml un dataSet en base a un dataTable pasado
+        /// </summary>
+        /// <param name="nombreDataSet">Nombre que se le asignara al dataSet</param>
+        /// <param name="rutaXml">Ruta en la que se encuentra el archivo</param>
+        /// <param name="dt">dataTable a pasar al xml</param>
+        public static void crearXmlDataSet(String nombreDataSet, String rutaXml, DataTable dt)
+        {
+            DataSet ds = new DataSet();
             ds.Tables.Add(dt);
             ds.Tables[0].TableName = nombreDataSet;
             ds.WriteXml(rutaXml);
@@ -241,6 +256,19 @@ namespace MySleepy
             return resultado;
         }
         /// <summary>
+        /// Metodo que lee un XMLDataSet
+        /// </summary>
+        /// <param name="rutaXml">ruta del archivo XML</param>
+        /// <returns>Devuelve el dataTable del xml</returns>
+        public static DataTable leerXMLDataSet(String rutaXml)
+        {
+            XmlReader xmlFile = XmlReader.Create(rutaXml, new XmlReaderSettings());
+            DataSet ds = new DataSet();
+            ds.ReadXml(xmlFile);
+            DataTable resultado = ds.Tables[0];
+            return resultado;
+        }
+        /// <summary>
         /// Metodo que busca un elemento en el archivo Xml
         /// </summary>
         /// <param name="pdv">dataView que se esta utilizando</param>
@@ -262,9 +290,9 @@ namespace MySleepy
         /// <param name="columna">nombre de la columna/elemento a buscar</param>
         /// <param name="valor">valor que se buscara, es el que contiene la columna/elemento</param>
         /// <returns></returns>
-        public static String[] cogerDatos(String rutaXml, String[] nombreColumnas,String columna, String valor)
+        public static String[] cogerDatos(String rutaXml, String[] nombreColumnas, String columna, String valor)
         {
-            XmlReader xmlFile = XmlReader.Create(rutaXml,new XmlReaderSettings());
+            XmlReader xmlFile = XmlReader.Create(rutaXml, new XmlReaderSettings());
             DataSet ds = new DataSet();
             DataView dv;
             ds.ReadXml(xmlFile);
@@ -293,7 +321,7 @@ namespace MySleepy
         /// <param name="valor">valor que contiene la columna para la busqueda del elemento</param>
         public static void modificarDatos(String rutaXml, String[] nombreColumnas, String[] valorColumnas, String columna, String valor)
         {
-            XmlReader xmlFile = XmlReader.Create(rutaXml,new XmlReaderSettings());
+            XmlReader xmlFile = XmlReader.Create(rutaXml, new XmlReaderSettings());
             DataSet ds = new DataSet();
             DataView dv;
             ds.ReadXml(xmlFile);
@@ -317,10 +345,10 @@ namespace MySleepy
         /// <param name="nombreElemento">nombre del elemento a crear(normalmente es el mismo de la tabla)</param>
         /// <param name="nombreColumnas">nombre de los hijos/columnas</param>
         /// <param name="valorCampos">valor que contienen las columnas/hijos</param>
-        public void InsertarXml(String rutaxml,String nombreElemento, String[] nombreColumnas, String[] valorCampos)
+        public void InsertarXml(String rutaxml, String nombreElemento, String[] nombreColumnas, String[] valorCampos)
         {
             //Cargamos el documento XML.
-            XmlDocument xmldoc= new XmlDocument();
+            XmlDocument xmldoc = new XmlDocument();
             xmldoc.Load(rutaxml);
 
             //Creamos el nodo que deseamos insertar.
