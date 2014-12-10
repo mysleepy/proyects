@@ -78,7 +78,6 @@
             this.txtNombre.Size = new System.Drawing.Size(124, 20);
             this.txtNombre.TabIndex = 1;
             this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
-            this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyUp);
             // 
             // dgvClientes
             // 
@@ -347,6 +346,7 @@
             this.btnRestaurar.Size = new System.Drawing.Size(61, 58);
             this.btnRestaurar.TabIndex = 24;
             this.btnRestaurar.UseVisualStyleBackColor = true;
+            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
             // ClientesForm
             // 

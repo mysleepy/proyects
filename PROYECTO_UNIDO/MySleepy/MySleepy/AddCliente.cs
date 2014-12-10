@@ -80,7 +80,7 @@ namespace MySleepy
         //Metodo que rellena los campos segun el id pasado
         private void rellenaDatos()
         {
-            String sentencia = "SELECT C.IDCLIENTE,C.NOMBRE,C.APELLIDO1,C.APELLIDO2,C.TELEFONO,C.EMAIL,C.DIRECCION,C.DNI," +
+            String sentencia = "SELECT distinct C.IDCLIENTE,C.NOMBRE,C.APELLIDO1,C.APELLIDO2,C.TELEFONO,C.EMAIL,C.DIRECCION,C.DNI," +
                 "P.POBLACION,R.PROVINCIA,M.COMUNIDAD,L.CODIGOPOSTAL" +
                 " FROM CLIENTES C, POBLACIONES P, PROVINCIAS R, COMUNIDADES M,CODIGOSPOSTALES L,CODIGOSPOSTALESPOBLACIONES X" +
                 " WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPROVINCIA = R.IDPROVINCIA AND R.REFCOMUNIDAD = M.IDCOMUNIDAD" +
@@ -148,9 +148,11 @@ namespace MySleepy
                             idCliente = Convert.ToInt32(conexion.DLookUp("MAX(IDCLIENTE)", "CLIENTES", "")) + 1;
                             //Console.WriteLine(idCliente);
                             //Almaceno los datos en la base de datos
-                            conexion.setData("INSERT INTO CLIENTES (IDCLIENTE,NOMBRE,APELLIDO1,APELLIDO2,DIRECCION,REFCPPOBLACIONES,TELEFONO,EMAIL,ELIMINADO,DNI)" +
+                            String ins = "INSERT INTO CLIENTES (IDCLIENTE,NOMBRE,APELLIDO1,APELLIDO2,DIRECCION,REFCPPOBLACIONES,TELEFONO,EMAIL,ELIMINADO,DNI)" +
                                 " VALUES(" + idCliente + ",'" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + direccion +
-                                "'," + refCpProPo + "," + telefono + ",'" + email + "'," + 0 + ",'" + dni + "')");
+                                "'," + refCpProPo + "," + telefono + ",'" + email + "'," + 0 + ",'" + dni + "')";
+                            conexion.setData(ins);
+                            Console.Write(ins);
                             MessageBox.Show(this, "Cliente añadido", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             limpiar();
 

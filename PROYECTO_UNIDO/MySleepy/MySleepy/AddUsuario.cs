@@ -161,7 +161,7 @@ namespace MySleepy
                     }
                     MessageBox.Show(update);
                     conexion.setData(update);
-                    MessageBox.Show("Usuario modificado");
+                    //MessageBox.Show("Usuario modificado");
 
                     //insert en la tabla historial cambios
                     String nombreUsuario = Convert.ToString
@@ -193,7 +193,7 @@ namespace MySleepy
                     //Console.WriteLine(insert);
                     //realizamos el insert
                     conexion.setData(ins);
-                    MessageBox.Show("Usuario creado");
+                    //MessageBox.Show("Usuario creado");
 
                     //insert en la tabla historial de cambios
                     String nombreUsuario = Convert.ToString

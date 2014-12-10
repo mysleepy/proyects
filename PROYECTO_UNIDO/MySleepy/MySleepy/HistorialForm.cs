@@ -34,6 +34,12 @@ namespace MySleepy
             rellenarCombo(cbUsuarios, "Select NOMBRE from USUARIOS", "NOMBRE", "USUARIOS");
             rellenarCombo(cbTipoCambio, "Select DESCRIPCION FROM TIPOCAMBIO", "DESCRIPCION", "TIPOCAMBIO");
         }
+
+        public HistorialForm(ConnectDB conexion)
+        {
+            // TODO: Complete member initialization
+            this.conexion = conexion;
+        }
         private void HistorialForm_Load_1(object sender, EventArgs e)
         {
             dgvHistorial.ClearSelection();
@@ -47,7 +53,6 @@ namespace MySleepy
                 dgvHistorial.Rows.Remove(dgvHistorial.CurrentRow);
             }
         }
-
         public void cargarTablaInicio()
         {
             //solo mostraremos los no eliminados inicialmente
@@ -149,14 +154,15 @@ namespace MySleepy
             {
                 select += " and upper(h.OBSERVACION) LIKE '%" + cbParteModificada.SelectedItem.ToString().ToUpper() + "%'";
             }
-            if (dateTimePickerFechaInicio.Value < dateTimePickerFechaFin.Value)
+            if (dateTimePickerFechaInicio.Value <= dateTimePickerFechaFin.Value)
             {
                 String fechaInicio = dateTimePickerFechaInicio.Value.ToShortDateString();
                 String fechaFin = dateTimePickerFechaFin.Value.ToShortDateString();
                 
                 select += " and FECHA between '" + fechaInicio + "'" +
                           " and '" + fechaFin + "'";
-            } 
+            }
+            
             Console.Write(select);
             cargarTabla(select);
         }
@@ -188,12 +194,27 @@ namespace MySleepy
 
         private void dateTimePickerFechaInicio_ValueChanged(object sender, EventArgs e)
         {
-            filtrar();
+            if (dateTimePickerFechaInicio.Value > System.DateTime.Now && dateTimePickerFechaFin.Value > System.DateTime.Now)
+            {
+                MessageBox.Show("Fecha posterior a la actual");
+            }
+            else
+            {
+                filtrar();
+            }
+            
         }
 
         private void dateTimePickerFechaFin_ValueChanged(object sender, EventArgs e)
         {
-            filtrar();
+            if (dateTimePickerFechaInicio.Value > System.DateTime.Now && dateTimePickerFechaFin.Value > System.DateTime.Now)
+            {
+                MessageBox.Show("Fecha posterior a la actual");
+            }
+            else
+            {
+                filtrar();
+            }
         }
 
         private void btnSalir_Click_1(object sender, EventArgs e)

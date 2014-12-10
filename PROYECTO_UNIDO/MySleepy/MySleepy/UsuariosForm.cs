@@ -191,7 +191,7 @@ namespace MySleepy
                             mensaje = "Usuario borrado ->" + nombreUsuario+" Motivo ->"+mensaje;
                             insert.insertHistorialCambio(idUsuario, tipoCambio,mensaje );
 
-                            MessageBox.Show("Usuario eliminado");
+                            //MessageBox.Show("Usuario eliminado");
                         
                     }
                 }
@@ -201,7 +201,6 @@ namespace MySleepy
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
             tipoCambio = 4;
-            dgvUsuarios.ClearSelection();
             if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
@@ -222,7 +221,7 @@ namespace MySleepy
                         int idUsu = extraerIDTabla();
                         String update = " update USUARIOS  set ELIMINADO = " + 0 + " where IDUSUARIO=" + idUsuario;
                         conexion.setData(update);
-                        MessageBox.Show("Usuario restaurado");
+                        //MessageBox.Show("Usuario restaurado");
 
                         //Actualizar los usuarios visualizados en el data grid view
                         cargarTablaInicio();

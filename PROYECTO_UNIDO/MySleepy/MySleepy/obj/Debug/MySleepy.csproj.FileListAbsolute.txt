@@ -280,6 +280,7 @@ C:\Users\Noemi\Desktop\MySleepy\MySleepy\bin\Debug\es\MySleepy.resources.dll
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\bin\Debug\BCrypt.Net.dll
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\bin\Debug\BCrypt.Net.pdb
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\bin\Debug\BCrypt.Net.xml
+C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.AccesoForm.resources
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.AddCliente.resources
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.AddNuevoArticulo.resources
@@ -301,4 +302,3 @@ C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\es-AR\MySleepy.resources.dll
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\es\MySleepy.resources.dll
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.exe
 C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.pdb
-C:\Users\Noemi\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.csprojResolveAssemblyReference.cache

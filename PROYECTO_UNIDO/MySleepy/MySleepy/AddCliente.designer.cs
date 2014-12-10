@@ -96,6 +96,7 @@
             this.cbCP.Name = "cbCP";
             this.cbCP.Size = new System.Drawing.Size(147, 21);
             this.cbCP.TabIndex = 10;
+            this.cbCP.SelectedIndexChanged += new System.EventHandler(this.cbCP_SelectedIndexChanged);
             // 
             // cbCAutonoma
             // 
@@ -105,6 +106,7 @@
             this.cbCAutonoma.Name = "cbCAutonoma";
             this.cbCAutonoma.Size = new System.Drawing.Size(147, 21);
             this.cbCAutonoma.TabIndex = 7;
+            this.cbCAutonoma.SelectedIndexChanged += new System.EventHandler(this.cbCAutonoma_SelectedIndexChanged);
             // 
             // cbProvincia
             // 
@@ -115,6 +117,7 @@
             this.cbProvincia.Size = new System.Drawing.Size(147, 21);
             this.cbProvincia.TabIndex = 8;
             this.cbProvincia.Tag = "";
+            this.cbProvincia.SelectedIndexChanged += new System.EventHandler(this.cbProvincia_SelectedIndexChanged);
             // 
             // cbPoblacion
             // 
@@ -124,6 +127,7 @@
             this.cbPoblacion.Name = "cbPoblacion";
             this.cbPoblacion.Size = new System.Drawing.Size(147, 21);
             this.cbPoblacion.TabIndex = 9;
+            this.cbPoblacion.SelectedIndexChanged += new System.EventHandler(this.cbPoblacion_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -140,6 +144,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(177, 20);
             this.txtDireccion.TabIndex = 11;
+            this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDireccion_KeyPress);
             // 
             // label8
             // 
@@ -204,6 +209,7 @@
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(124, 20);
             this.txtDNI.TabIndex = 1;
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // label11
             // 
@@ -220,6 +226,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(167, 20);
             this.txtEmail.TabIndex = 6;
+            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmail_KeyPress);
             // 
             // label1
             // 
@@ -236,6 +243,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(124, 20);
             this.txtNombre.TabIndex = 2;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // label6
             // 
@@ -261,6 +269,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(124, 20);
             this.txtTelefono.TabIndex = 5;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtApellido1
             // 
@@ -268,6 +277,7 @@
             this.txtApellido1.Name = "txtApellido1";
             this.txtApellido1.Size = new System.Drawing.Size(124, 20);
             this.txtApellido1.TabIndex = 3;
+            this.txtApellido1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido1_KeyPress);
             // 
             // label3
             // 
@@ -293,6 +303,7 @@
             this.txtApellido2.Name = "txtApellido2";
             this.txtApellido2.Size = new System.Drawing.Size(124, 20);
             this.txtApellido2.TabIndex = 4;
+            this.txtApellido2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido2_KeyPress);
             // 
             // btnGuardar
             // 

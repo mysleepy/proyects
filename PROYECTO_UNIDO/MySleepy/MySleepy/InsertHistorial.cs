@@ -15,12 +15,15 @@ namespace MySleepy
     class InsertHistorial
     {
         ConnectDB conexion;
-
+        private HistorialForm historialForm;
+        
 
         public InsertHistorial(ConnectDB conexion)
         {
             this.conexion = conexion;
+            historialForm = new HistorialForm(conexion);
         }
+
         //METODOS DE HISTORIAL DE CAMBIOS -> CLASE A PARTE
         public void insertHistorialCambio(int idUsuario, int tipoCambio, String cambio)
         {
@@ -29,7 +32,7 @@ namespace MySleepy
             String insert = "INSERT INTO HISTORIALCAMBIOS VALUES (" + (ultimoIDHistorial() + 1) + ", " + idUsuario +
                             " , '" + date + "', " + tipoCambio + ", '" + cambio + "')";
             conexion.setData(insert);
-            //MessageBox.Show(insert);
+            MessageBox.Show(insert);
 
         }
 

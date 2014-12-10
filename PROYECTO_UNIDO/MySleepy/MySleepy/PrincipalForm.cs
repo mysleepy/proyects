@@ -13,6 +13,13 @@ namespace MySleepy
     public partial class PrincipalForm : Form
     {
         ConnectDB conexion;
+        ClientesForm clientes;
+        UsuariosForm usuarios;
+        ArticulosForm articulos;
+        PedidosForm pedidos;
+        Proveedor proveedores;
+        HistorialForm historial;
+
         int idRol;
         int idUsuario;
         public PrincipalForm(int idUsuario,int idRol, ConnectDB c,String nombre)
@@ -34,18 +41,26 @@ namespace MySleepy
         {
             String etiqueta = "Usted se ha identificado como "+nombre;
             lblTipoUsuario.Text = etiqueta;
+            lblTipoUsuario.BackColor = Color.Transparent;
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (idRol == 1 || idRol == 2)
             {
-                UsuariosForm usuarios = UsuariosForm.Instance(idRol,conexion,idUsuario);
-                usuarios.MdiParent = this;
-                usuarios.SetDesktopLocation(-1, -1); // saldra en la esquina
-                usuarios.WindowState = FormWindowState.Normal;
-                usuarios.Show();
-                usuarios.Focus();
+                if (historial == null || historial.IsDisposed)
+                {
+                    usuarios = UsuariosForm.Instance(idRol, conexion, idUsuario);
+                    usuarios.MdiParent = this;
+                    usuarios.SetDesktopLocation(-1, -1); // saldra en la esquina
+                    usuarios.WindowState = FormWindowState.Normal;
+                    usuarios.Show();
+                    usuarios.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Debe cerrar la ventana historial");
+                }
             }
             else
             {
@@ -56,22 +71,38 @@ namespace MySleepy
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClientesForm clientes = ClientesForm.Instance(idRol,conexion,idUsuario);
-            clientes.MdiParent = this;
-            clientes.SetDesktopLocation(-1, -1); // saldra en la esquina
-            clientes.WindowState = FormWindowState.Normal;
-            clientes.Show();
-            clientes.Focus();
+            Form[] ventanas = { pedidos,historial};
+            if (ventanasCerradas(ventanas) == true)
+            {
+                clientes = ClientesForm.Instance(idRol, conexion, idUsuario);
+                clientes.MdiParent = this;
+                clientes.SetDesktopLocation(-1, -1); // saldra en la esquina
+                clientes.WindowState = FormWindowState.Normal;
+                clientes.Show();
+                clientes.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Debe cerrar las ventanas Pedidos y/o Historial");
+            }
         }
 
         private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ArticulosForm articulos = ArticulosForm.Instance(idRol, conexion,idUsuario);
-            articulos.MdiParent = this;
-            articulos.SetDesktopLocation(-1, -1); // saldra en la esquina
-            articulos.WindowState = FormWindowState.Normal;
-            articulos.Show();
-            articulos.Focus();
+            Form[] ventanas = { pedidos,historial};
+            if (ventanasCerradas(ventanas) == true)
+            {
+                articulos = ArticulosForm.Instance(idRol, conexion, idUsuario);
+                articulos.MdiParent = this;
+                articulos.SetDesktopLocation(-1, -1); // saldra en la esquina
+                articulos.WindowState = FormWindowState.Normal;
+                articulos.Show();
+                articulos.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Debe cerrar las ventanas Pedidos y/o Historial");
+            }
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -88,12 +119,23 @@ namespace MySleepy
 
         private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PedidosForm pedidos = PedidosForm.Instance(idRol, conexion,idUsuario);
-            pedidos.MdiParent = this;
-            pedidos.SetDesktopLocation(-1, -1); // saldra en la esquina
-            pedidos.WindowState = FormWindowState.Normal;
-            pedidos.Show();
-            pedidos.Focus();
+            Form[] ventanas = { clientes, articulos, historial, proveedores };
+            if (ventanasCerradas(ventanas) == true)
+            {
+                pedidos = PedidosForm.Instance(idRol, conexion, idUsuario);
+                pedidos.MdiParent = this;
+                pedidos.SetDesktopLocation(-1, -1); // saldra en la esquina
+                pedidos.WindowState = FormWindowState.Normal;
+                pedidos.Show();
+                pedidos.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Debe cerrar todas las ventanas exceptuando Usuarios");
+            }    
+            
+                
+           
         }
 
         private void PrincipalForm_Load(object sender, EventArgs e)
@@ -109,8 +151,7 @@ namespace MySleepy
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Pedimos confirmacion
-            //Pedimos confirmacion
-                DialogResult opcion = MessageBox.Show("¿Desea cerrar sesión?", "Cocnfirmación",
+                DialogResult opcion = MessageBox.Show("¿Desea cerrar sesión?", "Confirmación",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (opcion == DialogResult.OK)
                 {
@@ -124,24 +165,57 @@ namespace MySleepy
 
         private void historialToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            HistorialForm historial = HistorialForm.Instance(idUsuario,conexion);
-            historial.MdiParent = this;
-            historial.SetDesktopLocation(-1, -1); // saldra en la esquina
-            historial.WindowState = FormWindowState.Normal;
-            historial.Show();
-            historial.Focus();
+            Form[] ventanas = { pedidos,usuarios,articulos,clientes,proveedores};
+            if (ventanasCerradas(ventanas) == true)
+            {
+                historial = HistorialForm.Instance(idUsuario, conexion);
+                historial.MdiParent = this;
+                historial.SetDesktopLocation(-1, -1); // saldra en la esquina
+                historial.WindowState = FormWindowState.Normal;
+                historial.Show();
+                historial.Focus();
+                
+            }
+            else
+            {
+                MessageBox.Show("Debe cerrar el resto de ventanas para acceder al historial");
+            }
         }
 
         private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Proveedor proveedor = Proveedor.Instance(idRol, conexion, idUsuario);
-            proveedor.MdiParent = this;
-            proveedor.SetDesktopLocation(-1, -1);
-            proveedor.WindowState = FormWindowState.Normal;
-            proveedor.Show();
-            proveedor.Focus();
+            Form[] ventanas = { pedidos, historial };
+            if (ventanasCerradas(ventanas))
+            {
+                proveedores = Proveedor.Instance(idRol, conexion, idUsuario);
+                proveedores.MdiParent = this;
+                proveedores.SetDesktopLocation(-1, -1);
+                proveedores.WindowState = FormWindowState.Normal;
+                proveedores.Show();
+                proveedores.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Debe cerrar las ventanas Pedidos e Historial");
+            }
 
+        }
+
+        private Boolean ventanasCerradas(Form[] ventanas)
+        {
+            Boolean cerrado =false;
+            for (int i = 0; i < ventanas.Length; i++)
+            {
+                if (ventanas[i] == null || ventanas[i].IsDisposed )
+                {
+                    cerrado = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return cerrado;
         }
     }
 }
