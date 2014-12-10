@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -59,18 +60,33 @@ namespace MySleepy
             this.idRol = idRol;
             this.conexion = conexion;
             cargarDGVInicio();
+            cargarCombos(cbMedida);
             this.idUsuario = idUsuario;
             insert = new InsertHistorial(conexion);
         }
 
         private void cargarDGVInicio()
         {
-            String sentencia = "SELECT A.REFERENCIA,A.PRECIO,A.NOMBRE,C.COMPOSICION,M.MEDIDA FROM ARTICULOS A, COMPOSICIONES C, MEDIDAS M  WHERE A.REFCOMPOSICION=C.IDCOMPOSICION AND A.REFMEDIDA=M.IDMEDIDA  AND A.ELIMINADO=0";
-            Console.WriteLine(sentencia);
+            String sentencia = "SELECT IDARTICULO,REFCOMPOSICION,REFMEDIDA,PRECIO,NOMBRE,REFERENCIA FROM ARTICULOS WHERE ELIMINADO=0";
             actualizarDGV(sentencia);
             dgvArticulos.ClearSelection();
         }
 
+        private void cargarCombos(ComboBox cbo)
+        {
+            DataSet data;
+            DataTable tabla = null;
+            String sentencia = "";
+
+            sentencia = "SELECT MEDIDA FROM MEDIDAS";
+            data = conexion.getData(sentencia, "MEDIDAS");
+            tabla = data.Tables["MEDIDAS"];
+            foreach (DataRow row in tabla.Rows)
+            {
+                cbo.Items.Add(Convert.ToString(row["MEDIDA"]));
+            }
+
+        }
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose();
@@ -78,18 +94,20 @@ namespace MySleepy
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void limpiarCampos()
         {
             txtPrecio.Text = "";
             txtReferencia.Text = "";
-            txtMedida.Text = "";
+            cbMedida.SelectedIndex = -1;
             txtNombre.Text = "";
+            rbEliminados.Checked = false;
+            rbNoEliminados.Checked = true;
         }
 
-        public void filtrar(String medida, String nombre, String referencia, String precio)
+        public void filtrar(int medida, String nombre, String referencia, String precio)
         {
             String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0";
 
@@ -99,9 +117,9 @@ namespace MySleepy
 
             }
 
-            if (medida != "")
+            if (medida != -1)
             {
-                sentencia = sentencia + " AND MEDIDA LIKE '%'" + medida + "%'";
+                sentencia = sentencia + " AND REFMEDIDA=" + medida;
 
             }
 
@@ -133,11 +151,12 @@ namespace MySleepy
             foreach (DataRow row in tArticulos.Rows)
             {
                 int referencia = Convert.ToInt32(row["REFERENCIA"]);
+                int id = Convert.ToInt32(row["IDARTICULO"]);
                 String nombre = Convert.ToString(row["NOMBRE"]);
-                String composicion = Convert.ToString(row["COMPOSICION"]);
-                String medida = Convert.ToString(row["MEDIDA"]);
+                String composicion = Convert.ToString(conexion.DLookUp("COMPOSICION", "COMPOSICIONES", "IDCOMPOSICION=" + row["REFCOMPOSICION"]));
+                String medida = Convert.ToString(conexion.DLookUp("MEDIDA", "MEDIDAS", "IDMEDIDA=" + row["REFMEDIDA"]));
                 String precio = Convert.ToString(row["PRECIO"]);
-                dgvArticulos.Rows.Add(referencia, nombre, composicion, medida, precio);
+                dgvArticulos.Rows.Add(referencia, nombre, composicion, medida, precio, id);
 
             } // Fin del bucle for each
             limpiarSeleccion();
@@ -159,24 +178,24 @@ namespace MySleepy
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddNuevoArticulo add = new AddNuevoArticulo(conexion, 0, this,idUsuario);
+            AddNuevoArticulo add = new AddNuevoArticulo(conexion, 0, this, idUsuario);
             add.Show();
             if (add.IsDisposed)
             {
-                filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+                filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             // limpiarSeleccion();
-            if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count != 0)
+            if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
             else
             {
-                
+
                 AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1, this, idUsuario);
                 add.activarReferencia(false);
                 add.rellenar(dgvArticulos.CurrentRow);
@@ -192,7 +211,7 @@ namespace MySleepy
                 MessageBox.Show("No hay articulos para borrar");
                 return;
             }
-           if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count != 0)
+            if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -206,41 +225,41 @@ namespace MySleepy
                     cargarDGVInicio();
                     //dgvArticulos.Rows.RemoveAt(dgvArticulos.CurrentRow.Index);
                     limpiarSeleccion();
-                    filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
-                }            
+                    filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+                }
             }
         }
 
         private void eliminarRegistro(DataGridViewRow fila)
         {
-            int referencia = Convert.ToInt32(fila.Cells[0].Value);
-            String sentencia = "UPDATE ARTICULOS SET ELIMINADO=1 WHERE REFERENCIA=" + referencia;
+            int idarticuloseleccionado = Convert.ToInt32(fila.Cells[5].Value);
+            String sentencia = "UPDATE ARTICULOS SET ELIMINADO=1 WHERE IDARTICULO=" + idarticuloseleccionado;
             conexion.setData(sentencia);
 
             //insert en la tabla historial de cambios
             String nombreArticulo = Convert.ToString
-                            (conexion.DLookUp("NOMBRE", "USUARIOS", " REFERENCIA = " + referencia));
+                            (conexion.DLookUp("NOMBRE", "USUARIOS", " IDARTICULO = " + idarticuloseleccionado));
             insert.insertHistorialCambio(idUsuario, 3, "Articulo eliminado ->" + nombreArticulo);
         }
 
         private void txtReferencia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void txtMedida_KeyPress(object sender, KeyPressEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void limpiarSeleccion()
@@ -257,7 +276,7 @@ namespace MySleepy
                 MessageBox.Show("No hay articulos para borrar");
                 return;
             }
-           if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count != 0)
+            if (dgvArticulos.CurrentRow == null || dgvArticulos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -268,37 +287,34 @@ namespace MySleepy
                 {
                     restaurarRegistro(dgvArticulos.CurrentRow);
                     // Actualiza tabla
-                    filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+                    filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
                 }
             }
-            
+
         }
 
         private void restaurarRegistro(DataGridViewRow fila)
         {
-            int referencia = Convert.ToInt32(fila.Cells[0].Value);
-            String sentencia = "UPDATE ARTICULOS SET ELIMINADO=0 WHERE REFERENCIA=" + referencia;
+            int idarticuloseleccionado = Convert.ToInt32(fila.Cells[5].Value);
+            String sentencia = "UPDATE ARTICULOS SET ELIMINADO=0 WHERE IDARTICULO=" + idarticuloseleccionado;
             conexion.setData(sentencia);
             //insert en tabla historial cambios
             String nombreArticulo = Convert.ToString
-                                    (conexion.DLookUp("NOMBRE", "ARTICULOS", " REFERENCIA ->" + referencia));
+                                    (conexion.DLookUp("NOMBRE", "ARTICULOS", " IDARTICULO ->" + idarticuloseleccionado));
             insert.insertHistorialCambio(idUsuario, 4, "Articulo restaurado ->" + nombreArticulo);
         }
 
         private void rbEliminados_Click(object sender, EventArgs e)
         {
-            limpiarSeleccion();
             btnBorrar.Enabled = false;
             btnRestaurar.Enabled = true;
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            rbNoEliminados.Checked = false;
+            rbEliminados.Checked = true;
         }
 
         private void rbNoEliminados_CheckedChanged(object sender, EventArgs e)
         {
-            limpiarSeleccion();
-            btnBorrar.Enabled = true;
-            btnRestaurar.Enabled = false;
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void ArticulosForm_Shown(object sender, EventArgs e)
@@ -310,27 +326,27 @@ namespace MySleepy
 
         private void txtReferencia_KeyUp(object sender, KeyEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void txtNombre_KeyUp(object sender, KeyEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void txtMedida_KeyUp(object sender, KeyEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void txtPrecio_KeyUp(object sender, KeyEventArgs e)
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         internal void actualizarTabla()
         {
-            filtrar(txtMedida.Text, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
         }
 
         private void dgvArticulos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -340,13 +356,18 @@ namespace MySleepy
             {
                 if (txtCantidad.Value != 0)
                 {
+                    lblCantidad.ForeColor = Color.Green;
                     cantidad = Convert.ToString(txtCantidad.Value);
-                    pedido.nuevoArticulo(dgvArticulos.CurrentRow.Cells[0].Value.ToString(), dgvArticulos.CurrentRow.Cells[1].Value.ToString(), dgvArticulos.CurrentRow.Cells[2].Value.ToString(), dgvArticulos.CurrentRow.Cells[3].Value.ToString(), dgvArticulos.CurrentRow.Cells[4].Value.ToString(), cantidad);
+                    pedido.nuevoArticulo(Convert.ToInt32(dgvArticulos.CurrentRow.Cells[5].Value.ToString()), 
+                        dgvArticulos.CurrentRow.Cells[0].Value.ToString(), dgvArticulos.CurrentRow.Cells[1].Value.ToString(), 
+                        dgvArticulos.CurrentRow.Cells[2].Value.ToString(), dgvArticulos.CurrentRow.Cells[3].Value.ToString(), 
+                        dgvArticulos.CurrentRow.Cells[4].Value.ToString(), cantidad);
                     return;
                 }
                 else
                 {
                     MessageBox.Show("La cantidad no puede tener un valor de 0");
+                    lblCantidad.ForeColor = Color.Red;
                     dgvArticulos.ClearSelection();
                     return;
                 }
@@ -361,8 +382,28 @@ namespace MySleepy
             {
                 txtCantidad.Visible = true;
                 lblCantidad.Visible = true;
+                label1.Visible = true;
             }
         }
+
+        private void cbMedida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void rbEliminados_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+        }
+
+        private void rbNoEliminados_Click(object sender, EventArgs e)
+        {
+            btnBorrar.Enabled = true;
+            btnRestaurar.Enabled = false;
+            rbNoEliminados.Checked = true;
+            rbEliminados.Checked = false;
+        }
+
 
     }
 }

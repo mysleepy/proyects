@@ -38,6 +38,10 @@
             this.dpFecha = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
+            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtApellido2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtApellido1 = new System.Windows.Forms.TextBox();
@@ -64,10 +68,6 @@
             this.btnBuscarArticulo = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnRealizar = new System.Windows.Forms.Button();
-            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.gbCliente.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -122,6 +122,41 @@
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPedidos.Size = new System.Drawing.Size(762, 190);
             this.dgvPedidos.TabIndex = 29;
+            // 
+            // Destino
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Destino.FillWeight = 58.28161F;
+            this.Destino.HeaderText = "Cliente";
+            this.Destino.Name = "Destino";
+            // 
+            // Texto
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Texto.FillWeight = 61.92574F;
+            this.Texto.HeaderText = "Articulos";
+            this.Texto.Name = "Texto";
+            // 
+            // cant
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.cant.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cant.HeaderText = "Cantidad";
+            this.cant.Name = "cant";
+            // 
+            // Telefono
+            // 
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Telefono.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Telefono.FillWeight = 94.99262F;
+            this.Telefono.HeaderText = "Precio";
+            this.Telefono.Name = "Telefono";
             // 
             // txtApellido2
             // 
@@ -318,7 +353,7 @@
             // 
             // btnCancelarPedido
             // 
-            this.btnCancelarPedido.Image = global::MySleepy.Properties.Resources.red_green_OK_not_OK_Icons_converted;
+            this.btnCancelarPedido.Image = global::MySleepy.Properties.Resources.cancel;
             this.btnCancelarPedido.Location = new System.Drawing.Point(734, 206);
             this.btnCancelarPedido.Name = "btnCancelarPedido";
             this.btnCancelarPedido.Size = new System.Drawing.Size(68, 60);
@@ -367,48 +402,13 @@
             // 
             // btnRealizar
             // 
-            this.btnRealizar.Image = global::MySleepy.Properties.Resources.tick_converted1;
+            this.btnRealizar.Image = global::MySleepy.Properties.Resources.guardar;
             this.btnRealizar.Location = new System.Drawing.Point(611, 206);
             this.btnRealizar.Name = "btnRealizar";
             this.btnRealizar.Size = new System.Drawing.Size(68, 60);
             this.btnRealizar.TabIndex = 19;
             this.btnRealizar.UseVisualStyleBackColor = true;
             this.btnRealizar.Click += new System.EventHandler(this.btnRealizar_Click);
-            // 
-            // Destino
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Destino.FillWeight = 58.28161F;
-            this.Destino.HeaderText = "Cliente";
-            this.Destino.Name = "Destino";
-            // 
-            // Texto
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Texto.FillWeight = 61.92574F;
-            this.Texto.HeaderText = "Articulos";
-            this.Texto.Name = "Texto";
-            // 
-            // cant
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.cant.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cant.HeaderText = "Cantidad";
-            this.cant.Name = "cant";
-            // 
-            // Telefono
-            // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Telefono.FillWeight = 94.99262F;
-            this.Telefono.HeaderText = "Precio";
-            this.Telefono.Name = "Telefono";
             // 
             // AddPedido
             // 

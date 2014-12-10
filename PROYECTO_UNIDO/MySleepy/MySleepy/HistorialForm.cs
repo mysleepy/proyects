@@ -121,11 +121,6 @@ namespace MySleepy
             }
         }
 
-        private void dateTimePickerHistorial_ValueChanged(object sender, EventArgs e)
-        {
-            String fecha = dateTimePickerFechaInicio.Value.Date.ToShortDateString();
-            MessageBox.Show(fecha);
-        }
 
         private void cbParteModificada_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -154,29 +149,11 @@ namespace MySleepy
             {
                 select += " and upper(h.OBSERVACION) LIKE '%" + cbParteModificada.SelectedItem.ToString().ToUpper() + "%'";
             }
-            if (dateTimePickerFechaInicio.Value.Date < dateTimePickerFechaFin.Value.Date)
+            if (dateTimePickerFechaInicio.Value < dateTimePickerFechaFin.Value)
             {
-                String diaInicio = dateTimePickerFechaInicio.Value.Day+"", diaFin = "";
-                String mesInicio = dateTimePickerFechaInicio.Value.Month+ "", mesFin =dateTimePickerFechaFin.Value.Month+ "";
-                if (dateTimePickerFechaInicio.Value.Day < 10)
-                {
-                     diaInicio = "0" + dateTimePickerFechaInicio.Value.Day;
-                }
-                if (dateTimePickerFechaInicio.Value.Month < 10)
-                {
-                    mesInicio = "0" + dateTimePickerFechaInicio.Value.Month;
-                }
-                if (dateTimePickerFechaFin.Value.Day < 10)
-                {
-                    diaFin = "0" + dateTimePickerFechaFin.Value.Day;
-                }
-                if (dateTimePickerFechaFin.Value.Month < 10)
-                {
-                    mesFin = "0" + dateTimePickerFechaFin.Value.Month;
-                }
-                String fechaInicio = diaInicio
-                                    + "/" + mesInicio + "/" + dateTimePickerFechaInicio.Value.Year;
-                String fechaFin = diaFin + "/" + mesFin+ "/" + dateTimePickerFechaFin.Value.Year;
+                String fechaInicio = dateTimePickerFechaInicio.Value.ToShortDateString();
+                String fechaFin = dateTimePickerFechaFin.Value.ToShortDateString();
+                
                 select += " and FECHA between '" + fechaInicio + "'" +
                           " and '" + fechaFin + "'";
             } 

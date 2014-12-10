@@ -20,26 +20,27 @@ namespace MySleepy
         //Atributo que almacena la sentencia BASE sin filtros
         private const String SQL = "SELECT * FROM PROVEEDORES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA AND C.ELIMINADO = 0";
         private ToolTip toolTip1;
-
+        int idUsuario;
+        private int empresaAutonomo = -1;
         private static Proveedor instance;
 
-        public static Proveedor Instance(int idRol, int señal, ConnectDB c, AddPedido a)
+        public static Proveedor Instance(int idRol, int señal, ConnectDB c, AddPedido a,int idUsuario)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new Proveedor(idRol, señal, c, a);
+                instance = new Proveedor(idRol, señal, c, a,idUsuario);
             }
             return instance;
         }
-        public static Proveedor Instance(int idRol, ConnectDB conexion)
+        public static Proveedor Instance(int idRol, ConnectDB conexion,int idUsuario)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new Proveedor(idRol,conexion);
+                instance = new Proveedor(idRol,conexion,idUsuario);
             }
             return instance;
         }
-        private Proveedor(int idRol,int señal, ConnectDB c,AddPedido a)
+        private Proveedor(int idRol,int señal, ConnectDB c,AddPedido a,int idUsuario)
         {
             toolTip1 = new ToolTip();
             InitializeComponent();
@@ -49,15 +50,17 @@ namespace MySleepy
             //cargarTabla(SQL);
             numero = señal;
             addPedido = a;
+            this.idUsuario = idUsuario;
         }
 
-        private Proveedor(int idRol, ConnectDB conexion)
+        private Proveedor(int idRol, ConnectDB conexion,int idUsuario)
         {
             toolTip1 = new ToolTip();
             InitializeComponent();
             this.rolUsuario = idRol;
             this.conexion = conexion;
-            //cargarTabla(SQL);
+            this.idUsuario = idUsuario;
+            cargarTablaInicio();
             ckEliminado = 0;
         }
         //Con este modo se limpia la tabla
@@ -68,6 +71,49 @@ namespace MySleepy
             {
                 dgvProveedores.Rows.Remove(dgvProveedores.CurrentRow);
             }
+        }
+
+        public void cargarTablaInicio()
+        {
+            //solo mostraremos los no eliminados inicialmente
+            String select = "SELECT * FROM PROVEEDORES PR, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R,CODIGOSPOSTALES CP"+
+                             " WHERE PR.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB"+
+                             " AND X.REFPOBLACION = P.IDPOBLACION"+
+                             " AND X.REFPROVINCIA = R.IDPROVINCIA"+
+                             " AND X.REFCODIGOPOSTAL = CP.IDCODIGOPOSTAL"+
+                             " AND PR.ELIMINADO = 0"; 
+            cargarTabla(select);
+        }
+        public void cargarTabla(String sentencia)
+        {
+
+            limpiarTabla();
+            int idProveedor,telefono,cPostal;
+            String nombre, CIF,direccion,poblacion,provincia;
+
+
+            DataSet data;
+            data = conexion.getData(sentencia, "PROVEEDORES");
+
+            DataTable tUsuarios = data.Tables["PROVEEDORES"];
+
+
+            foreach (DataRow row in tUsuarios.Rows)
+            {
+                idProveedor = Convert.ToInt32(row["IDPROVEEDOR"]);
+                nombre = Convert.ToString(row["NOMBRE"]);
+                CIF = Convert.ToString(row["CIF"]);
+                direccion = Convert.ToString(row["DIRECCION"]);
+                poblacion = Convert.ToString(row["POBLACION"]);
+                provincia = Convert.ToString(row["PROVINCIA"]);
+                cPostal = Convert.ToInt32(row["CODIGOPOSTAL"]);
+                telefono = Convert.ToInt32(row["TELEFONO"]);
+
+                dgvProveedores.Rows.Add(idProveedor,CIF, nombre,direccion,poblacion,provincia,cPostal,telefono);
+
+            } // Fin del bucle for each
+            dgvProveedores.ClearSelection();
+            dgvProveedores.Update();
         }
         //Boton salir
         private void btnSalir_Click(object sender, EventArgs e)
@@ -129,44 +175,42 @@ namespace MySleepy
         public void limpiar()
         {
             txtNombre.Text = "";
-            txtPoblacion.Text = "";
-            txtApellido.Text = "";
-            txtCM.Text = "";
-            txtProvincia.Text = "";
+            txtCIFNIF.Text = "";
+            txtTelefono.Text = "";
             rbNoEliminados.Checked = true;
             rbEliminados.Checked = false;
             btnBorrar.Enabled = true;
             btnRestaurar.Enabled = false;
-            
-            //cargarTabla(SQL);
+            cbEA.SelectedItem = -1;
+            cargarTablaInicio();
         }
         //Metodo usado para filtrar la tabla
         private void filtrar()
         {
-            String sentencia = "SELECT * FROM CLIENTES C, POBLACIONES P, COMUNIDADES M, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R" +
-                " WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA" +
-                " AND M.IDCOMUNIDAD = R.REFCOMUNIDAD";
+            String sentencia = "SELECT * FROM PROVEEDORES PR, POBLACIONES P, PROVINCIAS R, CODIGOSPOSTALESPOBLACIONES X,CODIGOSPOSTALES CP"
+                +" WHERE PR.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA"
+                +" AND X.REFCODIGOPOSTAL = CP.IDCODIGOPOSTAL";
+            if (rbEliminados.Checked)
+            {
+                sentencia = sentencia + " AND PR.ELIMINADO = "+0;
+            }
+            if (rbNoEliminados.Checked)
+            {
+                sentencia = sentencia + " AND PR.ELIMINADO = " + 1;
+            }
             if (txtNombre.Text != "")
             {
-                sentencia = sentencia + " AND UPPER(C.NOMBRE) LIKE '%" + txtNombre.Text.ToUpper() + "%'";
+                sentencia = sentencia + " AND UPPER(PR.NOMBRE) LIKE '%" + txtNombre.Text.ToUpper() + "%'";
             }
-            if (txtApellido.Text != "")
+            if (txtTelefono.Text != "")
             {
-                sentencia = sentencia + " AND UPPER(C.APELLIDO1) LIKE '%" + txtApellido.Text.ToUpper() + "%'";
+                sentencia = sentencia + " AND PR.TELEFONO LIKE '%" + txtTelefono.Text + "%'";
             }
-            if (txtPoblacion.Text != "")
+            if (txtCIFNIF.Text != "")
             {
-                sentencia = sentencia + " AND UPPER(P.POBLACION) LIKE '%" + txtPoblacion.Text.ToUpper() + "%'";
+                sentencia = sentencia + " AND UPPER(PR.CIF) LIKE '%" + txtCIFNIF.Text.ToUpper() + "%'";
             }
-            if (txtProvincia.Text != "")
-            {
-                sentencia = sentencia + " AND UPPER(R.PROVINCIA) LIKE '%" + txtProvincia.Text.ToUpper() + "%'";
-            }
-            if (txtCM.Text != "")
-            {
-                sentencia = sentencia + " AND UPPER(M.COMUNIDAD) LIKE '%" + txtCM.Text.ToUpper() + "%'";
-            }
-            //cargarTabla(sentencia);
+            cargarTabla(sentencia);
         }
         //Metodo que controlo el textBox de Nombre
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -184,7 +228,7 @@ namespace MySleepy
         //Metodo que controla el textBox de Apellido
         private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtApellido.Text.Length >= 20)
+            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtTelefono.Text.Length >= 20)
             {
                 e.Handled = true;
             }
@@ -194,45 +238,7 @@ namespace MySleepy
                 filtrar();
             }
         }
-        //Metodo que controla el textBox de Poblacion
-        private void txtPoblacion_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtCM.Text.Length >= 50)
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-                filtrar();
-            }
-        }
-        //Metodo que controla el textBox de Provincia
-        private void txtProvincia_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtProvincia.Text.Length >= 50)
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-                filtrar();
-            }
-        }
-        //Metodo que controla el textBox de Comunidad Autonoma
-        private void txtCM_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtCM.Text.Length >= 50)
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                e.Handled = false;
-                filtrar();
-            }
-        }
+       
         //Boton limpiar filtros
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
@@ -275,7 +281,7 @@ namespace MySleepy
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count != 0)
+            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No ha seleccionado ninguna fila");
             }
@@ -293,7 +299,7 @@ namespace MySleepy
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count != 0)
+            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No ha seleccionado ninguna fila");
             }
@@ -305,7 +311,7 @@ namespace MySleepy
 
         private void btnRestaurar_Click(object sender, EventArgs e)
         {
-            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count != 0)
+            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ninguna fila");
             }
@@ -328,6 +334,23 @@ namespace MySleepy
             btnBorrar.Enabled = false;
             btnRestaurar.Enabled = true;
             filtrar();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbEA.SelectedIndex != -1)
+            {
+                txtCIFNIF.Enabled = true;
+                if (cbEA.SelectedText.Equals("Empresa"))
+                {
+                    empresaAutonomo = 0;
+                    
+                }
+                else
+                {
+                    empresaAutonomo = 1;
+                }
+            }
         }
     }
 }

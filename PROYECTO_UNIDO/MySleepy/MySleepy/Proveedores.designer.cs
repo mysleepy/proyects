@@ -28,55 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbEliminados = new System.Windows.Forms.RadioButton();
+            this.rbNoEliminados = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.txtProvincia = new System.Windows.Forms.TextBox();
-            this.txtPoblacion = new System.Windows.Forms.TextBox();
-            this.txtCM = new System.Windows.Forms.TextBox();
+            this.txtCIFNIF = new System.Windows.Forms.TextBox();
             this.lblPoblacion = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
             this.IDPROVEEDOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Poblacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Provincia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CPOSTAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
             this.btnRestaurar = new System.Windows.Forms.Button();
-            this.rbEliminados = new System.Windows.Forms.RadioButton();
-            this.rbNoEliminados = new System.Windows.Forms.RadioButton();
+            this.cbEA = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cbEA);
             this.groupBox1.Controls.Add(this.rbEliminados);
             this.groupBox1.Controls.Add(this.rbNoEliminados);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtApellido);
+            this.groupBox1.Controls.Add(this.txtTelefono);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.lblNombre);
             this.groupBox1.Controls.Add(this.btnLimpiar);
-            this.groupBox1.Controls.Add(this.txtProvincia);
-            this.groupBox1.Controls.Add(this.txtPoblacion);
-            this.groupBox1.Controls.Add(this.txtCM);
+            this.groupBox1.Controls.Add(this.txtCIFNIF);
             this.groupBox1.Controls.Add(this.lblPoblacion);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(37, 28);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(910, 123);
@@ -84,23 +80,47 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
+            // rbEliminados
+            // 
+            this.rbEliminados.AutoSize = true;
+            this.rbEliminados.Location = new System.Drawing.Point(568, 34);
+            this.rbEliminados.Name = "rbEliminados";
+            this.rbEliminados.Size = new System.Drawing.Size(75, 17);
+            this.rbEliminados.TabIndex = 22;
+            this.rbEliminados.Text = "Eliminados";
+            this.rbEliminados.UseVisualStyleBackColor = true;
+            this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
+            // 
+            // rbNoEliminados
+            // 
+            this.rbNoEliminados.AutoSize = true;
+            this.rbNoEliminados.Checked = true;
+            this.rbNoEliminados.Location = new System.Drawing.Point(568, 66);
+            this.rbNoEliminados.Name = "rbNoEliminados";
+            this.rbNoEliminados.Size = new System.Drawing.Size(92, 17);
+            this.rbNoEliminados.TabIndex = 23;
+            this.rbNoEliminados.TabStop = true;
+            this.rbNoEliminados.Text = "No Eliminados";
+            this.rbNoEliminados.UseVisualStyleBackColor = true;
+            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 41);
+            this.label3.Location = new System.Drawing.Point(9, 82);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 21;
-            this.label3.Text = "Apellido:";
+            this.label3.Text = "Teléfono:";
             // 
-            // txtApellido
+            // txtTelefono
             // 
-            this.txtApellido.Location = new System.Drawing.Point(321, 38);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(134, 20);
-            this.txtApellido.TabIndex = 2;
-            this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
-            this.txtApellido.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtApellido_KeyUp);
+            this.txtTelefono.Location = new System.Drawing.Point(72, 79);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(124, 20);
+            this.txtTelefono.TabIndex = 2;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
+            this.txtTelefono.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtApellido_KeyUp);
             // 
             // txtNombre
             // 
@@ -131,69 +151,33 @@
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // txtProvincia
+            // txtCIFNIF
             // 
-            this.txtProvincia.Location = new System.Drawing.Point(321, 71);
-            this.txtProvincia.Name = "txtProvincia";
-            this.txtProvincia.Size = new System.Drawing.Size(134, 20);
-            this.txtProvincia.TabIndex = 4;
-            this.txtProvincia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProvincia_KeyPress);
-            this.txtProvincia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProvincia_KeyUp);
-            // 
-            // txtPoblacion
-            // 
-            this.txtPoblacion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPoblacion.Location = new System.Drawing.Point(72, 71);
-            this.txtPoblacion.Name = "txtPoblacion";
-            this.txtPoblacion.Size = new System.Drawing.Size(124, 20);
-            this.txtPoblacion.TabIndex = 3;
-            this.txtPoblacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPoblacion_KeyPress);
-            this.txtPoblacion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPoblacion_KeyUp);
-            // 
-            // txtCM
-            // 
-            this.txtCM.Location = new System.Drawing.Point(634, 71);
-            this.txtCM.Name = "txtCM";
-            this.txtCM.Size = new System.Drawing.Size(125, 20);
-            this.txtCM.TabIndex = 5;
-            this.txtCM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCM_KeyPress);
-            this.txtCM.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCM_KeyUp);
+            this.txtCIFNIF.Enabled = false;
+            this.txtCIFNIF.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCIFNIF.Location = new System.Drawing.Point(362, 79);
+            this.txtCIFNIF.Name = "txtCIFNIF";
+            this.txtCIFNIF.Size = new System.Drawing.Size(160, 20);
+            this.txtCIFNIF.TabIndex = 3;
+            this.txtCIFNIF.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPoblacion_KeyUp);
             // 
             // lblPoblacion
             // 
             this.lblPoblacion.AutoSize = true;
-            this.lblPoblacion.Location = new System.Drawing.Point(9, 78);
+            this.lblPoblacion.Location = new System.Drawing.Point(299, 82);
             this.lblPoblacion.Name = "lblPoblacion";
-            this.lblPoblacion.Size = new System.Drawing.Size(57, 13);
+            this.lblPoblacion.Size = new System.Drawing.Size(48, 13);
             this.lblPoblacion.TabIndex = 8;
-            this.lblPoblacion.Text = "Poblacion:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Provincia:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(514, 74);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Comunidad Autonoma:";
+            this.lblPoblacion.Text = "CIF/NIF:";
             // 
             // dgvProveedores
             // 
             this.dgvProveedores.AllowUserToAddRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvProveedores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvProveedores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProveedores.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvProveedores.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -202,19 +186,19 @@
             this.IDPROVEEDOR,
             this.cif,
             this.Nombre,
-            this.Apellido,
-            this.Telefono,
             this.Direccion,
             this.Poblacion,
-            this.Email});
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Constantia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle14;
+            this.Provincia,
+            this.CPOSTAL,
+            this.Telefono});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Constantia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProveedores.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvProveedores.Location = new System.Drawing.Point(37, 245);
             this.dgvProveedores.MultiSelect = false;
@@ -248,22 +232,6 @@
             this.Nombre.ReadOnly = true;
             this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // Apellido
-            // 
-            this.Apellido.FillWeight = 107.8276F;
-            this.Apellido.HeaderText = "Apellido";
-            this.Apellido.Name = "Apellido";
-            this.Apellido.ReadOnly = true;
-            this.Apellido.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // Telefono
-            // 
-            this.Telefono.FillWeight = 93.28328F;
-            this.Telefono.HeaderText = "Telefono";
-            this.Telefono.Name = "Telefono";
-            this.Telefono.ReadOnly = true;
-            this.Telefono.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
             // Direccion
             // 
             this.Direccion.FillWeight = 95.77672F;
@@ -280,13 +248,25 @@
             this.Poblacion.ReadOnly = true;
             this.Poblacion.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // Email
+            // Provincia
             // 
-            this.Email.FillWeight = 112.94F;
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Provincia.HeaderText = "Provincia";
+            this.Provincia.Name = "Provincia";
+            this.Provincia.ReadOnly = true;
+            // 
+            // CPOSTAL
+            // 
+            this.CPOSTAL.HeaderText = "CodPostal";
+            this.CPOSTAL.Name = "CPOSTAL";
+            this.CPOSTAL.ReadOnly = true;
+            // 
+            // Telefono
+            // 
+            this.Telefono.FillWeight = 93.28328F;
+            this.Telefono.HeaderText = "Telefono";
+            this.Telefono.Name = "Telefono";
+            this.Telefono.ReadOnly = true;
+            this.Telefono.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // btnSalir
             // 
@@ -338,29 +318,27 @@
             this.btnRestaurar.UseVisualStyleBackColor = true;
             this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
             // 
-            // rbEliminados
+            // cbEA
             // 
-            this.rbEliminados.AutoSize = true;
-            this.rbEliminados.Location = new System.Drawing.Point(568, 34);
-            this.rbEliminados.Name = "rbEliminados";
-            this.rbEliminados.Size = new System.Drawing.Size(75, 17);
-            this.rbEliminados.TabIndex = 22;
-            this.rbEliminados.Text = "Eliminados";
-            this.rbEliminados.UseVisualStyleBackColor = true;
-            this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
+            this.cbEA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEA.FormattingEnabled = true;
+            this.cbEA.Items.AddRange(new object[] {
+            "Empresa",
+            "Autonomo"});
+            this.cbEA.Location = new System.Drawing.Point(362, 37);
+            this.cbEA.Name = "cbEA";
+            this.cbEA.Size = new System.Drawing.Size(160, 21);
+            this.cbEA.TabIndex = 24;
+            this.cbEA.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // rbNoEliminados
+            // label1
             // 
-            this.rbNoEliminados.AutoSize = true;
-            this.rbNoEliminados.Checked = true;
-            this.rbNoEliminados.Location = new System.Drawing.Point(667, 34);
-            this.rbNoEliminados.Name = "rbNoEliminados";
-            this.rbNoEliminados.Size = new System.Drawing.Size(92, 17);
-            this.rbNoEliminados.TabIndex = 23;
-            this.rbNoEliminados.TabStop = true;
-            this.rbNoEliminados.Text = "No Eliminados";
-            this.rbNoEliminados.UseVisualStyleBackColor = true;
-            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(252, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Empresa/Autonomo:";
             // 
             // Proveedor
             // 
@@ -389,31 +367,29 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.TextBox txtProvincia;
-        private System.Windows.Forms.TextBox txtPoblacion;
-        private System.Windows.Forms.TextBox txtCM;
+        private System.Windows.Forms.TextBox txtCIFNIF;
         private System.Windows.Forms.Label lblPoblacion;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAñadir;
         private System.Windows.Forms.DataGridView dgvProveedores;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDPROVEEDOR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cif;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Poblacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.Button btnRestaurar;
         private System.Windows.Forms.RadioButton rbEliminados;
         private System.Windows.Forms.RadioButton rbNoEliminados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDPROVEEDOR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cif;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Poblacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Provincia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPOSTAL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbEA;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,8 +19,9 @@ namespace MySleepy
         private AddPedido addPedido;
         private int numero; // Almacena si lo llama el formulario Add pedido
         //Atributo que almacena la sentencia BASE sin filtros
-        private const String SQL = "SELECT * FROM CLIENTES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA AND C.ELIMINADO = 0";
+        private const String SQL = "SELECT distinct * FROM CLIENTES C, POBLACIONES P, CODIGOSPOSTALESPOBLACIONES X,PROVINCIAS R WHERE C.REFCPPOBLACIONES=X.IDCODIGOPOSTALPOB AND X.REFPOBLACION = P.IDPOBLACION AND X.REFPROVINCIA = R.IDPROVINCIA AND C.ELIMINADO = 0";
         private int idUsuario;
+        InsertHistorial insert;
 
         //patron Singleton
         private static ClientesForm instance;
@@ -51,14 +53,17 @@ namespace MySleepy
             btnRestaurar.Enabled = false;
             btnBorrar.Enabled = true;
             this.idUsuario = idUsuario;
+            insert = new InsertHistorial(c);
         }
 
         private ClientesForm(int idRol, ConnectDB conexion,int idUsuario)
         {
             InitializeComponent();
+            cargarTabla(SQL);
             this.rolUsuario = idRol;
             this.conexion = conexion;
             this.idUsuario = idUsuario;
+            insert = new InsertHistorial(conexion);
         }
 
         //Con este modo se limpia la tabla
@@ -121,23 +126,18 @@ namespace MySleepy
         public int extraerIDTabla()
         {
             int id = 0;
-            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count != 0)
-            {
-                MessageBox.Show("No se ha seleccionado ninguna fila");
-            }
-            else
-            {
+
 
                 DataGridViewRow fila = dgvClientes.CurrentRow;
                 id = Convert.ToInt32(fila.Cells[0].Value);
                 
-            }
+            
             return id;
         }
         //Boton modificar
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count != 0)
+            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ninguna fila");
             }
@@ -151,23 +151,31 @@ namespace MySleepy
         //Boton borrar y restaurar
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count != 0)
+            if (dgvClientes.CurrentRow == null || dgvClientes.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No se ha seleccionado ninguna fila");
             }
             else
             {
-                String mensaje,mensajeConf;
+                String mensaje, mensajeConf;
                 int eliminar_rest;
-                if(this.ckEliminado == 0){
+                int tipoCambio = -1;
+                if (this.ckEliminado == 0)
+                {
                     mensaje = "¿Desea borrar al cliente?";
                     mensajeConf = "Cliente borrado correctamente";
                     eliminar_rest = 1;
+                    tipoCambio = 3;
+                    mensajeConf = "Cliente eliminado ->";
+
                 }
-                else{
+                else
+                {
                     mensaje = "¿Desea restaurar al cliente?";
                     mensajeConf = "Cliente restaurado correctamente";
                     eliminar_rest = 0;
+                    tipoCambio = 4;
+                    mensajeConf = "Cliente restaurado ->";
                 }
                 int idCliente;
                 dgvClientes.ClearSelection();
@@ -177,18 +185,31 @@ namespace MySleepy
                 if (opcion == DialogResult.OK)
                 {
                     idCliente = extraerIDTabla();
-                   
-                        String update = " UPDATE CLIENTES  set ELIMINADO = " + eliminar_rest + " where IDCLIENTE=" + idCliente;
-                        conexion.setData(update);
 
+                    String update = " UPDATE CLIENTES  set ELIMINADO = " + eliminar_rest + " where IDCLIENTE=" + idCliente;
+                    conexion.setData(update);
+
+
+                    String nombreCliente = Convert.ToString
+                                        (conexion.DLookUp("NOMBRE", "CLIENTES", " IDCLIENTE = " + idCliente));
+                    if (tipoCambio == 3)
+                    {
+                        //Si se borra pedimos el motivo
+                        mensajeConf = Interaction.InputBox("¿Motivo por el cual se elimina?", "Motivo", "");
+                        mensajeConf = "Cliente eliminado->" + nombreCliente + " " + mensajeConf;
+
+                        //insert 
+                        insert.insertHistorialCambio(idUsuario, tipoCambio, mensajeConf + nombreCliente);
                         //Actualizar los usuarios visualizados en el data grid view
                         MessageBox.Show(mensajeConf, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         limpiar();
-                   
-                }
 
-             }
+                    }
+
+                }
             }
+        }
+            
             //Metodo que limpia la interfaz
             public void limpiar()
             {
@@ -325,6 +346,11 @@ namespace MySleepy
                 rbNoEliminados.Checked = false;
                 btnBorrar.Enabled = false;
                 btnRestaurar.Enabled = true;
+                filtrar();
+            }
+
+            private void txtNombre_KeyUp(object sender, KeyEventArgs e)
+            {
                 filtrar();
             }
 

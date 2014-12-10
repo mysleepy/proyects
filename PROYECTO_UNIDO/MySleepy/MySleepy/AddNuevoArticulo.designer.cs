@@ -116,21 +116,21 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(247, 183);
+            this.btnCancelar.Image = global::MySleepy.Properties.Resources.cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(239, 183);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(80, 65);
             this.btnCancelar.TabIndex = 26;
-            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAnadir
             // 
-            this.btnAnadir.Location = new System.Drawing.Point(146, 183);
+            this.btnAnadir.Image = global::MySleepy.Properties.Resources.guardar;
+            this.btnAnadir.Location = new System.Drawing.Point(143, 183);
             this.btnAnadir.Name = "btnAnadir";
-            this.btnAnadir.Size = new System.Drawing.Size(75, 23);
+            this.btnAnadir.Size = new System.Drawing.Size(78, 65);
             this.btnAnadir.TabIndex = 25;
-            this.btnAnadir.Text = "Añadir";
             this.btnAnadir.UseVisualStyleBackColor = true;
             this.btnAnadir.Click += new System.EventHandler(this.btnAnadir_Click);
             // 
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 235);
+            this.ClientSize = new System.Drawing.Size(469, 272);
             this.ControlBox = false;
             this.Controls.Add(this.nStock);
             this.Controls.Add(this.lblStock);

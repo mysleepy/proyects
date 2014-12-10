@@ -38,28 +38,30 @@
             this.txtCantidad = new System.Windows.Forms.NumericUpDown();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbMedida = new System.Windows.Forms.ComboBox();
             this.rbNoEliminados = new System.Windows.Forms.RadioButton();
             this.rbEliminados = new System.Windows.Forms.RadioButton();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblPrecio = new System.Windows.Forms.Label();
-            this.txtMedida = new System.Windows.Forms.TextBox();
             this.lblMedida = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtReferencia = new System.Windows.Forms.TextBox();
             this.lblReferencia = new System.Windows.Forms.Label();
-            this.btnRestaurar = new System.Windows.Forms.Button();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnRestaurar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnBorrar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnAñadir = new System.Windows.Forms.Button();
             this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBorrar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAñadir = new System.Windows.Forms.Button();
+            this.IDARTICULO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.txtCantidad)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
@@ -85,11 +87,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbMedida);
             this.groupBox1.Controls.Add(this.rbNoEliminados);
             this.groupBox1.Controls.Add(this.rbEliminados);
             this.groupBox1.Controls.Add(this.txtPrecio);
             this.groupBox1.Controls.Add(this.lblPrecio);
-            this.groupBox1.Controls.Add(this.txtMedida);
             this.groupBox1.Controls.Add(this.lblMedida);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.txtNombre);
@@ -103,6 +105,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
+            // cbMedida
+            // 
+            this.cbMedida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMedida.FormattingEnabled = true;
+            this.cbMedida.Location = new System.Drawing.Point(325, 20);
+            this.cbMedida.Name = "cbMedida";
+            this.cbMedida.Size = new System.Drawing.Size(153, 21);
+            this.cbMedida.TabIndex = 40;
+            // 
             // rbNoEliminados
             // 
             this.rbNoEliminados.AutoSize = true;
@@ -115,6 +126,7 @@
             this.rbNoEliminados.Text = "No Eliminados";
             this.rbNoEliminados.UseVisualStyleBackColor = true;
             this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
+            this.rbNoEliminados.Click += new System.EventHandler(this.rbNoEliminados_Click);
             // 
             // rbEliminados
             // 
@@ -126,6 +138,7 @@
             this.rbEliminados.TabStop = true;
             this.rbEliminados.Text = "Eliminados";
             this.rbEliminados.UseVisualStyleBackColor = true;
+            this.rbEliminados.CheckedChanged += new System.EventHandler(this.rbEliminados_CheckedChanged);
             this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
             // 
             // txtPrecio
@@ -145,15 +158,6 @@
             this.lblPrecio.Size = new System.Drawing.Size(40, 13);
             this.lblPrecio.TabIndex = 30;
             this.lblPrecio.Text = "Precio:";
-            // 
-            // txtMedida
-            // 
-            this.txtMedida.Location = new System.Drawing.Point(325, 22);
-            this.txtMedida.Name = "txtMedida";
-            this.txtMedida.Size = new System.Drawing.Size(153, 20);
-            this.txtMedida.TabIndex = 29;
-            this.txtMedida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMedida_KeyPress);
-            this.txtMedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMedida_KeyUp);
             // 
             // lblMedida
             // 
@@ -200,17 +204,6 @@
             this.lblReferencia.TabIndex = 24;
             this.lblReferencia.Text = "Referencia:";
             // 
-            // btnRestaurar
-            // 
-            this.btnRestaurar.Enabled = false;
-            this.btnRestaurar.Image = global::MySleepy.Properties.Resources.restaurar;
-            this.btnRestaurar.Location = new System.Drawing.Point(318, 138);
-            this.btnRestaurar.Name = "btnRestaurar";
-            this.btnRestaurar.Size = new System.Drawing.Size(61, 58);
-            this.btnRestaurar.TabIndex = 42;
-            this.btnRestaurar.UseVisualStyleBackColor = true;
-            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
-            // 
             // dgvArticulos
             // 
             this.dgvArticulos.AllowUserToAddRows = false;
@@ -228,7 +221,8 @@
             this.Nombre,
             this.Destino,
             this.Texto,
-            this.Telefono});
+            this.Telefono,
+            this.IDARTICULO});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
@@ -249,6 +243,77 @@
             this.dgvArticulos.Size = new System.Drawing.Size(715, 187);
             this.dgvArticulos.TabIndex = 41;
             this.dgvArticulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulos_CellDoubleClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(30, 436);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(269, 13);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Para añadir articulos, doble click sobre la tabla Articulos";
+            this.label1.Visible = false;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
+            this.btnLimpiar.Location = new System.Drawing.Point(640, 25);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(61, 58);
+            this.btnLimpiar.TabIndex = 39;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click_1);
+            // 
+            // btnRestaurar
+            // 
+            this.btnRestaurar.Enabled = false;
+            this.btnRestaurar.Image = global::MySleepy.Properties.Resources.restaurar;
+            this.btnRestaurar.Location = new System.Drawing.Point(318, 138);
+            this.btnRestaurar.Name = "btnRestaurar";
+            this.btnRestaurar.Size = new System.Drawing.Size(61, 58);
+            this.btnRestaurar.TabIndex = 42;
+            this.btnRestaurar.UseVisualStyleBackColor = true;
+            this.btnRestaurar.Click += new System.EventHandler(this.btnRestaurar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
+            this.btnSalir.Location = new System.Drawing.Point(721, 436);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(63, 52);
+            this.btnSalir.TabIndex = 40;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnBorrar
+            // 
+            this.btnBorrar.Image = global::MySleepy.Properties.Resources.papelera_de_reciclaje;
+            this.btnBorrar.Location = new System.Drawing.Point(223, 138);
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Size = new System.Drawing.Size(61, 58);
+            this.btnBorrar.TabIndex = 38;
+            this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Image = global::MySleepy.Properties.Resources.adwords_editor_128;
+            this.btnModificar.Location = new System.Drawing.Point(134, 138);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(61, 58);
+            this.btnModificar.TabIndex = 37;
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnAñadir
+            // 
+            this.btnAñadir.Image = global::MySleepy.Properties.Resources.mas;
+            this.btnAñadir.Location = new System.Drawing.Point(46, 138);
+            this.btnAñadir.Name = "btnAñadir";
+            this.btnAñadir.Size = new System.Drawing.Size(61, 58);
+            this.btnAñadir.TabIndex = 36;
+            this.btnAñadir.UseVisualStyleBackColor = true;
+            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
             // Origen
             // 
@@ -299,61 +364,19 @@
             this.Telefono.Name = "Telefono";
             this.Telefono.ReadOnly = true;
             // 
-            // btnSalir
+            // IDARTICULO
             // 
-            this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
-            this.btnSalir.Location = new System.Drawing.Point(721, 436);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(63, 52);
-            this.btnSalir.TabIndex = 40;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
-            this.btnLimpiar.Location = new System.Drawing.Point(640, 25);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(61, 58);
-            this.btnLimpiar.TabIndex = 39;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click_1);
-            // 
-            // btnBorrar
-            // 
-            this.btnBorrar.Image = global::MySleepy.Properties.Resources.papelera_de_reciclaje;
-            this.btnBorrar.Location = new System.Drawing.Point(223, 138);
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(61, 58);
-            this.btnBorrar.TabIndex = 38;
-            this.btnBorrar.UseVisualStyleBackColor = true;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::MySleepy.Properties.Resources.adwords_editor_128;
-            this.btnModificar.Location = new System.Drawing.Point(134, 138);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(61, 58);
-            this.btnModificar.TabIndex = 37;
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnAñadir
-            // 
-            this.btnAñadir.Image = global::MySleepy.Properties.Resources.mas;
-            this.btnAñadir.Location = new System.Drawing.Point(46, 138);
-            this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(61, 58);
-            this.btnAñadir.TabIndex = 36;
-            this.btnAñadir.UseVisualStyleBackColor = true;
-            this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
+            this.IDARTICULO.HeaderText = "IDARTICULO";
+            this.IDARTICULO.Name = "IDARTICULO";
+            this.IDARTICULO.ReadOnly = true;
+            this.IDARTICULO.Visible = false;
             // 
             // ArticulosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 500);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.lblCantidad);
             this.Controls.Add(this.groupBox1);
@@ -385,7 +408,6 @@
         private System.Windows.Forms.RadioButton rbEliminados;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label lblPrecio;
-        private System.Windows.Forms.TextBox txtMedida;
         private System.Windows.Forms.Label lblMedida;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
@@ -393,16 +415,19 @@
         private System.Windows.Forms.Label lblReferencia;
         private System.Windows.Forms.Button btnRestaurar;
         private System.Windows.Forms.DataGridView dgvArticulos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAñadir;
+        private System.Windows.Forms.ComboBox cbMedida;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDARTICULO;
 
     }
 }

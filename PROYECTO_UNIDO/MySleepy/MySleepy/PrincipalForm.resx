@@ -121,6 +121,69 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 28</value>
+  </data>
+  <data name="usuariosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usuarios</value>
+  </data>
+  <data name="clientesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 28</value>
+  </data>
+  <data name="clientesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
+  <data name="proveedoresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 28</value>
+  </data>
+  <data name="proveedoresToolStripMenuItem.Text" xml:space="preserve">
+    <value>Proveedores</value>
+  </data>
+  <data name="articulosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 28</value>
+  </data>
+  <data name="articulosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Articulos</value>
+  </data>
+  <data name="cerrarSesiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 28</value>
+  </data>
+  <data name="cerrarSesiónToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="salirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 28</value>
+  </data>
+  <data name="salirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="sistemaToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15.75pt</value>
+  </data>
+  <data name="sistemaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 27</value>
+  </data>
+  <data name="sistemaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="pedidosToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15.75pt</value>
+  </data>
+  <data name="pedidosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 27</value>
+  </data>
+  <data name="pedidosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pedidos</value>
+  </data>
+  <data name="historialToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 15.75pt</value>
+  </data>
+  <data name="historialToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 27</value>
+  </data>
+  <data name="historialToolStripMenuItem.Text" xml:space="preserve">
+    <value>Historial</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -145,60 +208,6 @@
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="sistemaToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 15.75pt</value>
-  </data>
-  <data name="sistemaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 27</value>
-  </data>
-  <data name="sistemaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sistema</value>
-  </data>
-  <data name="usuariosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
-  </data>
-  <data name="usuariosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usuarios</value>
-  </data>
-  <data name="clientesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
-  </data>
-  <data name="clientesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Clientes</value>
-  </data>
-  <data name="articulosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
-  </data>
-  <data name="articulosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Articulos</value>
-  </data>
-  <data name="cerrarSesiónToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
-  </data>
-  <data name="salirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 28</value>
-  </data>
-  <data name="salirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Salir</value>
-  </data>
-  <data name="pedidosToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 15.75pt</value>
-  </data>
-  <data name="pedidosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 27</value>
-  </data>
-  <data name="pedidosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pedidos</value>
-  </data>
-  <data name="historialToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 15.75pt</value>
-  </data>
-  <data name="historialToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 27</value>
-  </data>
-  <data name="historialToolStripMenuItem.Text" xml:space="preserve">
-    <value>Historial</value>
   </data>
   <data name="lblTipoUsuario.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,6 +268,12 @@
     <value>clientesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;clientesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;proveedoresToolStripMenuItem.Name" xml:space="preserve">
+    <value>proveedoresToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;proveedoresToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;articulosToolStripMenuItem.Name" xml:space="preserve">

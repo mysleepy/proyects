@@ -65,14 +65,14 @@ namespace MySleepy
 
                     //Escribo en el fichero los valores de cada registro de la tabla dgvHistorial
                     //Recorrer datagridview por filas. Mensajes es el nombre que le pongo
-                    for (int i = 0; i < tabla.RowCount - 1; i++)
+                    for (int i = 0; i < tabla.RowCount; i++)
                     {
-                        String usuario = (String)tabla.Rows[i].Cells["USUARIO"].Value;
-                        String fecha = (String)tabla.Rows[i].Cells["FECHA"].Value;
-                        String tipo = (String)tabla.Rows[i].Cells["TIPO"].Value;
-                        String observacion = (String)tabla.Rows[i].Cells["OBSERVACION"].Value;
+                        String usuario = (String)tabla.Rows[i].Cells[0].Value;
+                        String fecha = (String)tabla.Rows[i].Cells[1].Value;
+                        String tipo = (String)tabla.Rows[i].Cells[2].Value;
+                        String observacion = (String)tabla.Rows[i].Cells[3].Value;
                         writer.Write(usuario + "#" + fecha + "#" + tipo + "#" + observacion + "##");
-                        writer.WriteLine();
+                        writer.WriteLine("\n");
                     }
                     writer.Close();
                 }

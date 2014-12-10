@@ -47,26 +47,109 @@ namespace MySleepy
         /// <param name="tabla">tabla a leer de la BBDD</param>
         /// <param name="campos">cantidad de campos que contiene la tabla a leer</param>
         /// <returns>un array de String con todos los nodos</returns>
-        public static String[,] Leerxml(String direccionXml, String tabla, int campos)
+        /// 
+        //tabla -> nodoPrincipal
+        public static String Leerxml(String rutaXml, String nodoPrincipal)
         {
             XmlDataDocument xmldoc = new XmlDataDocument();
             XmlNodeList xmlnode;
             int i;
-            String[,] resultado;
-            FileStream fs = new FileStream(direccionXml, FileMode.Open, FileAccess.Read);
+            String resultado = "";
+            FileStream fs = new FileStream(rutaXml, FileMode.Open, FileAccess.Read);
             xmldoc.Load(fs);
-            xmlnode = xmldoc.GetElementsByTagName(tabla);
-            resultado = new String[xmlnode.Count, campos];
+            xmlnode = xmldoc.GetElementsByTagName(nodoPrincipal);
             for (i = 0; i < xmlnode.Count - 1; i++)
             {
                 xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
-                for (int j = 0; j < campos; j++)
-                {
-                    resultado[i, j] = xmlnode[i].ChildNodes.Item(j).InnerText.Trim();
-                }
+                
+                    resultado = resultado +"|"+xmlnode[i].ChildNodes.Item(i).InnerText.Trim();
+                
             }
             return resultado;
         }
+        //metodo crearXML -> creara un XML vacio, solo con la cabecera
+        public static void crearXML()
+        {
+            XmlTextWriter writer = new XmlTextWriter("empleados.xml", System.Text.Encoding.UTF8);
+            writer.WriteStartDocument(true);
+            writer.Formatting = Formatting.Indented;
+            writer.Indentation = 2;
+            writer.WriteStartElement("Table"); //inicio del xml
+
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+
+        }
+        private static XmlNode crearNodo(XmlDocument documento,String CIF, String nombre, String direccion, 
+                                         String poblacion,String provincia,int cPostal,int telefono)
+        {
+            XmlElement elemento = documento.CreateElement("Proveedor");
+
+            //Datos del nodo ->CIF
+            XmlElement CIFprov = documento.CreateElement("CIF");
+            CIFprov.InnerText = CIF;
+            elemento.AppendChild(CIFprov);
+            //fin del dato CIF
+
+            //Datos del nodo ->nombre
+            XmlElement nombreP = documento.CreateElement("Nombre");
+            nombreP.InnerText = nombre;
+            elemento.AppendChild(nombreP);
+            //fin del dato nombre
+
+            //direccion
+            XmlElement direccionP = documento.CreateElement("Direccion");
+            direccionP.InnerText = direccion;
+            elemento.AppendChild(direccionP);
+            //fin del dato direccion
+
+            //poblacion
+            XmlElement poblacionP = documento.CreateElement("Poblacion");
+            poblacionP.InnerText = poblacion;
+            elemento.AppendChild(poblacionP);
+            // fin de la poblacion
+
+            //provincia
+            XmlElement provinciaP = documento.CreateElement("Provincia");
+            provinciaP.InnerText = provincia;
+            elemento.AppendChild(provinciaP);
+            // fin de la provincia
+            //cpostal
+            XmlElement cPostalP = documento.CreateElement("CodPostal");
+            cPostalP.InnerText = cPostal.ToString();
+            elemento.AppendChild(cPostalP);
+            // fin del cpostal
+
+            //telefono
+            XmlElement telefonoP = documento.CreateElement("Telefono");
+            poblacionP.InnerText = telefono.ToString();
+            elemento.AppendChild(telefonoP);
+            // fin del telefono
+            //din elemento
+            return elemento;
+        }
+        //metodo insertarXML -> cargamos en el xml un nodo
+        public static void insertarXML(String rutaxml,XmlDocument documento, String CIF, String nombre, String direccion,
+                                         String poblacion, String provincia, int cPostal, int telefono)
+        {
+            //Cargamos el documento XML.
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.Load(rutaxml);
+
+            //Creamos el nodo que deseamos insertar.
+            XmlNode empleado = crearNodo(xmldoc, CIF,nombre,direccion,poblacion,provincia,cPostal,telefono);
+
+            //Obtenemos el nodo raiz del documento.
+            XmlNode nodoRaiz = xmldoc.DocumentElement;
+
+            //Insertamos el nodo empleado al final del archivo
+            nodoRaiz.InsertAfter(empleado, nodoRaiz.LastChild);
+
+            xmldoc.Save(rutaxml);
+        }
+
         /// <summary>
         /// Metodo que escribira en el archivo XML especificado
         /// </summary>
@@ -74,7 +157,7 @@ namespace MySleepy
         /// <param name="nombreElemento">Nombre usado para los nodos</param>
         /// <param name="nombreColumnas">Nombres usados para los nodos hijos</param>
         /// <param name="valorCampos">Valores a almacenar en cada nodo hijo</param>
-        public static void escribirXml(String rutaXml, String nombreElemento, String[] nombreColumnas, String[,] valorCampos)
+        /*public static void escribirXml(String rutaXml, String nombreElemento, String[] nombreColumnas, String[,] valorCampos)
         {
             XmlTextWriter writer = new XmlTextWriter(rutaXml, System.Text.Encoding.UTF8);
             writer.WriteStartDocument(true);
@@ -335,6 +418,6 @@ namespace MySleepy
             nodoRaiz.InsertAfter(empleado, nodoRaiz.LastChild);
 
             xmldoc.Save(rutaxml);
-        }
+        }*/
     }
 }

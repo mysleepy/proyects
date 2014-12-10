@@ -60,7 +60,7 @@ namespace MySleepy
         public void txtNombre_lostFocus(object sender, EventArgs e)
         {
             //Comprobamos que no haya un usuario con ese nombre en la base de datos
-            if (usuarioRepetido(txtNombre.Text))
+            if (usuarioRepetido(txtNombre.Text) && señal == 0)
             {
                 lblNombre.Text = " Usuario repetido";
                 txtNombre.Focus();
@@ -134,26 +134,32 @@ namespace MySleepy
         }
         public void modificarRegistro()
         {
-            if (vacio())
-            {
-                MessageBox.Show(mensajeError);
-            }
-            else
-            {
                 //Pedimos confirmacion
                 DialogResult opcion = MessageBox.Show("¿Desea modificar el usuario?", "Confirmación",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                String nombre = txtNombre.Text;
+                int idRol = Convert.ToInt32(conexion.DLookUp("IDROL", "ROLES", " NOMBREROL = '" + cbRoles.SelectedItem.ToString() + "'"));
+                int idUsu = usuario.extraerIDTabla();
+                String update = "";
                 if (opcion == DialogResult.OK)
                 {
-                    String passEncriptada = encriptarPassword(txtPassword.Text);    //en este metodo veo si coinciden ambas contraseñas
-                    String nombre = txtNombre.Text;
-                    int idRol = Convert.ToInt32(conexion.DLookUp("IDROL", "ROLES", " NOMBREROL = '" + cbRoles.SelectedItem.ToString()+"'"));
-                    int idUsu = usuario.extraerIDTabla();
-                    //update
-                    String update = " update USUARIOS set NOMBRE = '" + nombre + "' ," + " PASSWORD = '"
-                                    + passEncriptada + "' ,IDROL = " + idRol + " where IDUSUARIO = " + idUsu
+                    if (txtPassword.Text.Equals("") && txtRepetirPassword.Text.Equals(""))
+                    {
+                         update = " update USUARIOS set NOMBRE = '" + nombre + "' " +
+                            " ,IDROL = " + idRol + " where IDUSUARIO = " + idUsu
                                                                + " and ELIMINADO = " + 0;
-                    //MessageBox.Show(update);
+                    }
+                    else
+                    {
+                        String passEncriptada = encriptarPassword(txtPassword.Text);    //en este metodo veo si coinciden ambas contraseñas
+                        
+                        //update
+                        update = " update USUARIOS set NOMBRE = '" + nombre + "' ," + " PASSWORD = '"
+                                        + passEncriptada + "' ,IDROL = " + idRol + " where IDUSUARIO = " + idUsu
+                                                                   + " and ELIMINADO = " + 0;
+                       
+                    }
+                    MessageBox.Show(update);
                     conexion.setData(update);
                     MessageBox.Show("Usuario modificado");
 
@@ -162,7 +168,7 @@ namespace MySleepy
                                             (conexion.DLookUp("NOMBRE", "USUARIOS", " IDUSUARIO = " + idUsu));
                     insert.insertHistorialCambio(idUsuario, 2, "Usuario modificado ->" + nombreUsuario);
                 }
-            }    
+              
            
         }
 

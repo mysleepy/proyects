@@ -25,9 +25,11 @@ namespace MySleepy
         ///////////////// CONSTRUCTORES /////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
 
-        public static PedidosForm Instance(int idRol, ConnectDB c, int idUsuario){
-            if(instance == null || instance.IsDisposed){
-                instance = new PedidosForm(idRol,c,idUsuario);
+        public static PedidosForm Instance(int idRol, ConnectDB c, int idUsuario)
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new PedidosForm(idRol, c, idUsuario);
             }
             return instance;
         }
@@ -39,15 +41,25 @@ namespace MySleepy
             refPedido = -1;
             refCliente = -1;
             this.idUsuario = idUsuario;
+            cargarInicio();
         }
 
+        public void cargarInicio()
+        {
+            String sentencia = " Select * from PEDIDOS where ELIMINADO=0";
+            actualizarDGV(sentencia);
+        }
         ////////////////////////////////////////////////////////////////////////
         ///////////////// LISTENERS BOTONES /////////////////////////////////
         ///////////////////////////////////////////////////////////////////////
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddPedido añadir = new AddPedido(conexion, rolUsuario,idUsuario);
+            AddPedido añadir = new AddPedido(conexion, rolUsuario, idUsuario, 0);
             añadir.Show();
+            if (añadir.IsDisposed)
+            {
+                filtrar();
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -65,11 +77,35 @@ namespace MySleepy
             filtrar();
         }
 
-        private void btnFiltrar_Click(object sender, EventArgs e)
+        private void rbNoEliminados_CheckedChanged(object sender, EventArgs e)
         {
-            buscarFecha(fecha);
+            filtrar();
         }
 
+        private void rbEliminados_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void rbEliminados_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbNoEliminados_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+
+        }
 
         ////////////////////////////////////////////////////////////////////////
         ///////////////// CARGA FORMULARIO /////////////////////////////////
@@ -78,6 +114,7 @@ namespace MySleepy
         {
             dgvPedidos.ClearSelection();
             dgvPedidos.Update();
+            cargarInicio();
         }
 
         ////////////////////////////////////////////////////////////////////////
@@ -92,55 +129,28 @@ namespace MySleepy
             txtReferencia.Text = "";
         }
 
-        // Comprueba los campos, y asigna los valores
-        public void comprobarCampos()
-        {
-            refPedido = Convert.ToInt32(txtReferencia.Text);
-            buscarCliente();
-            buscarFecha(fecha);
-            cantidad = float.Parse(txtPrecio.Text);
-        }
-
-        // Busca el cliente en la base de datos y los pedidos que tiene asociados
-        private void buscarCliente()
-        {
-            String sentencia = "SELECT P.REFCLIENTE FROM PEDIDOS P,CLIENTE C WHERE P.REFCLIENTE=C.IDCLIENTE AND C.NOMBRE='" + txtNombre.Text.ToUpper() + "'";
-            DataSet res = conexion.getData(sentencia, "PEDIDOS");
-            DataTable tabla = res.Tables[("PEDIDOS")];
-
-            foreach (DataRow row in tabla.Rows)
-            {
-                refCliente = Convert.ToInt32(row["REFCLIENTE"]);
-            }
-        }
-
-        // Busca pedidos filtrando por fecha
-        private void buscarFecha(DateTime fecha)
-        {
-            MessageBox.Show(fecha.ToString());
-
-        }
 
         ///////////////////////////////////////////////////////
         // Metodo que filtra//////////////////////////////////////
         ///////////////////////////////////////////////////////
         public void filtrar()
         {
-            comprobarCampos();
-            String sentencia = "SELECT NºPEDIDO,FECHA,CLIENTE,ARTICULOS,PRECIO FROM PEDIDOS WHERE ELIMINADO=0";
-            if (refPedido != 0)
+            String sentencia = "SELECT * FROM PEDIDOS WHERE ELIMINADO=0";
+            if (rbEliminados.Checked == true)
             {
-                sentencia = sentencia + " AND REFPEDIDO LIKE '%" + refPedido + "%'";
+                sentencia = "SELECT * FROM PEDIDOS WHERE ELIMINADO=1";
             }
-            if (refCliente != 0)
+            if (txtReferencia.Text != "")
             {
-                sentencia = sentencia + " AND REFPEDIDO LIKE '%" + refCliente + "%'";
+                sentencia = sentencia + " AND N_PEDIDO LIKE '%" + Convert.ToInt32(txtReferencia.Text) + "%'";
+            }
+            if (txtNombre.Text != "")
+            {
+                int rCliente = Convert.ToInt32(conexion.DLookUp("IDCLIENTE", "CLIENTES", "NOMBRE LIKE '%" + txtNombre.Text + "%'"));
+                sentencia = sentencia + " AND REFCLIENTE=" + rCliente;
             }
 
-            if (fecha != null)
-            {
-                buscarFecha(fecha);
-            }
+            sentencia = sentencia + " AND FECHA='" + dateTimePicker1.Value.ToShortDateString() + "'";
 
             actualizarDGV(sentencia);
         }
@@ -150,19 +160,17 @@ namespace MySleepy
         {
             limpiarTabla();
             DataSet resultado = conexion.getData(sentencia, "PEDIDOS");
-            DataTable tPedidos = resultado.Tables["PEDIDOSs"];
+            DataTable tPedidos = resultado.Tables["PEDIDOS"];
             foreach (DataRow row in tPedidos.Rows)
             {
-                int referencia = Convert.ToInt32(row["REFERENCIA"]);
-                String nombre = Convert.ToString(row["NOMBRE"]);
-                String composicion = Convert.ToString(row["COMPOSICION"]);
-                String medida = Convert.ToString(row["MEDIDA"]);
-                String precio = Convert.ToString(row["PRECIO"]);
-                dgvPedidos.Rows.Add(referencia, nombre, composicion, medida, precio);
+                int n_pedido = Convert.ToInt32(row["N_PEDIDO"]);
+                String fecha = Convert.ToString(row["FECHA"]);
+                String cliente = Convert.ToString(conexion.DLookUp("NOMBRE", "CLIENTES", "IDCLIENTE =" + row["REFCLIENTE"]));
+                int precio = Convert.ToInt32(row["TOTAL"]);
+                String pagado = Convert.ToString(row["PAGADO"]);
+                dgvPedidos.Rows.Add(n_pedido, fecha, cliente, precio, pagado);
 
             } // Fin del bucle for each
-
-
         }
 
         // Limpia la tabla
@@ -175,21 +183,47 @@ namespace MySleepy
             }
         }
 
-        // Devuelve una fecha seleccionada en el calendario 
-        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            fecha = e.Start;
-            int dia = fecha.Day;
-            int mes = fecha.Month;
-            int anio = fecha.Year;
-            fecha = new DateTime(anio, mes, dia);
-        }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
 
+        private void txtReferencia_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txtNombre_KeyDown(object sender, KeyEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txtPrecio_KeyDown(object sender, KeyEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            filtrar();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txtReferencia_KeyUp_1(object sender, KeyEventArgs e)
+        {
+            filtrar();
+        }
+
+        
 
     }
 }

@@ -119,7 +119,7 @@ namespace MySleepy
             Label[] idsLabel = { lblReferencia, lblNombre, lblStock, lblComposicion, lblMedida, lblPrecio };
             TextBox[] idsTextBox = { txtReferencia, txtNombre, txtPrecio };
             ComboBox[] idsCombos = { cboMedida, cboComposicion };
-            if (idsCombos[0].SelectedIndex ==-1)
+            if (idsCombos[0].SelectedIndex == -1)
             {
                 idsLabel[4].ForeColor = Color.Red;
             }
@@ -182,8 +182,8 @@ namespace MySleepy
         {
             int referencia = Convert.ToInt32(fila.Cells[0].Value);
             String nombre = Convert.ToString(fila.Cells[1].Value);
-            String composicion = Convert.ToString(fila.Cells[2].Value);
-            String medida = Convert.ToString(fila.Cells[3].Value);
+            int composicion = Convert.ToInt32(conexion.DLookUp("IDCOMPOSICION", "COMPOSICIONES", "COMPOSICION='" + fila.Cells[2].Value.ToString() + "'"));
+            int medida = Convert.ToInt32(conexion.DLookUp("IDMEDIDA", "MEDIDAS", "MEDIDA='" + fila.Cells[3].Value.ToString() + "'"));
             String precio = Convert.ToString(fila.Cells[4].Value);
             conseguirId(referencia);
             escribir(referencia, nombre, composicion, medida, precio);
@@ -230,12 +230,12 @@ namespace MySleepy
             cboMedida.SelectedIndex = -1;
         }
 
-        private void escribir(int referencia, string nombre, string composicion, string medida, string precio)
+        private void escribir(int referencia, string nombre, int composicion, int medida, string precio)
         {
             txtReferencia.Text = "" + referencia;
             txtNombre.Text = nombre;
-            cboComposicion.SelectedText = composicion;
-            cboMedida.SelectedText = medida;
+            cboComposicion.SelectedIndex = composicion;
+            cboMedida.SelectedIndex = medida;
             txtPrecio.Text = precio;
         }
 
@@ -319,7 +319,6 @@ namespace MySleepy
             }
         }
 
-       
 
     }
 }

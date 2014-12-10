@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,16 +44,16 @@
             this.dateTimePickerFechaFin = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerFechaInicio = new System.Windows.Forms.DateTimePicker();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.cbUsuarios = new System.Windows.Forms.ComboBox();
             this.dgvHistorial = new System.Windows.Forms.DataGridView();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistorial)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,26 +153,6 @@
             this.dateTimePickerFechaInicio.TabIndex = 25;
             this.dateTimePickerFechaInicio.ValueChanged += new System.EventHandler(this.dateTimePickerFechaInicio_ValueChanged);
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Image = global::MySleepy.Properties.Resources.googlemail_offline_128_converted;
-            this.btnGuardar.Location = new System.Drawing.Point(552, 444);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(70, 52);
-            this.btnGuardar.TabIndex = 24;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
-            this.btnSalir.Location = new System.Drawing.Point(652, 444);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(63, 52);
-            this.btnSalir.TabIndex = 23;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -208,14 +189,14 @@
             this.Destino,
             this.Texto,
             this.Origen});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHistorial.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHistorial.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvHistorial.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvHistorial.Location = new System.Drawing.Point(30, 217);
             this.dgvHistorial.Name = "dgvHistorial";
@@ -223,43 +204,6 @@
             this.dgvHistorial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHistorial.Size = new System.Drawing.Size(658, 194);
             this.dgvHistorial.TabIndex = 39;
-            // 
-            // Nombre
-            // 
-            this.Nombre.FillWeight = 90.00434F;
-            this.Nombre.HeaderText = "USUARIO";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Destino
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Destino.FillWeight = 90.01416F;
-            this.Destino.HeaderText = "FECHA";
-            this.Destino.Name = "Destino";
-            this.Destino.ReadOnly = true;
-            // 
-            // Texto
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Texto.FillWeight = 90.67631F;
-            this.Texto.HeaderText = "TIPOCAMBIO";
-            this.Texto.Name = "Texto";
-            this.Texto.ReadOnly = true;
-            // 
-            // Origen
-            // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Origen.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Origen.FillWeight = 182.5785F;
-            this.Origen.HeaderText = "OBSERVACION";
-            this.Origen.Name = "Origen";
-            this.Origen.ReadOnly = true;
             // 
             // btnLimpiar
             // 
@@ -270,6 +214,66 @@
             this.btnLimpiar.Text = "Limpiar Filtros";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // Nombre
+            // 
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Nombre.FillWeight = 90.00434F;
+            this.Nombre.HeaderText = "USUARIO";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Destino
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Destino.FillWeight = 90.01416F;
+            this.Destino.HeaderText = "FECHA";
+            this.Destino.Name = "Destino";
+            this.Destino.ReadOnly = true;
+            // 
+            // Texto
+            // 
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Texto.FillWeight = 90.67631F;
+            this.Texto.HeaderText = "TIPOCAMBIO";
+            this.Texto.Name = "Texto";
+            this.Texto.ReadOnly = true;
+            // 
+            // Origen
+            // 
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Origen.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Origen.FillWeight = 182.5785F;
+            this.Origen.HeaderText = "OBSERVACION";
+            this.Origen.Name = "Origen";
+            this.Origen.ReadOnly = true;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Image = global::MySleepy.Properties.Resources.guardar;
+            this.btnGuardar.Location = new System.Drawing.Point(552, 444);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(70, 52);
+            this.btnGuardar.TabIndex = 24;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
+            this.btnSalir.Location = new System.Drawing.Point(652, 444);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(63, 52);
+            this.btnSalir.TabIndex = 23;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
             // 
             // HistorialForm
             // 
@@ -318,11 +322,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbUsuarios;
         private System.Windows.Forms.DataGridView dgvHistorial;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
         private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
-        private System.Windows.Forms.Button btnLimpiar;
 
     }
 }

@@ -45,6 +45,7 @@ namespace MySleepy
                 usuarios.SetDesktopLocation(-1, -1); // saldra en la esquina
                 usuarios.WindowState = FormWindowState.Normal;
                 usuarios.Show();
+                usuarios.Focus();
             }
             else
             {
@@ -60,6 +61,7 @@ namespace MySleepy
             clientes.SetDesktopLocation(-1, -1); // saldra en la esquina
             clientes.WindowState = FormWindowState.Normal;
             clientes.Show();
+            clientes.Focus();
         }
 
         private void articulosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,6 +71,7 @@ namespace MySleepy
             articulos.SetDesktopLocation(-1, -1); // saldra en la esquina
             articulos.WindowState = FormWindowState.Normal;
             articulos.Show();
+            articulos.Focus();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,6 +93,7 @@ namespace MySleepy
             pedidos.SetDesktopLocation(-1, -1); // saldra en la esquina
             pedidos.WindowState = FormWindowState.Normal;
             pedidos.Show();
+            pedidos.Focus();
         }
 
         private void PrincipalForm_Load(object sender, EventArgs e)
@@ -126,6 +130,18 @@ namespace MySleepy
             historial.SetDesktopLocation(-1, -1); // saldra en la esquina
             historial.WindowState = FormWindowState.Normal;
             historial.Show();
+            historial.Focus();
+        }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Proveedor proveedor = Proveedor.Instance(idRol, conexion, idUsuario);
+            proveedor.MdiParent = this;
+            proveedor.SetDesktopLocation(-1, -1);
+            proveedor.WindowState = FormWindowState.Normal;
+            proveedor.Show();
+            proveedor.Focus();
+
         }
     }
 }

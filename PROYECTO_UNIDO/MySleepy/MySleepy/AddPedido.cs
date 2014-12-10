@@ -13,19 +13,12 @@ namespace MySleepy
     public partial class AddPedido : Form
     {
         ConnectDB conexion;
-        ArticulosForm formArticulos;
-        int id_pedido;
-        int id_articulo_añadir;
-        int precio;
-        int id_cliente;
-        int id_rol;
-        int totalpedido;
         InsertHistorial insert;
-        int idUsuario;
-        ///       ///////////////////////
-        String n_pedido, cliente, nombre_articulo_añadir;
-        String cantidad;
-        public AddPedido(ConnectDB c, int idrol, int idUsuario)
+        int id_pedido, id_articulo_añadir, precio, id_cliente, id_rol, totalpedido, idUsuario, señal;
+        String n_pedido, cliente, nombre_articulo_añadir, cantidad;
+        ////////////////////////////////////
+
+        public AddPedido(ConnectDB c, int idrol, int idUsuario, int señal)
         {
             InitializeComponent();
             conexion = c;
@@ -33,6 +26,7 @@ namespace MySleepy
             this.id_rol = idrol;
             this.idUsuario = idUsuario;
             insert = new InsertHistorial(conexion);
+            this.señal = señal;
         }
 
 
@@ -55,19 +49,24 @@ namespace MySleepy
         {
             generarNumero();
             cargarComboFormasPago();
+            if (señal == 1)
+            {
+                // Modificar pedido
+
+            }
         }
 
         private void btnBuscarArticulo_Click(object sender, EventArgs e)
         {
-            formArticulos.Show();
+            ArticulosForm add = ArticulosForm.Instance(id_rol, conexion, idUsuario);
+            add.Show();
         }
 
-        public void nuevoArticulo(String refArticulo, String nombre, String composicion, String medida, String precio, String cantidad)
+        public void nuevoArticulo(int id_articulo, String refArticulo, String nombre, String composicion, String medida, String precio, String cantidad)
         {
-            this.id_articulo_añadir = Convert.ToInt32(refArticulo);
+            this.id_articulo_añadir = id_articulo;
             this.nombre_articulo_añadir = nombre;
             this.precio = calcularPrecio(cantidad, precio);
-            totalpedido = totalpedido + this.precio;
             aumentarTotalPedido(this.precio);
             this.cantidad = cantidad;
             MessageBox.Show("Articulo con referencia " + id_articulo_añadir + " y nombre " + nombre + " ha sido añadido");
@@ -82,7 +81,7 @@ namespace MySleepy
         private void actualizarDGV()
         {
             obtenerDatosCliente();
-            dgvPedidos.Rows.Add(n_pedido, dpFecha.Value, txtNombre.Text, nombre_articulo_añadir, cantidad, precio.ToString());
+            dgvPedidos.Rows.Add(txtNombre.Text, nombre_articulo_añadir, cantidad, precio.ToString(), id_articulo_añadir);
         }
 
         public void cargarComboFormasPago()
@@ -108,13 +107,19 @@ namespace MySleepy
             else
             {
                 recuperarIdPedido();
-                String fcientifica = "" + fechaD.Year;
-                fcientifica = fcientifica + fechaD.Month;
-                fcientifica = fcientifica + fechaD.Day;
-                fcientifica = fcientifica + id_pedido;
+                String fcientifica = "";
+                fcientifica = devFCientifica() + id_pedido;
                 txtNumeroPedido.Text = fcientifica;
             }
+        }
 
+        public String devFCientifica()
+        {
+            DateTime fechaD = dpFecha.Value;
+            String fcientifica = "" + fechaD.Year;
+            fcientifica = fcientifica + fechaD.Month;
+            fcientifica = fcientifica + fechaD.Day;
+            return fcientifica;
         }
 
         private void btnRealizar_Click(object sender, EventArgs e)
@@ -139,14 +144,14 @@ namespace MySleepy
 
         public void aumentarTotalPedido(int p)
         {
-            int precioEscribir = totalpedido + p;
-            txtTotalPedido.Text = " " + precioEscribir;
+            this.totalpedido = this.totalpedido + p;
+            txtTotalPedido.Text = " " + this.totalpedido;
         }
         private void guardarPedido()
         {
-            if (dgvPedidos.RowCount != 0 || cbFormaPago.SelectedIndex != 0)
+            if (dgvPedidos.RowCount > 0 || cbFormaPago.SelectedIndex > 0)
             {
-                String n_pedido, cliente, articulos, cantidad, precio;
+                String n_pedido, cliente, articulos, cantidad, precio, id_articulo;
                 while (dgvPedidos.RowCount > 0)
                 {
                     n_pedido = txtNumeroPedido.Text;
@@ -154,7 +159,8 @@ namespace MySleepy
                     articulos = dgvPedidos.Rows[0].Cells[1].Value.ToString();
                     cantidad = dgvPedidos.Rows[0].Cells[2].Value.ToString();
                     precio = dgvPedidos.Rows[0].Cells[3].Value.ToString();
-                    añadirPedido(n_pedido, cliente, articulos, cantidad, precio);
+                    id_articulo = dgvPedidos.Rows[0].Cells[4].Value.ToString();
+                    añadirPedido(n_pedido, cliente, articulos, cantidad, precio, id_articulo);
                     dgvPedidos.Rows.RemoveAt(0);
 
                 }
@@ -167,7 +173,7 @@ namespace MySleepy
             }
         }
 
-        private void añadirPedido(string n_pedido, string cliente, string articulos, string cantidad, string precio)
+        private void añadirPedido(string n_pedido, string cliente, string articulos, string cantidad, string precio, string id)
         {
             String fpago = cbFormaPago.SelectedText;
             Char pagado = 'N';
@@ -175,17 +181,20 @@ namespace MySleepy
             {
                 pagado = 'S';
             }
-            String select = "INSERT INTO PEDIDOS (IDPEDIDO,REFCLIENTE,REFUSUARIO,FECHA,REFFORMAPAGO,TOTAL,PAGADO,N_PEDIDO " +
-                                "VALUES(" + conexion.siguienteID("IDPEDIDO", "PEDIDOS") + "," + conexion.DLookUp("IDCLIENTE", "CLIENTES", "WHERE NOMBRE='" + cliente + "'") + ",'" + dpFecha.Value.ToString() + "'," + conexion.DLookUp("IDPAGO", "FORMASDEPAGO", "WHERE IDFORMAPAGO='" + cbFormaPago.SelectedIndex + "'") + ",'" + precio + "','" + pagado + "','" + n_pedido + "')";
+            String select = "INSERT INTO PEDIDOS (IDPEDIDO,REFCLIENTE,REFUSUARIO,FECHA,REFFORMAPAGO,TOTAL,PAGADO,N_PEDIDO ,ELIMINADO)" +
+                                "VALUES(" + conexion.siguienteID("IDPEDIDO", "PEDIDOS") + "," + Convert.ToInt32(conexion.DLookUp("IDCLIENTE", "CLIENTES", "NOMBRE='" + cliente + "'")) + "," + idUsuario + ",'" + dpFecha.Value.ToShortDateString() + "'," + (cbFormaPago.SelectedIndex + 1) + ",'" + precio + "','" + pagado + "','" + n_pedido + "'," + 0 + ")";
+            String selectArticulos = "INSERT INTO PEDIDOSARTICULOS (IDPEDIDOARTICULO,REFPEDIDO,REFARTICULO,CANTIDAD,PRECIOVENTA)" +
+                                " VALUES(" + Convert.ToInt32(conexion.siguienteID("IDPEDIDOARTICULO", "PEDIDOSARTICULOS")) + "," + id_pedido + "," + Convert.ToInt32(id) + "," + Convert.ToInt32(cantidad) + "," + Convert.ToInt32(precio) + ")";
+            conexion.setData(select);
+            conexion.setData(selectArticulos);
             // Añade el pedido
-
             //insert en tabla historial cambios
             insert.insertHistorialCambio(idUsuario, 1, "Pedido añadido  num_pedido->" + n_pedido);
         }
 
         private void recuperarIdPedido()
         {
-            id_pedido = conexion.siguienteID("IDPEDIDO", "PEDIDOS");
+            id_pedido = conexion.siguienteID("IDPEDIDO", "PEDIDOS") - 1;
         }
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -197,7 +206,7 @@ namespace MySleepy
         {
             if (txtNombre.Text != "")
             {
-                ArticulosForm articulos =ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
+                ArticulosForm articulos = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
                 articulos.Show();
             }
             else
@@ -213,7 +222,17 @@ namespace MySleepy
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dgvPedidos.Rows.RemoveAt(dgvPedidos.CurrentRow.Index);
+           
+            if (dgvPedidos.CurrentRow == null || dgvPedidos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay ninguna fila seleccionada");
+            }
+            else
+            {
+                aumentarTotalPedido(-Convert.ToInt32(dgvPedidos.Rows[dgvPedidos.CurrentRow.Index].Cells[3].ToString()));
+                dgvPedidos.Rows.RemoveAt(dgvPedidos.CurrentRow.Index);
+            }
+
         } 
     }
 }

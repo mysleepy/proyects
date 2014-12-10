@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySleepy;
+using Microsoft.VisualBasic;
      
 
 namespace MySleepy
@@ -116,7 +117,7 @@ namespace MySleepy
         {
             tipoCambio = 2;
 
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -142,25 +143,20 @@ namespace MySleepy
         public int extraerIDTabla()
         {
             int id = 0;
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
-            {
-                MessageBox.Show("No hay ninguna fila seleccionada");
-            }
-            else
-            {
+          
                 DataGridViewRow fila = dgvUsuarios.CurrentRow;
                 id = Convert.ToInt32(fila.Cells[0].Value); //columna referente al idUsuario
                 
                 //MessageBox.Show(""+idUsuario);
-            }
+            
             return id;
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             tipoCambio = 3;
-            dgvUsuarios.ClearSelection();
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
+            
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
@@ -191,10 +187,12 @@ namespace MySleepy
                             //insert historial cambios
                             String nombreUsuario = Convert.ToString
                                     (conexion.DLookUp("NOMBRE", "USUARIOS", " IDUSUARIO = " + idUsu));
-                            insert.insertHistorialCambio(idUsuario, tipoCambio, "Usuario borrado ->" + nombreUsuario);
+                            String mensaje = Interaction.InputBox("¿Motivo por el cual se elimina?", "Motivo", "");
+                            mensaje = "Usuario borrado ->" + nombreUsuario+" Motivo ->"+mensaje;
+                            insert.insertHistorialCambio(idUsuario, tipoCambio,mensaje );
 
                             MessageBox.Show("Usuario eliminado");
-
+                        
                     }
                 }
             }
@@ -204,7 +202,7 @@ namespace MySleepy
         {
             tipoCambio = 4;
             dgvUsuarios.ClearSelection();
-            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count != 0)
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.SelectedRows.Count == 0)
             {
                 MessageBox.Show("No hay ninguna fila seleccionada");
             }
