@@ -345,7 +345,7 @@ namespace MySleepy
                 this.idProvincia = Convert.ToInt32(conexion.DLookUp("IDPROVINCIA", "PROVINCIAS", "PROVINCIA ='" + provincia + "'"));
                 rellenarComboBox(cbPoblacion, "POBLACIONES", "POBLACION", "IDPOBLACION IN (SELECT REFPOBLACION FROM CODIGOSPOSTALESPOBLACIONES WHERE " +
                 "REFPROVINCIA =" + idProvincia + ") ORDER BY POBLACION");
-                //cbPoblacion.SelectedIndex = 0;
+                cbPoblacion.SelectedIndex = 0;
             }
 
         }
@@ -359,7 +359,7 @@ namespace MySleepy
                 this.idPoblacion = Convert.ToInt32(conexion.DLookUp("IDPOBLACION", "POBLACIONES", "POBLACION ='" + poblacion + "'"));
                 rellenarComboBox(cbCP, "CODIGOSPOSTALES", "CODIGOPOSTAL", "IDCODIGOPOSTAL IN (SELECT REFCODIGOPOSTAL FROM CODIGOSPOSTALESPOBLACIONES WHERE " +
                 "REFPOBLACION = " + idPoblacion + ") ORDER BY CODIGOPOSTAL");
-                //cbCP.SelectedIndex = 0;
+                cbCP.SelectedIndex = 0;
             }
 
         }

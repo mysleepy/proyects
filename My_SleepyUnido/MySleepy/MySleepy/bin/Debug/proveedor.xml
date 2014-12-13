@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <PROVEEDORES>
+    <IDPROVEEDOR>1</IDPROVEEDOR>
+    <CIF>563214789</CIF>
+    <NOMBRE>Ramirez S.A</NOMBRE>
+    <DIRECCION>por esa zona</DIRECCION>
+    <REFCPPOBLACIONES>1472</REFCPPOBLACIONES>
+    <TELEFONO>926457813</TELEFONO>
+    <ELIMINADO>0</ELIMINADO>
+    <NIF>-</NIF>
+  </PROVEEDORES>
+</NewDataSet>
