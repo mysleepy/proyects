@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PedidosForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbNoPagados = new System.Windows.Forms.RadioButton();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -310,6 +311,7 @@
             this.Controls.Add(this.dgvPedidosRealizados);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAñadir);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PedidosForm";
             this.Text = "PedidosForm";
             this.Load += new System.EventHandler(this.Pedidos_Load);

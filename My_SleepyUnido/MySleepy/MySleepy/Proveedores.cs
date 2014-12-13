@@ -225,6 +225,7 @@ namespace MySleepy
             toolTip1.SetToolTip(this.btnSalir, "Cerrar ventana");
             toolTip1.SetToolTip(this.btnBorrar, "Borrar Proveedor");
             toolTip1.SetToolTip(this.btnRestaurar, "Restaurar Proveedor");
+            toolTip1.SetToolTip(this.btnBuscar, "Buscar Proveedor");
         }
         //Metodo para extraer id
         public int extraerIDTabla()

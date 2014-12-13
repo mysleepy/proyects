@@ -226,7 +226,7 @@ namespace MySleepy
             String[,] datos = XML_proveedor.leerXMLDataSet(rutaXml, true);
             int idProveedor;
             String sentencia;
-            for (int i = 0; i < datos.Length; i++)
+            for (int i = 0; i < datos.GetLength(0); i++)
             {
                 idProveedor = Convert.ToInt32(conexion.DLookUp("MAX(IDPROVEEDOR)", "PROVEEDORES", ""));
                 if (Convert.ToInt32(datos[i, 0]) <= idProveedor)
