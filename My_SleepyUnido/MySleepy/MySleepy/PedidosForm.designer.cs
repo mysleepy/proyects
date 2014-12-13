@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbNoEliminados = new System.Windows.Forms.RadioButton();
+            this.rbNoPagados = new System.Windows.Forms.RadioButton();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.rbEliminados = new System.Windows.Forms.RadioButton();
+            this.rbPagados = new System.Windows.Forms.RadioButton();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.lblReferencia = new System.Windows.Forms.Label();
             this.txtReferencia = new System.Windows.Forms.TextBox();
@@ -53,7 +53,6 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IDPEDIDO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
@@ -63,9 +62,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.rbNoEliminados);
+            this.groupBox1.Controls.Add(this.rbNoPagados);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.rbEliminados);
+            this.groupBox1.Controls.Add(this.rbPagados);
             this.groupBox1.Controls.Add(this.lblPrecio);
             this.groupBox1.Controls.Add(this.lblReferencia);
             this.groupBox1.Controls.Add(this.txtReferencia);
@@ -80,19 +79,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
-            // rbNoEliminados
+            // rbNoPagados
             // 
-            this.rbNoEliminados.AutoSize = true;
-            this.rbNoEliminados.Checked = true;
-            this.rbNoEliminados.Location = new System.Drawing.Point(380, 125);
-            this.rbNoEliminados.Name = "rbNoEliminados";
-            this.rbNoEliminados.Size = new System.Drawing.Size(92, 17);
-            this.rbNoEliminados.TabIndex = 51;
-            this.rbNoEliminados.TabStop = true;
-            this.rbNoEliminados.Text = "No Eliminados";
-            this.rbNoEliminados.UseVisualStyleBackColor = true;
-            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
-            this.rbNoEliminados.Click += new System.EventHandler(this.rbNoEliminados_Click);
+            this.rbNoPagados.AutoSize = true;
+            this.rbNoPagados.Checked = true;
+            this.rbNoPagados.Location = new System.Drawing.Point(380, 125);
+            this.rbNoPagados.Name = "rbNoPagados";
+            this.rbNoPagados.Size = new System.Drawing.Size(84, 17);
+            this.rbNoPagados.TabIndex = 51;
+            this.rbNoPagados.TabStop = true;
+            this.rbNoPagados.Text = "No Pagados";
+            this.rbNoPagados.UseVisualStyleBackColor = true;
+            this.rbNoPagados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
+            this.rbNoPagados.Click += new System.EventHandler(this.rbNoEliminados_Click);
             // 
             // dateTimePicker1
             // 
@@ -102,18 +101,18 @@
             this.dateTimePicker1.TabIndex = 44;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // rbEliminados
+            // rbPagados
             // 
-            this.rbEliminados.AutoSize = true;
-            this.rbEliminados.Location = new System.Drawing.Point(380, 81);
-            this.rbEliminados.Name = "rbEliminados";
-            this.rbEliminados.Size = new System.Drawing.Size(75, 17);
-            this.rbEliminados.TabIndex = 50;
-            this.rbEliminados.TabStop = true;
-            this.rbEliminados.Text = "Eliminados";
-            this.rbEliminados.UseVisualStyleBackColor = true;
-            this.rbEliminados.CheckedChanged += new System.EventHandler(this.rbEliminados_CheckedChanged);
-            this.rbEliminados.Click += new System.EventHandler(this.rbEliminados_Click);
+            this.rbPagados.AutoSize = true;
+            this.rbPagados.Location = new System.Drawing.Point(380, 81);
+            this.rbPagados.Name = "rbPagados";
+            this.rbPagados.Size = new System.Drawing.Size(67, 17);
+            this.rbPagados.TabIndex = 50;
+            this.rbPagados.TabStop = true;
+            this.rbPagados.Text = "Pagados";
+            this.rbPagados.UseVisualStyleBackColor = true;
+            this.rbPagados.CheckedChanged += new System.EventHandler(this.rbEliminados_CheckedChanged);
+            this.rbPagados.Click += new System.EventHandler(this.rbEliminados_Click);
             // 
             // lblPrecio
             // 
@@ -202,11 +201,11 @@
             // dgvPedidosRealizados
             // 
             this.dgvPedidosRealizados.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvPedidosRealizados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvPedidosRealizados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPedidosRealizados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPedidosRealizados.BackgroundColor = System.Drawing.Color.Snow;
             this.dgvPedidosRealizados.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -216,16 +215,15 @@
             this.Nombre,
             this.Destino,
             this.Texto,
-            this.IDPEDIDO,
             this.Telefono});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvPedidosRealizados.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvPedidosRealizados.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvPedidosRealizados.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvPedidosRealizados.Location = new System.Drawing.Point(20, 266);
             this.dgvPedidosRealizados.Name = "dgvPedidosRealizados";
@@ -236,50 +234,44 @@
             // 
             // Origen
             // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Origen.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Origen.DefaultCellStyle = dataGridViewCellStyle9;
             this.Origen.FillWeight = 71.06599F;
             this.Origen.HeaderText = "NºPedido";
             this.Origen.Name = "Origen";
             // 
             // Nombre
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle10;
             this.Nombre.HeaderText = "Fecha";
             this.Nombre.Name = "Nombre";
             // 
             // Destino
             // 
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle11;
             this.Destino.FillWeight = 58.28161F;
             this.Destino.HeaderText = "Cliente";
             this.Destino.Name = "Destino";
             // 
             // Texto
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle12;
             this.Texto.FillWeight = 61.92574F;
             this.Texto.HeaderText = "Importe";
             this.Texto.Name = "Texto";
             // 
-            // IDPEDIDO
-            // 
-            this.IDPEDIDO.HeaderText = "IDPEDIDO";
-            this.IDPEDIDO.Name = "IDPEDIDO";
-            this.IDPEDIDO.Visible = false;
-            // 
             // Telefono
             // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Telefono.DefaultCellStyle = dataGridViewCellStyle13;
             this.Telefono.FillWeight = 94.99262F;
             this.Telefono.HeaderText = "Pagado";
             this.Telefono.Name = "Telefono";
@@ -328,9 +320,9 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbNoEliminados;
+        private System.Windows.Forms.RadioButton rbNoPagados;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.RadioButton rbEliminados;
+        private System.Windows.Forms.RadioButton rbPagados;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.Label lblReferencia;
         private System.Windows.Forms.TextBox txtReferencia;
@@ -347,7 +339,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
         private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDPEDIDO;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
 
 

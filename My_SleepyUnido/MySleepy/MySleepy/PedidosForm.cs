@@ -14,7 +14,7 @@ namespace MySleepy
     {
         // Atributos de la clase
         ConnectDB conexion;
-        int rolUsuario, refPedido, refCliente, idUsuario;
+        int rolUsuario, idUsuario,refPedido,refCliente;
 
         //patron singleton
         private static PedidosForm instance;
@@ -44,7 +44,9 @@ namespace MySleepy
 
         public void cargarInicio()
         {
-            String sentencia = " Select * from PEDIDOS where ELIMINADO=0";
+            // Muestra los pedidos en la fecha actual que no estan pagados
+            String sentencia = " Select * from PEDIDOS where PAGADO='N' and ELIMINADO=0";
+            sentencia = sentencia + " AND FECHA='" + dateTimePicker1.Value.ToShortDateString() + "'";
             actualizarDGV(sentencia);
         }
         ////////////////////////////////////////////////////////////////////////
@@ -53,6 +55,7 @@ namespace MySleepy
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             AddPedido añadir = new AddPedido(conexion, rolUsuario, idUsuario, 0);
+            añadir.asignarFPedidos(this);
             añadir.Show();
             if (añadir.IsDisposed)
             {
@@ -94,11 +97,13 @@ namespace MySleepy
 
         private void rbEliminados_Click(object sender, EventArgs e)
         {
+            rbNoPagados.Checked = false;
             filtrar();
         }
 
         private void rbNoEliminados_Click(object sender, EventArgs e)
         {
+            rbPagados.Checked = false;
             filtrar();
         }
 
@@ -158,6 +163,7 @@ namespace MySleepy
             else
             {
                 AddPedido modificar = new AddPedido(conexion, rolUsuario, idUsuario, 1);
+                modificar.asignarFPedidos(this);
                 modificar.rellenar(dgvPedidosRealizados.CurrentRow);
                 modificar.Show();
             }
@@ -171,8 +177,25 @@ namespace MySleepy
             }
             else
             {
-                dgvPedidosRealizados.Rows.RemoveAt(dgvPedidosRealizados.CurrentRow.Index);
+                String mensaje = "¿Desea borrar el pedido?";
+                String mensajeConf = "Pedido borrado correctamente";
+                //pedimos confirmacion
+                DialogResult opcion = MessageBox.Show(mensaje, "Confirmación",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (opcion == DialogResult.OK)
+                {
+                    eliminarPedido(dgvPedidosRealizados.CurrentRow);
+                    dgvPedidosRealizados.Rows.RemoveAt(dgvPedidosRealizados.CurrentRow.Index);
+                    MessageBox.Show(mensajeConf);
+                }
             }
+        }
+
+        private void eliminarPedido(DataGridViewRow fila)
+        {
+            int id_p_eliminar = Convert.ToInt32(conexion.DLookUp("IDPEDIDO", "PEDIDOS", "N_PEDIDO=" + Convert.ToInt32(fila.Cells[0].Value.ToString())));
+            String sentencia = "UPDATE PEDIDOS SET ELIMINADO=1  WHERE IDPEDIDO=" + id_p_eliminar;
+            conexion.setData(sentencia);
         }
 
         ////////////////////////////////////////////////////////////////////////
@@ -203,10 +226,14 @@ namespace MySleepy
         ///////////////////////////////////////////////////////
         public void filtrar()
         {
-            String sentencia = "SELECT * FROM PEDIDOS WHERE ELIMINADO=0";
-            if (rbEliminados.Checked == true)
+            String sentencia="";
+            if (rbNoPagados.Checked == true)
             {
-                sentencia = "SELECT * FROM PEDIDOS WHERE ELIMINADO=1";
+                sentencia = "Select * from PEDIDOS where PAGADO='N' and ELIMINADO=0";
+            }
+            if (rbPagados.Checked == true)
+            {
+                sentencia = "Select * from PEDIDOS where PAGADO='S' and ELIMINADO=0";
             }
             if (txtReferencia.Text != "")
             {
@@ -231,12 +258,19 @@ namespace MySleepy
             DataTable tPedidos = resultado.Tables["PEDIDOS"];
             foreach (DataRow row in tPedidos.Rows)
             {
-                int n_pedido = Convert.ToInt32(row["N_PEDIDO"]);
-                String fecha = Convert.ToString(row["FECHA"]);
-                String cliente = Convert.ToString(conexion.DLookUp("NOMBRE", "CLIENTES", "IDCLIENTE =" + row["REFCLIENTE"]));
-                int precio = Convert.ToInt32(row["TOTAL"]);
-                String pagado = Convert.ToString(row["PAGADO"]);
-                dgvPedidosRealizados.Rows.Add(n_pedido, fecha, cliente, precio, pagado);
+                try
+                {
+                    int n_pedido = Convert.ToInt32(row["N_PEDIDO"]);
+                    String fecha = Convert.ToString(row["FECHA"]);
+                    String cliente = Convert.ToString(conexion.DLookUp("NOMBRE", "CLIENTES", "IDCLIENTE =" + row["REFCLIENTE"]));
+                    int precio = Convert.ToInt32(row["TOTAL"]);
+                    Char pagado = Convert.ToChar(row["PAGADO"]);
+                    dgvPedidosRealizados.Rows.Add(n_pedido, fecha, cliente, precio, pagado.ToString());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("excepcion pedidos");
+                }
 
             } // Fin del bucle for each
         }
@@ -247,7 +281,7 @@ namespace MySleepy
             // Limpiamos el datagridView
             while (dgvPedidosRealizados.RowCount > 0)
             {
-                dgvPedidosRealizados.Rows.Remove(dgvPedidosRealizados.CurrentRow);
+                dgvPedidosRealizados.Rows.RemoveAt(0);
             }
         }
 

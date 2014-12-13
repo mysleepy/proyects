@@ -57,7 +57,6 @@ namespace MySleepy
                 {
                     añadirArticulo(idmodificar);
                     MessageBox.Show("Articulo añadido");
-                    //articulos.actualizarTabla();
                 }
                 else
                 {
@@ -90,8 +89,8 @@ namespace MySleepy
                 if (comprobarReferencia(Convert.ToInt32(txtReferencia.Text)))
                 {
                     int nuevoid = conexion.siguienteID("IDARTICULO", "ARTICULOS");
-                    sentencia = "INSERT INTO ARTICULOS(IDARTICULO,REFCOMPOSICION,REFMEDIDA,PRECIO,ELIMINADO,NOMBRE,REFERENCIA)" +
-                                                " VALUES(" + nuevoid + ",'" + cboComposicion.SelectedIndex + "','" + cboMedida.SelectedIndex + "'," + txtPrecio.Text + ",0,'" + nombreArticulo.ToUpper() + "'," + Convert.ToInt32(txtReferencia.Text) + ")";
+                    sentencia = "INSERT INTO ARTICULOS(IDARTICULO,REFCOMPOSICION,REFMEDIDA,PRECIO,ELIMINADO,NOMBRE,REFERENCIA,STOCK)" +
+                                                " VALUES(" + nuevoid + ",'" + cboComposicion.SelectedIndex + "','" + cboMedida.SelectedIndex + "'," + txtPrecio.Text + ",0,'" + nombreArticulo.ToUpper() + "'," + Convert.ToInt32(txtReferencia.Text) + "," + Convert.ToInt32(nStock.Value.ToString())+")";
 
                     tipoCambio = 1;
                     mensajeHistorial = "Articulo añadido ->" + nombreArticulo;

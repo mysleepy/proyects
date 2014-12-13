@@ -15,8 +15,8 @@ namespace MySleepy
         ////////////////////////////////////////////////////////////
         const String driver = "Data Source=(DESCRIPTION ="
         + "(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = LOCALHOST)(PORT = 1521)))"
-        + "(CONNECT_DATA = (SERVICE_NAME = orcl))); "
-        + "User Id=ad; Password=ad;";
+        + "(CONNECT_DATA = (SERVICE_NAME = -----))); "
+        + "User Id=----; Password=-----;";
 
         ////////////////////////////////////////////////////////////
 
@@ -105,7 +105,12 @@ namespace MySleepy
             int idg = 0;
             foreach (DataRow row in tTabla.Rows)
             {
-                idg = Convert.ToInt16(row["MAX(" + campo + ")"]);
+                try{
+                    idg = Convert.ToInt16(row["MAX(" + campo + ")"]);
+                }catch (Exception a)
+                {
+                    break;
+                }
             }
             return idg + 1;
         }

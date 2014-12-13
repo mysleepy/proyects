@@ -390,6 +390,7 @@ namespace MySleepy
 
         private void ArticulosForm_Load(object sender, EventArgs e)
         {
+            cargarCombos(cbMedida);
             if (numero == 1)
             {
                 txtCantidad.Visible = true;

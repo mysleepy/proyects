@@ -14,8 +14,11 @@ namespace MySleepy
     {
         ConnectDB conexion;
         InsertHistorial insert;
-        int id_pedido, id_articulo_añadir, precio, id_cliente, id_rol, totalpedido, idUsuario, señal,f_pago;
+        PedidosForm fPedidosPrincipal;
+        double precio,totalpedido;
+        int id_pedido, id_articulo_añadir, id_cliente, id_rol, idUsuario, señal,f_pago;
         String n_pedido, cliente, nombre_articulo_añadir, cantidad, n_pedido_modificar;
+
         ////////////////////////////////////////////////////////////////////////
         ///////////////// CONSTRUCTORES /////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -40,6 +43,10 @@ namespace MySleepy
                 // Modificar pedido
                 dpFecha.Enabled = false;
                 gbCliente.Enabled = false;
+                txtApellido1.Visible = false;
+                txtApellido2.Visible = false;
+                txtDireccion.Visible = false;
+                txtPoblacion.Visible = false;
                 cbFormaPago.Enabled = false;
                 txtNumeroPedido.Text = n_pedido_modificar;
                 cbFormaPago.SelectedIndex = f_pago;
@@ -77,6 +84,8 @@ namespace MySleepy
                 MessageBox.Show("Tienes que rellenar la forma de pago");
             }
         }
+
+        
 
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -191,6 +200,10 @@ namespace MySleepy
             }
         }
 
+        public void asignarFPedidos(PedidosForm f)
+        {
+            this.fPedidosPrincipal = f;
+        }
         public String devFCientifica()
         {
             DateTime fechaD = dpFecha.Value;
@@ -202,15 +215,15 @@ namespace MySleepy
 
 
 
-        public int calcularPrecio(String cantidad, String precio)
+        public double calcularPrecio(String cantidad, String precio)
         {
             int cant = Convert.ToInt32(cantidad);
-            int preciot = Convert.ToInt32(precio);
-            int res = cant * preciot;
+            double preciot = Convert.ToDouble(precio);
+            double res = cant * preciot;
             return res;
         }
 
-        public void aumentarTotalPedido(int p)
+        public void aumentarTotalPedido(double p)
         {
             this.totalpedido = this.totalpedido + p;
             txtTotalPedido.Text = " " + this.totalpedido;
@@ -224,7 +237,10 @@ namespace MySleepy
                 n_pedido = txtNumeroPedido.Text;
                 cliente = txtNombre.Text;
 
-                añadirTablaPedido(cliente, txtTotalPedido.Text);
+                if (señal == 0)
+                {
+                    añadirTablaPedido(cliente, txtTotalPedido.Text);
+                }
                 MessageBox.Show("Pedido realizado correctamente");
                 while (dgvPedidos.RowCount > 0)
                 {
@@ -240,16 +256,30 @@ namespace MySleepy
                     }
                     if (señal == 1)
                     {
-                        añadirPedido(n_pedido, cliente, articulos, cantidad, precio, id_articulo, 1);
-                        //MessageBox.Show("Pedido modificado correctamente");
+                        modificarPedido(n_pedido, articulos, cantidad, precio, id_articulo, 0);
                     }
                     dgvPedidos.Rows.RemoveAt(0);
 
                 }
-            } 
-               
-                this.Close();
+            }
+            fPedidosPrincipal.filtrar();
+            this.Close();
         }
+
+        private void modificarPedido(string n_pedido, string articulos, string cantidad, string precio, string id_articulo, int p)
+        {
+            int id_pedido_modificar = Convert.ToInt32(conexion.DLookUp("IDPEDIDO", "PEDIDOS", "N_PEDIDO='" + n_pedido + "'"));
+            int n_añadirArticulos= Convert.ToInt32(conexion.DLookUp("IDPEDIDOARTICULO","PEDIDOSARTICULOS","REFPEDIDO="+id_pedido_modificar));
+            String selectArticulos = "ALTER TABLE PEDIDOSARTICULOS (IDPEDIDOARTICULO,REFPEDIDO,REFARTICULO,CANTIDAD,PRECIOVENTA)" +
+                                    " VALUES(" + n_añadirArticulos + "," + id_pedido + "," + Convert.ToInt32(id_articulo) + "," + Convert.ToInt32(cantidad) + "," + Convert.ToInt32(precio) + ")";
+
+            conexion.setData(selectArticulos);
+            // Añade el pedido
+            //insert en tabla historial cambios
+            insert.insertHistorialCambio(idUsuario, 1, "Pedido modificado  num_pedido->" + n_pedido);
+        }
+
+        
 
         private void añadirPedido(string n_pedido, string cliente, string articulos, string cantidad, string precio, string id, int señal)
         {
@@ -257,16 +287,12 @@ namespace MySleepy
             {
 
                 String selectArticulos = "INSERT INTO PEDIDOSARTICULOS (IDPEDIDOARTICULO,REFPEDIDO,REFARTICULO,CANTIDAD,PRECIOVENTA)" +
-                                    " VALUES(" + Convert.ToInt32(conexion.siguienteID("IDPEDIDOARTICULO", "PEDIDOSARTICULOS")) + "," + id_pedido + "," + Convert.ToInt32(id) + "," + Convert.ToInt32(cantidad) + "," + Convert.ToInt32(precio) + ")";
+                                    " VALUES(" + Convert.ToInt32(conexion.siguienteID("IDPEDIDOARTICULO", "PEDIDOSARTICULOS")) + "," + id_pedido + "," + Convert.ToInt32(id) + "," + Convert.ToInt32(cantidad) + ",'" + Convert.ToDouble(precio) + "')";
 
                 conexion.setData(selectArticulos);
                 // Añade el pedido
                 //insert en tabla historial cambios
                 insert.insertHistorialCambio(idUsuario, 1, "Pedido añadido  num_pedido->" + n_pedido);
-            }
-            if (señal == 1)
-            {
-
             }
         }
         public void añadirTablaPedido(String c,String p)
@@ -299,19 +325,21 @@ namespace MySleepy
             n_pedido_modificar = d.Cells[0].Value.ToString();
             f_pago = Convert.ToInt32(conexion.DLookUp("REFFORMAPAGO", "PEDIDOS", "N_PEDIDO=" + Convert.ToInt32(d.Cells[0].Value.ToString())));
             int idPedido = Convert.ToInt32(conexion.DLookUp("IDPEDIDO", "PEDIDOS", "N_PEDIDO=" + Convert.ToInt32(d.Cells[0].Value.ToString())));
-            MessageBox.Show(idPedido + "");
             String sentencia = "SELECT * FROM PEDIDOSARTICULOS WHERE REFPEDIDO=" + idPedido;
             DataSet resultado = conexion.getData(sentencia, "PEDIDOSARTICULOS");
             DataTable tPArticulos = resultado.Tables["PEDIDOSARTICULOS"];
-            int idArticulo, cantidad, precio;
+            int idArticulo, cantidad;
+            double precio;
             String nombreArticulo;
             foreach (DataRow row in tPArticulos.Rows)
             {
                 idArticulo = Convert.ToInt32(row["REFARTICULO"]);
                 cantidad = Convert.ToInt32(row["CANTIDAD"]);
                 nombreArticulo = Convert.ToString(conexion.DLookUp("NOMBRE", "ARTICULOS", "IDARTICULO=" + idArticulo));
-                precio = Convert.ToInt32(row["PRECIOVENTA"]);
+                precio = Convert.ToDouble(row["PRECIOVENTA"]);
                 dgvPedidos.Rows.Add(d.Cells[2].Value.ToString(), nombreArticulo, cantidad, precio);
+                txtTotalPedido.Text = "" + precio;
+                txtNombre.Text = "" + d.Cells[2].Value.ToString(); // Nombre Cliente
             }
         }
 
