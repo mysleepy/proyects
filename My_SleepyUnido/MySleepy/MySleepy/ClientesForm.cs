@@ -118,7 +118,7 @@ namespace MySleepy
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             AddCliente add = new AddCliente(conexion, this, idUsuario);
-            add.Show();
+            add.ShowDialog(this);
         }
         //Metodo que es llamado cuando se carga la interfaz
         private void ClientesForm_Load(object sender, EventArgs e)
@@ -146,7 +146,7 @@ namespace MySleepy
             {
                 int idClienteSel = extraerIDTabla();
                 AddCliente add = new AddCliente(conexion, this, idClienteSel, idUsuario);
-                add.Show();
+                add.ShowDialog();
             }
         }
         /// <summary>

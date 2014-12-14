@@ -231,14 +231,14 @@ namespace MySleepy
                 idProveedor = Convert.ToInt32(conexion.DLookUp("MAX(IDPROVEEDOR)", "PROVEEDORES", ""));
                 if (Convert.ToInt32(datos[i, 0]) <= idProveedor)
                 {
-                    sentencia = "UPDATE PROVEEDORES set CIF = " + Convert.ToInt32(datos[i, 1]) + ",NOMBRE = '" + datos[i, 2] +
+                    sentencia = "UPDATE PROVEEDORES set CIF = '" + datos[i, 1] + "',NOMBRE = '" + datos[i, 2] +
                         "', DIRECCION = '" + datos[i, 3] + "', REFCPPOBLACIONES = " + datos[i, 4] + ",TELEFONO = " + datos[i, 5] +
                         ",ELIMINADO= " + datos[i, 6] + ", NIF ='" + datos[i, 7] + "' WHERE IDPROVEEDOR=" + datos[i, 0];
                 }
                 else
                 {
                     sentencia = "INSERT INTO PROVEEDORES (IDPROVEEDOR,CIF,NOMBRE,DIRECCION,REFCPPOBLACIONES,TELEFONO,ELIMINADO,NIF)" +
-                                " VALUES(" + datos[i, 0] + "," + datos[i, 1] + ",'" + datos[i, 2] + "','" + datos[i, 3] + "'," + datos[i, 4] +
+                                " VALUES(" + datos[i, 0] + ",'" + datos[i, 1] + "','" + datos[i, 2] + "','" + datos[i, 3] + "'," + datos[i, 4] +
                                 "," + datos[i, 5] + "," + datos[i, 6] + ",'" + datos[i, 7] + "')";
                 }
                 conexion.setData(sentencia);

@@ -56,7 +56,7 @@ namespace MySleepy
         {
             AddPedido añadir = new AddPedido(conexion, rolUsuario, idUsuario, 0);
             añadir.asignarFPedidos(this);
-            añadir.Show();
+            añadir.ShowDialog(this);
             if (añadir.IsDisposed)
             {
                 filtrar();
@@ -165,7 +165,7 @@ namespace MySleepy
                 AddPedido modificar = new AddPedido(conexion, rolUsuario, idUsuario, 1);
                 modificar.asignarFPedidos(this);
                 modificar.rellenar(dgvPedidosRealizados.CurrentRow);
-                modificar.Show();
+                modificar.ShowDialog(this);
             }
         }
 

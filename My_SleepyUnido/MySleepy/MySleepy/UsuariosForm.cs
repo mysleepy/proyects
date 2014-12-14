@@ -104,7 +104,7 @@ namespace MySleepy
             tipoCambio = 1; //tipo de cambio -> añadir
             AddUsuario add = new AddUsuario(this,conexion,0,idUsuario);
             //comprobar que no este abierto los formularios addClientes etc
-            add.Show();
+            add.ShowDialog(this);
             
             if (add.IsDisposed)
             {
@@ -130,7 +130,7 @@ namespace MySleepy
                 else
                 {
                     AddUsuario modificar = new AddUsuario(this, conexion, 1, idUsuario);
-                    modificar.Show();
+                    modificar.ShowDialog(this);
                 }     
             }
         }

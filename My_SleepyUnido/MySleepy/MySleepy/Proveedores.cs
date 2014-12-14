@@ -183,7 +183,7 @@ namespace MySleepy
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             AddProveedor add = AddProveedor.Instance(conexion, ds, this);
-            add.Show();
+            add.ShowDialog(this);
         }
         //Abre la ventana modificar proveedor
         private void btnModificar_Click(object sender, EventArgs e)
@@ -198,7 +198,7 @@ namespace MySleepy
                 {
                     int id = extraerIDTabla();
                     AddProveedor add = AddProveedor.Instance(conexion, id, ds, this);
-                    add.Show();
+                    add.ShowDialog(this);
                 }
             }
         }

@@ -65,7 +65,7 @@ namespace MySleepy
         private void btnBuscarArticulo_Click(object sender, EventArgs e)
         {
             ArticulosForm add = ArticulosForm.Instance(id_rol, conexion, idUsuario);
-            add.Show();
+            add.ShowDialog(this);
         }
 
         private void btnRealizar_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace MySleepy
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
             ClientesForm clientes = ClientesForm.Instance(id_rol, 1, conexion, this, idUsuario);
-            clientes.Show();
+            clientes.ShowDialog(this);
         }
 
         private void btnAddArticulo_Click(object sender, EventArgs e)
@@ -99,13 +99,13 @@ namespace MySleepy
             {
                 // Modificando
                 ArticulosForm articulos = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
-                articulos.Show();
+                articulos.ShowDialog(this);
                 return;
             }
             if (txtNombre.Text != "")
             {
                 ArticulosForm articulos = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
-                articulos.Show();
+                articulos.ShowDialog(this);
             }
             else
             {

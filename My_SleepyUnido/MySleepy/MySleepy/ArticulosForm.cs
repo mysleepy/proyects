@@ -179,7 +179,7 @@ namespace MySleepy
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             AddNuevoArticulo add = new AddNuevoArticulo(conexion, 0, this, idUsuario);
-            add.Show();
+            add.ShowDialog(this);
             if (add.IsDisposed)
             {
                 filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
@@ -199,7 +199,7 @@ namespace MySleepy
                 AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1, this, idUsuario);
                 add.activarReferencia(false);
                 add.rellenar(dgvArticulos.CurrentRow);
-                add.Show();
+                add.ShowDialog(this);
             }
         }
 
