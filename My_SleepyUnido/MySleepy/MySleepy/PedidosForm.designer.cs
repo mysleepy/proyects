@@ -45,16 +45,16 @@
             this.txtReferencia = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnSalir = new System.Windows.Forms.Button();
-            this.btnBorrar = new System.Windows.Forms.Button();
             this.dgvPedidosRealizados = new System.Windows.Forms.DataGridView();
             this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnPagar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -160,16 +160,6 @@
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             this.txtPrecio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPrecio_KeyDown);
             // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
-            this.btnLimpiar.Location = new System.Drawing.Point(584, 49);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(61, 58);
-            this.btnLimpiar.TabIndex = 42;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(93, 69);
@@ -178,26 +168,6 @@
             this.txtNombre.TabIndex = 31;
             this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             this.txtNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombre_KeyDown);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
-            this.btnSalir.Location = new System.Drawing.Point(658, 475);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(62, 54);
-            this.btnSalir.TabIndex = 52;
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // btnBorrar
-            // 
-            this.btnBorrar.Image = global::MySleepy.Properties.Resources.papelera_de_reciclaje;
-            this.btnBorrar.Location = new System.Drawing.Point(228, 189);
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(61, 58);
-            this.btnBorrar.TabIndex = 51;
-            this.btnBorrar.UseVisualStyleBackColor = true;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // dgvPedidosRealizados
             // 
@@ -280,6 +250,36 @@
             this.Telefono.HeaderText = "Pagado";
             this.Telefono.Name = "Telefono";
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
+            this.btnLimpiar.Location = new System.Drawing.Point(584, 49);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(61, 58);
+            this.btnLimpiar.TabIndex = 42;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::MySleepy.Properties.Resources.Door_converted;
+            this.btnSalir.Location = new System.Drawing.Point(658, 475);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(62, 54);
+            this.btnSalir.TabIndex = 52;
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // btnPagar
+            // 
+            this.btnPagar.Image = global::MySleepy.Properties.Resources.Simbolo_del_dinero;
+            this.btnPagar.Location = new System.Drawing.Point(228, 189);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(61, 58);
+            this.btnPagar.TabIndex = 51;
+            this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnBorrar_Click);
+            // 
             // btnModificar
             // 
             this.btnModificar.Image = global::MySleepy.Properties.Resources.adwords_editor_128;
@@ -307,7 +307,7 @@
             this.ClientSize = new System.Drawing.Size(740, 541);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnBorrar);
+            this.Controls.Add(this.btnPagar);
             this.Controls.Add(this.dgvPedidosRealizados);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAñadir);
@@ -336,7 +336,7 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.Button btnPagar;
         private System.Windows.Forms.DataGridView dgvPedidosRealizados;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAñadir;

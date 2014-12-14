@@ -303,6 +303,16 @@ namespace MySleepy.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Simbolo_del_dinero {
+            get {
+                object obj = ResourceManager.GetObject("Simbolo del dinero", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap socios {
             get {
                 object obj = ResourceManager.GetObject("socios", resourceCulture);

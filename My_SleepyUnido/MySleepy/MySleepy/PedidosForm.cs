@@ -177,24 +177,24 @@ namespace MySleepy
             }
             else
             {
-                String mensaje = "¿Desea borrar el pedido?";
-                String mensajeConf = "Pedido borrado correctamente";
+                String mensaje = "¿Desea pagar el pedido?";
+                String mensajeConf = "Pedido pagado correctamente";
                 //pedimos confirmacion
                 DialogResult opcion = MessageBox.Show(mensaje, "Confirmación",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (opcion == DialogResult.OK)
                 {
-                    eliminarPedido(dgvPedidosRealizados.CurrentRow);
+                    pagarPedido(dgvPedidosRealizados.CurrentRow);
                     dgvPedidosRealizados.Rows.RemoveAt(dgvPedidosRealizados.CurrentRow.Index);
                     MessageBox.Show(mensajeConf);
                 }
             }
         }
 
-        private void eliminarPedido(DataGridViewRow fila)
+        private void pagarPedido(DataGridViewRow fila)
         {
-            int id_p_eliminar = Convert.ToInt32(conexion.DLookUp("IDPEDIDO", "PEDIDOS", "N_PEDIDO=" + Convert.ToInt32(fila.Cells[0].Value.ToString())));
-            String sentencia = "UPDATE PEDIDOS SET ELIMINADO=1  WHERE IDPEDIDO=" + id_p_eliminar;
+            int id_p_pagar = Convert.ToInt32(conexion.DLookUp("IDPEDIDO", "PEDIDOS", "N_PEDIDO=" + Convert.ToInt32(fila.Cells[0].Value.ToString())));
+            String sentencia = "UPDATE PEDIDOS SET PAGADO='S'  WHERE IDPEDIDO=" + id_p_pagar;
             conexion.setData(sentencia);
         }
 

@@ -379,3 +379,6 @@ C:\Users\Norman\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.PrincipalForm.es.re
 C:\Users\Norman\Desktop\MySleepy\MySleepy\obj\Debug\MySleepy.csproj.GenerateResource.Cache
 C:\Users\Norman\Desktop\MySleepy\MySleepy\obj\Debug\es-AR\MySleepy.resources.dll
 C:\Users\Norman\Desktop\MySleepy\MySleepy\obj\Debug\es\MySleepy.resources.dll
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy\MySleepy\bin\Debug\MySleepy.exe.config
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy\MySleepy\obj\Debug\MySleepy.exe
+d:\MIS DOCUMENTOS PC\ESCRITORIO\MySleepy\MySleepy\obj\Debug\MySleepy.pdb
