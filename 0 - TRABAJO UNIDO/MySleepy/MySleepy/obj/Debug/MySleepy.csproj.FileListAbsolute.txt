@@ -412,3 +412,6 @@ D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\My_SleepyUnido\MySleepy\MySleepy
 D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\My_SleepyUnido\MySleepy\MySleepy\obj\Debug\MySleepy.csproj.GenerateResource.Cache
 D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\My_SleepyUnido\MySleepy\MySleepy\obj\Debug\es-AR\MySleepy.resources.dll
 D:\MIS DOCUMENTOS PC\DOCUMENTOS\GitHub\proyects\My_SleepyUnido\MySleepy\MySleepy\obj\Debug\es\MySleepy.resources.dll
+D:\GitHub\Final\proyects\0 - TRABAJO UNIDO\MySleepy\MySleepy\bin\Debug\MySleepy.exe.config
+D:\GitHub\Final\proyects\0 - TRABAJO UNIDO\MySleepy\MySleepy\obj\Debug\MySleepy.exe
+D:\GitHub\Final\proyects\0 - TRABAJO UNIDO\MySleepy\MySleepy\obj\Debug\MySleepy.pdb
