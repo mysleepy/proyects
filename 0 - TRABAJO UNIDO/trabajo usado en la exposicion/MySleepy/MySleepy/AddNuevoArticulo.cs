@@ -18,14 +18,15 @@ namespace MySleepy
         ArticulosForm articulos;
         AddPedido addPedido;
         InsertHistorial insert;
-        int idUsuario;
-        public AddNuevoArticulo(ConnectDB c, int señal, ArticulosForm articulos, int idUsuario)
+        int idUsuario,cerrarForm;
+        public AddNuevoArticulo(ConnectDB c, int señal, ArticulosForm articulos, int idUsuario,int cerrar)
         {
             InitializeComponent();
             activarReferencia(true);
             this.idmodificar = 0;
             this.conexion = c;
-            this.articulos = articulos;
+            this.articulos = articulos; 
+             this.cerrarForm = cerrar;
             numero = señal;
             cargarCombos(cboComposicion, 0);
             cargarCombos(cboMedida, 1);
@@ -74,6 +75,11 @@ namespace MySleepy
                 {
                     MessageBox.Show("Tienes que rellenar los campos que faltan");
                 }
+            }
+
+            if (cerrarForm == 0)
+            {
+                this.Dispose();
             }
         }
 
@@ -182,11 +188,12 @@ namespace MySleepy
         {
             int referencia = Convert.ToInt32(fila.Cells[0].Value);
             String nombre = Convert.ToString(fila.Cells[1].Value);
+            int stock = Convert.ToInt32(fila.Cells[2].Value.ToString());
             int composicion = Convert.ToInt32(conexion.DLookUp("IDCOMPOSICION", "COMPOSICIONES", "COMPOSICION='" + fila.Cells[2].Value.ToString() + "'"));
             int medida = Convert.ToInt32(conexion.DLookUp("IDMEDIDA", "MEDIDAS", "MEDIDA='" + fila.Cells[3].Value.ToString() + "'"));
             String precio = Convert.ToString(fila.Cells[4].Value);
             conseguirId(referencia);
-            escribir(referencia, nombre, composicion, medida, precio);
+            escribir(referencia, nombre,stock, composicion, medida, precio);
         }
 
         private void conseguirId(int referencia)
@@ -231,13 +238,14 @@ namespace MySleepy
             nStock.Value = 0;
         }
 
-        private void escribir(int referencia, string nombre, int composicion, int medida, string precio)
+        private void escribir(int referencia, string nombre, int stock,int composicion, int medida, string precio)
         {
             txtReferencia.Text = "" + referencia;
             txtNombre.Text = nombre;
             cboComposicion.SelectedIndex = composicion;
             cboMedida.SelectedIndex = medida;
             txtPrecio.Text = precio;
+            nStock.Value = stock;
         }
 
         public void activarReferencia(Boolean valor)

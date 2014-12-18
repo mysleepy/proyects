@@ -35,10 +35,10 @@ namespace MySleepy
         private DataSet ds;
         private ToolTip toolTip1;
         private int empresaAutonomo;
-        private Proveedor daddy;
+        private Proveedores daddy;
         private InsertHistorial insert;
         private int idUsuario;
-        public static AddProveedor Instance(ConnectDB c, DataSet ds, Proveedor daddy, int idUsuario)
+        public static AddProveedor Instance(ConnectDB c, DataSet ds, Proveedores daddy, int idUsuario)
         {
             if (instance == null || instance.IsDisposed)
             {
@@ -46,7 +46,7 @@ namespace MySleepy
             }
             return instance;
         }
-        public static AddProveedor Instance(ConnectDB c, int id, DataSet ds, Proveedor daddy, int idUsuario)
+        public static AddProveedor Instance(ConnectDB c, int id, DataSet ds, Proveedores daddy, int idUsuario)
         {
             if (instance == null || instance.IsDisposed)
             {
@@ -54,7 +54,7 @@ namespace MySleepy
             }
             return instance;
         }
-        public AddProveedor(ConnectDB conexion, DataSet ds, Proveedor daddy, int idUsuario)
+        public AddProveedor(ConnectDB conexion, DataSet ds, Proveedores daddy, int idUsuario)
         {
             this.daddy = daddy;
             toolTip1 = new ToolTip();
@@ -63,6 +63,7 @@ namespace MySleepy
             txtDNI.Enabled = false;
             txtCIF.Visible = false;
             txtDNI.Visible = false;
+            cbEA.SelectedIndex = 0;
             this.mod = false;
             this.confirmacion = "¿Desea añadir al proveedor?";
             //iniciamos la conexion 
@@ -82,7 +83,7 @@ namespace MySleepy
             this.ds = ds;
             insert = new InsertHistorial(conexion);
         }
-        public AddProveedor(ConnectDB conexion, int id, DataSet ds, Proveedor daddy, int idUsuario)
+        public AddProveedor(ConnectDB conexion, int id, DataSet ds, Proveedores daddy, int idUsuario)
         {
             this.daddy = daddy;
             toolTip1 = new ToolTip();
@@ -110,6 +111,9 @@ namespace MySleepy
             dv.Sort = "IDPROVEEDOR";
             int posicion = dv.Find(idProveedor);
             this.txtCIF.Text = dv[posicion][1].ToString();
+            this.txtDNI.Text = dv[posicion][7].ToString();
+            if (txtDNI.Text.Equals("-")) { cbEA.SelectedIndex = 0; }
+            else { cbEA.SelectedIndex = 1; }
             this.txtNombre.Text = dv[posicion][2].ToString();
             this.txtDireccion.Text = dv[posicion][3].ToString();
             this.txtTelefono.Text = dv[posicion][5].ToString();
@@ -191,17 +195,19 @@ namespace MySleepy
             if ((Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtNombre.Text.Length >= 30) && (codigo != 8))
             {
                 e.Handled = true;
+                lNombre.Text = "SOLO SE PERMITEN LETRAS";
             }
             else
             {
                 e.Handled = false;
+                lNombre.Text ="";
             }
         }
         //Metodo para controlar que solo se escriban caracteres alfabeticos en  en campo Apellido1
-        private void txtApellido1_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
         {
             int codigo = Convert.ToInt32(e.KeyChar);
-            if ((char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtDNI.Text.Length >= 20) && (codigo != 8))
+            if ((char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtDNI.Text.Length >= 9) && (codigo != 8))
             {
                 e.Handled = true;
             }
@@ -217,10 +223,12 @@ namespace MySleepy
             if ((Char.IsLetter(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtTelefono.Text.Length >= 9) && (codigo != 8))
             {
                 e.Handled = true;
+                ltelefono.Text = "SOLO SE PERMITEN NUMEROS";
             }
             else
             {
                 e.Handled = false;
+                ltelefono.Text = "";
             }
         }
         //Metodo que controla el textbox direccion
@@ -360,7 +368,9 @@ namespace MySleepy
                 if (!txtDNI.Text.Equals("")) { nif = txtDNI.Text; }
                 if (mod == false)
                 {
-                    int id = Convert.ToInt32(conexion.DLookUp("MAX(IDPROVEEDOR)", "PROVEEDORES", "")) + 1;
+                    int id = Convert.ToInt32(conexion.DLookUp("IDPROVEEDOR", "PROVEEDORES", "IDPROVEEDOR = 1"));
+                    if (id == -1) { id = 1;}
+                    else { id = Convert.ToInt32(conexion.DLookUp("MAX(IDPROVEEDOR)", "PROVEEDORES", ""))+1; }
                     if (!txtCIF.Text.Equals("")) { cif = txtCIF.Text; }
                     if (!txtDNI.Text.Equals("")) { nif = txtDNI.Text; }
                     DataTable dt = ds.Tables[0];
@@ -369,11 +379,19 @@ namespace MySleepy
                     XML_proveedor.rellenaFilas(dt, columnas, valores);
                     ds.Tables.Clear();
                     ds.Tables.Add(dt);
-                    //MessageBox.Show(this, "Proveedor almacenado", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    limpiar();
-
-                    //insert en historial de cambios
-                    insert.insertHistorialCambio(idUsuario, 1, "Proveedor añadido ->" + nombre);
+                    DialogResult opcion = MessageBox.Show("¿Desea añadir más Proveedores?", "Question",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (opcion == DialogResult.Yes)
+                    {
+                        limpiar();
+                        //insert en historial de cambios
+                        insert.insertHistorialCambio(idUsuario, 1, "Proveedor añadido ->" + nombre);
+                    }
+                    else
+                    {
+                        this.Dispose();
+                    }
+                    
                 }
                 else
                 {
@@ -445,6 +463,7 @@ namespace MySleepy
             txtDNI.Enabled = false;
             txtCIF.Visible = false;
             txtDNI.Visible = false;
+            cbEA.SelectedIndex = 0;
         }
     }
 }

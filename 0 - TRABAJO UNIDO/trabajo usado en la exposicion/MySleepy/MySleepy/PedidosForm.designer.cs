@@ -37,6 +37,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PedidosForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbPNoEliminado = new System.Windows.Forms.RadioButton();
+            this.rbPEliminado = new System.Windows.Forms.RadioButton();
             this.rbNoPagados = new System.Windows.Forms.RadioButton();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.rbPagados = new System.Windows.Forms.RadioButton();
@@ -57,12 +59,17 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
+            this.btnBorrarPedido = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidosRealizados)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.rbPNoEliminado);
+            this.groupBox1.Controls.Add(this.rbPEliminado);
             this.groupBox1.Controls.Add(this.rbNoPagados);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.rbPagados);
@@ -80,11 +87,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
+            // rbPNoEliminado
+            // 
+            this.rbPNoEliminado.AutoSize = true;
+            this.rbPNoEliminado.Checked = true;
+            this.rbPNoEliminado.Location = new System.Drawing.Point(466, 125);
+            this.rbPNoEliminado.Name = "rbPNoEliminado";
+            this.rbPNoEliminado.Size = new System.Drawing.Size(92, 17);
+            this.rbPNoEliminado.TabIndex = 53;
+            this.rbPNoEliminado.TabStop = true;
+            this.rbPNoEliminado.Text = "No Eliminados";
+            this.rbPNoEliminado.UseVisualStyleBackColor = true;
+            this.rbPNoEliminado.CheckedChanged += new System.EventHandler(this.rbPNoEliminado_CheckedChanged);
+            this.rbPNoEliminado.Click += new System.EventHandler(this.rbPNoEliminado_Click);
+            // 
+            // rbPEliminado
+            // 
+            this.rbPEliminado.AutoSize = true;
+            this.rbPEliminado.Location = new System.Drawing.Point(466, 81);
+            this.rbPEliminado.Name = "rbPEliminado";
+            this.rbPEliminado.Size = new System.Drawing.Size(75, 17);
+            this.rbPEliminado.TabIndex = 52;
+            this.rbPEliminado.TabStop = true;
+            this.rbPEliminado.Text = "Eliminados";
+            this.rbPEliminado.UseVisualStyleBackColor = true;
+            this.rbPEliminado.CheckedChanged += new System.EventHandler(this.rbPEliminado_CheckedChanged);
+            this.rbPEliminado.Click += new System.EventHandler(this.rbPEliminado_Click);
+            // 
             // rbNoPagados
             // 
             this.rbNoPagados.AutoSize = true;
             this.rbNoPagados.Checked = true;
-            this.rbNoPagados.Location = new System.Drawing.Point(380, 125);
+            this.rbNoPagados.Location = new System.Drawing.Point(331, 125);
             this.rbNoPagados.Name = "rbNoPagados";
             this.rbNoPagados.Size = new System.Drawing.Size(84, 17);
             this.rbNoPagados.TabIndex = 51;
@@ -96,7 +130,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(282, 28);
+            this.dateTimePicker1.Location = new System.Drawing.Point(376, 28);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(239, 20);
             this.dateTimePicker1.TabIndex = 44;
@@ -105,7 +139,7 @@
             // rbPagados
             // 
             this.rbPagados.AutoSize = true;
-            this.rbPagados.Location = new System.Drawing.Point(380, 81);
+            this.rbPagados.Location = new System.Drawing.Point(331, 81);
             this.rbPagados.Name = "rbPagados";
             this.rbPagados.Size = new System.Drawing.Size(67, 17);
             this.rbPagados.TabIndex = 50;
@@ -163,7 +197,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
-            this.btnLimpiar.Location = new System.Drawing.Point(584, 49);
+            this.btnLimpiar.Location = new System.Drawing.Point(587, 69);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(61, 58);
             this.btnLimpiar.TabIndex = 42;
@@ -192,7 +226,7 @@
             // btnBorrar
             // 
             this.btnBorrar.Image = global::MySleepy.Properties.Resources.Simbolo_del_dinero;
-            this.btnBorrar.Location = new System.Drawing.Point(137, 189);
+            this.btnBorrar.Location = new System.Drawing.Point(191, 189);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(61, 58);
             this.btnBorrar.TabIndex = 51;
@@ -283,12 +317,11 @@
             // btnModificar
             // 
             this.btnModificar.Image = global::MySleepy.Properties.Resources.adwords_editor_128;
-            this.btnModificar.Location = new System.Drawing.Point(234, 189);
+            this.btnModificar.Location = new System.Drawing.Point(113, 189);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(61, 58);
             this.btnModificar.TabIndex = 49;
             this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Visible = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnAñadir
@@ -301,11 +334,31 @@
             this.btnAñadir.UseVisualStyleBackColor = true;
             this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
+            // btnBorrarPedido
+            // 
+            this.btnBorrarPedido.Image = global::MySleepy.Properties.Resources.papelera_de_reciclaje;
+            this.btnBorrarPedido.Location = new System.Drawing.Point(269, 189);
+            this.btnBorrarPedido.Name = "btnBorrarPedido";
+            this.btnBorrarPedido.Size = new System.Drawing.Size(61, 58);
+            this.btnBorrarPedido.TabIndex = 54;
+            this.btnBorrarPedido.UseVisualStyleBackColor = true;
+            this.btnBorrarPedido.Click += new System.EventHandler(this.btnBorrarPedido_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(303, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "Fecha:";
+            // 
             // PedidosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 541);
+            this.Controls.Add(this.btnBorrarPedido);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnBorrar);
@@ -346,6 +399,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
         private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.RadioButton rbPNoEliminado;
+        private System.Windows.Forms.RadioButton rbPEliminado;
+        private System.Windows.Forms.Button btnBorrarPedido;
+        private System.Windows.Forms.Label label1;
 
 
 

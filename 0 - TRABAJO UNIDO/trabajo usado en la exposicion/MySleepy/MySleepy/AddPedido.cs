@@ -13,10 +13,11 @@ namespace MySleepy
     public partial class AddPedido : Form
     {
         ConnectDB conexion;
+        ArticulosForm articulosForm;
         InsertHistorial insert;
         PedidosForm fPedidosPrincipal;
         double precio,totalpedido;
-        int id_pedido, id_articulo_añadir, id_cliente, id_rol, idUsuario, señal,f_pago;
+        int id_pedido, id_articulo_añadir, id_cliente, id_rol, idUsuario, señal,f_pago,stock;
         String n_pedido, cliente, nombre_articulo_añadir, cantidad, n_pedido_modificar;
 
         ////////////////////////////////////////////////////////////////////////
@@ -98,8 +99,8 @@ namespace MySleepy
             if (señal == 1)
             {
                 // Modificando
-                ArticulosForm articulos = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
-                articulos.Show();
+                articulosForm = ArticulosForm.Instance(id_rol, 1, this, conexion, idUsuario);
+                articulosForm.Show();
                 return;
             }
             if (txtNombre.Text != "")
@@ -147,13 +148,14 @@ namespace MySleepy
 
 
 
-        public void nuevoArticulo(int id_articulo, String refArticulo, String nombre, String composicion, String medida, String precio, String cantidad)
+        public void nuevoArticulo(int id_articulo, String refArticulo, String nombre, String composicion, String medida, String precio, String cantidad,String stock)
         {
             this.id_articulo_añadir = id_articulo;
             this.nombre_articulo_añadir = nombre;
             this.precio = calcularPrecio(cantidad, precio);
             aumentarTotalPedido(this.precio);
             this.cantidad = cantidad;
+            this.stock = Convert.ToInt32(stock);
             MessageBox.Show("Articulo añadido");
             actualizarDGV();
         }
@@ -247,7 +249,9 @@ namespace MySleepy
                     id_articulo = dgvPedidos.Rows[0].Cells[4].Value.ToString();
                     if (señal == 0)
                     {
+                        articulosForm.actualizarCantidad(this.stock-Convert.ToInt32(cantidad),Convert.ToInt32(id_articulo));
                         añadirPedido(n_pedido, cliente, articulos, cantidad, precio, id_articulo, 0);
+                      
                     }
                     if (señal == 1)
                     {

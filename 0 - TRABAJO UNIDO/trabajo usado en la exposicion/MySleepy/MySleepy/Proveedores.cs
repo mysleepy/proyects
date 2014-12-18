@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace MySleepy
 {
-    public partial class Proveedor : Form
+    public partial class Proveedores : Form
     {
         ConnectDB conexion;
         private int rolUsuario;
@@ -25,28 +25,28 @@ namespace MySleepy
         private ToolTip toolTip1;
         int idUsuario;
         private int empresaAutonomo = -1;
-        private static Proveedor instance;
+        private static Proveedores instance;
         //Atributo que almacena el dataTable usado(sacado del xml)
         private DataSet ds;
         private InsertHistorial insert;
 
-        public static Proveedor Instance(int idRol, int señal, ConnectDB c, AddPedido a, int idUsuario)
+        public static Proveedores Instance(int idRol, int señal, ConnectDB c, AddPedido a, int idUsuario)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new Proveedor(idRol, señal, c, a, idUsuario);
+                instance = new Proveedores(idRol, señal, c, a, idUsuario);
             }
             return instance;
         }
-        public static Proveedor Instance(int idRol, ConnectDB conexion, int idUsuario, DataSet ds)
+        public static Proveedores Instance(int idRol, ConnectDB conexion, int idUsuario, DataSet ds)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new Proveedor(idRol, conexion, idUsuario, ds);
+                instance = new Proveedores(idRol, conexion, idUsuario, ds);
             }
             return instance;
         }
-        private Proveedor(int idRol, int señal, ConnectDB c, AddPedido a, int idUsuario)
+        private Proveedores(int idRol, int señal, ConnectDB c, AddPedido a, int idUsuario)
         {
             ds = XML_proveedor.leerXMLDataSet(RUTAXML);
             toolTip1 = new ToolTip();
@@ -64,7 +64,7 @@ namespace MySleepy
             insert = new InsertHistorial(c);
         }
 
-        private Proveedor(int idRol, ConnectDB conexion, int idUsuario, DataSet ds)
+        private Proveedores(int idRol, ConnectDB conexion, int idUsuario, DataSet ds)
         {
             this.ds = ds;
             toolTip1 = new ToolTip();
@@ -82,11 +82,7 @@ namespace MySleepy
         //Con este modo se limpia la tabla
         public void limpiarTabla()
         {
-            // Limpiamos el datagridView
-            while (dgvProveedores.RowCount > 0)
-            {
-                dgvProveedores.Rows.Remove(dgvProveedores.CurrentRow);
-            }
+            dgvProveedores.Rows.Clear();
         }
 
         public void cargarTablaInicio()
@@ -136,21 +132,18 @@ namespace MySleepy
         public void cargarTabla(DataRow row)
         {
             limpiarTabla();
-            Console.WriteLine("ME pasan la fila");
-            int idProveedor, telefono, eliminado;
+            int idProveedor, telefono;
             String cif, nombre, direccion, nif;
             if (row != null)
             {
+                
                 idProveedor = Convert.ToInt32(row["IDPROVEEDOR"]);
                 cif = Convert.ToString(row["CIF"]);
                 nombre = Convert.ToString(row["NOMBRE"]);
                 telefono = Convert.ToInt32(row["TELEFONO"]);
                 direccion = Convert.ToString(row["DIRECCION"]);
-                eliminado = Convert.ToInt32(row["ELIMINADO"]);
                 nif = Convert.ToString(row["NIF"]);
-                if (eliminado == ckEliminado)
-                {
-                    if (this.empresaAutonomo == 0)
+                if (this.empresaAutonomo == 0)
                     {
                         if (cif.Equals("-"))
                         {
@@ -170,13 +163,10 @@ namespace MySleepy
                     dgvProveedores.ClearSelection();
                     dgvProveedores.Update();
                 }
-            }
             else
             {
                 cargarTablaInicio();
             }
-
-
         }
         //Boton salir
         private void btnSalir_Click(object sender, EventArgs e)
@@ -230,7 +220,6 @@ namespace MySleepy
             toolTip1.SetToolTip(this.btnSalir, "Cerrar ventana");
             toolTip1.SetToolTip(this.btnBorrar, "Borrar Proveedor");
             toolTip1.SetToolTip(this.btnRestaurar, "Restaurar Proveedor");
-            toolTip1.SetToolTip(this.btnBuscar, "Buscar Proveedor");
         }
         //Metodo para extraer id
         public int extraerIDTabla()
@@ -255,25 +244,51 @@ namespace MySleepy
         //Metodo que controlo el textBox de Nombre
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtNombre.Text.Length >= 30)
+            int codigo = Convert.ToInt32(e.KeyChar);
+            if (Char.IsDigit(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtNombre.Text.Length >= 30 && (codigo != 8))
             {
                 e.Handled = true;
+                lNombre.Text = "SOLO SE PERMITEN LETRAS";
             }
             else
             {
                 e.Handled = false;
+                lNombre.Text = "";
+                filtro();
             }
         }
         //Metodo que controla el textBox de Apellido
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtTelefono.Text.Length >= 20)
+            int codigo = Convert.ToInt32(e.KeyChar);
+            if (Char.IsLetter(e.KeyChar) || char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtTelefono.Text.Length >= 20 && (codigo != 8))
+            {
+                e.Handled = true;
+                lTelefono.Text = "SOLO SE PERMITEN NUMEROS";
+            }
+            else
+            {
+                e.Handled = false;
+                lTelefono.Text = "";
+                filtro();
+            }
+        }
+        /// <summary>
+        /// Metodo que controla el textbox de NIF/CIF
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtCIFNIF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int codigo = Convert.ToInt32(e.KeyChar);
+            if (char.IsSymbol(e.KeyChar) || e.KeyChar.Equals('\'') || txtTelefono.Text.Length >= 9 && (codigo != 8))
             {
                 e.Handled = true;
             }
             else
             {
                 e.Handled = false;
+                filtro();
             }
         }
 
@@ -294,7 +309,7 @@ namespace MySleepy
         }
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            if (dgvProveedores.CurrentRow == null || dgvProveedores.SelectedRows.Count == 0)
+            if (dgvProveedores.CurrentRow == null || dgvProveedores .SelectedRows.Count == 0)
             {
                 MessageBox.Show("No ha seleccionado ninguna fila");
             }
@@ -339,25 +354,21 @@ namespace MySleepy
             }
         }
 
-        private void rbNoEliminados_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbNoEliminados.Checked) { ckEliminado = 0; }
-            rbEliminados.Checked = false;
-        }
-
-        private void rbEliminados_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbEliminados.Checked) { ckEliminado = 1; }
-            rbNoEliminados.Checked = false;
-        }
-
         private void rbNoEliminados_Click(object sender, EventArgs e)
         {
             rbNoEliminados.Checked = true;
+            this.ckEliminado = 0;
+            btnRestaurar.Enabled = false;
+            btnBorrar.Enabled = true;
+            filtro();
         }
         private void rbEliminados_Click(object sender, EventArgs e)
         {
             rbEliminados.Checked = true;
+            this.ckEliminado = 1;
+            btnRestaurar.Enabled = true;
+            btnBorrar.Enabled = false;
+            filtro();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -380,22 +391,15 @@ namespace MySleepy
             {
                 txtCIFNIF.Enabled = false;
             }
+            filtro();
         }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Metodo que filtra la interfaz con la informacion buscada según los campos rellenados
+        /// </summary>
+        private void filtro()
         {
-            if (ckEliminado == 0)
-            {
-                btnBorrar.Enabled = true;
-                btnRestaurar.Enabled = false;
-            }
-            else
-            {
-                btnBorrar.Enabled = false;
-                btnRestaurar.Enabled = true;
-            }
             DataTable dt = ds.Tables[0];
-            int idProveedor, telefono;
+            int idProveedor, telefono, eliminado;
             String direccion, nombre, cif, nif;
             DataRow fila = null;
             foreach (DataRow row in dt.Rows)
@@ -405,46 +409,49 @@ namespace MySleepy
                 nombre = Convert.ToString(row["NOMBRE"]);
                 telefono = Convert.ToInt32(row["TELEFONO"]);
                 direccion = Convert.ToString(row["DIRECCION"]);
+                eliminado = Convert.ToInt32(row["ELIMINADO"]);
                 nif = Convert.ToString(row["NIF"]);
-                if (txtNombre.Text.Length > 0)
+                if (eliminado == ckEliminado)
                 {
-                    if (txtNombre.Text.Equals(nombre))
+                    if (txtNombre.Text.Length > 0)
                     {
-                        fila = row;
-                    }
-                }
-                if (txtCIFNIF.Text.Length > 0)
-                {
-                    if (this.empresaAutonomo == 1)
-                    {
-                        if (txtCIFNIF.Text.Equals(cif))
+                        if (System.Text.RegularExpressions.Regex.IsMatch(nombre, txtNombre.Text, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                         {
                             fila = row;
                         }
                     }
-                    else
+                    if (txtCIFNIF.Text.Length > 0)
                     {
-                        if (this.empresaAutonomo == 0)
+                        if (this.empresaAutonomo == 1)
                         {
-                            if (txtCIFNIF.Text.Equals(nif))
+                            if (System.Text.RegularExpressions.Regex.IsMatch(cif, txtCIFNIF.Text, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                             {
                                 fila = row;
                             }
                         }
+                        else
+                        {
+                            if (this.empresaAutonomo == 0)
+                            {
+                                if (System.Text.RegularExpressions.Regex.IsMatch(nif, txtCIFNIF.Text, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                                {
+                                    fila = row;
+                                }
+                            }
 
-                    }
-                }//fin txtCIFNIF
-                if (txtTelefono.Text.Length > 0)
-                {
-                    int numero = Convert.ToInt32(txtTelefono.Text.Trim());
-                    if (numero == telefono)
+                        }
+                    }//fin txtCIFNIF
+                    if (txtTelefono.Text.Length > 0)
                     {
-                        fila = row;
+                        if (System.Text.RegularExpressions.Regex.IsMatch(telefono.ToString(), txtTelefono.Text, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        {
+                            fila = row;
+                        }
                     }
-                }
-                if (fila != null)
-                {
-                    break;
+                    if (fila != null)
+                    {
+                         break;
+                    }
                 }
             }
             cargarTabla(fila);
@@ -463,5 +470,7 @@ namespace MySleepy
         {
             ds.WriteXml(RUTAXML);
         }
+
+        
     }
 }

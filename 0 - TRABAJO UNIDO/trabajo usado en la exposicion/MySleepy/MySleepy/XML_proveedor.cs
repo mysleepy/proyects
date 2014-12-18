@@ -202,7 +202,6 @@ namespace MySleepy
             DataRow dr = dt.NewRow();
             for (int i = 0; i < nombreColumnas.Length; i++)
             {
-                Console.WriteLine("Cuenta columnas" + i);
                 dr[nombreColumnas[i]] = valoresColumnas[i];
             }
             dt.Rows.Add(dr);

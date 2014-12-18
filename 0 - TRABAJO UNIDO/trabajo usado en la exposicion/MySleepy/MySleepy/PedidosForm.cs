@@ -49,7 +49,7 @@ namespace MySleepy
         {
             // Muestra los pedidos en la fecha actual que no estan pagados
             String sentencia = " Select * from PEDIDOS where PAGADO='N' and ELIMINADO=0";
-            sentencia = sentencia + " AND FECHA='" + dateTimePicker1.Value.ToShortDateString() + "'";
+            //sentencia = sentencia + " AND FECHA='" + dateTimePicker1.Value.ToShortDateString() + "'";
             actualizarDGV(sentencia);
         }
         ////////////////////////////////////////////////////////////////////////
@@ -97,6 +97,29 @@ namespace MySleepy
         {
             filtrar();
         }
+
+        private void rbPEliminado_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void rbPEliminado_Click(object sender, EventArgs e)
+        {
+            rbPNoEliminado.Checked = false;
+            filtrar();
+        }
+
+        private void rbPNoEliminado_Click(object sender, EventArgs e)
+        {
+            rbPEliminado.Checked = false;
+            filtrar();
+        }
+
+        private void rbPNoEliminado_CheckedChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
 
         private void rbEliminados_Click(object sender, EventArgs e)
         {
@@ -210,9 +233,17 @@ namespace MySleepy
         ///////////////////////////////////////////////////////////////////////
         private void Pedidos_Load(object sender, EventArgs e)
         {
+            
             dgvPedidosRealizados.ClearSelection();
             dgvPedidosRealizados.Update();
             cargarInicio();
+            if (rolUsuario != 1 || rolUsuario != 2)
+            {
+                btnBorrarPedido.Visible = false;
+                rbPEliminado.Visible = false;
+                rbPNoEliminado.Visible = false;
+                btnModificar.Visible = false;
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////
@@ -233,15 +264,24 @@ namespace MySleepy
         ///////////////////////////////////////////////////////
         public void filtrar()
         {
-            String sentencia="";
+            String sentencia = "Select * from PEDIDOS where";
             if (rbNoPagados.Checked == true)
             {
-                sentencia = "Select * from PEDIDOS where PAGADO='N' and ELIMINADO=0";
+                sentencia = sentencia + " PAGADO='N'";
             }
             if (rbPagados.Checked == true)
             {
-                sentencia = "Select * from PEDIDOS where PAGADO='S' and ELIMINADO=0";
+                sentencia = sentencia + " PAGADO='S'";
             }
+            if (rbPNoEliminado.Checked == true)
+            {
+                sentencia = sentencia + " and ELIMINADO=0";
+            }
+            if (rbPEliminado.Checked == true)
+            {
+                sentencia = sentencia + " and ELIMINADO=1";
+            }
+
             if (txtReferencia.Text != "")
             {
                 sentencia = sentencia + " AND N_PEDIDO LIKE '%" + Convert.ToInt32(txtReferencia.Text) + "%'";
@@ -261,6 +301,7 @@ namespace MySleepy
         private void actualizarDGV(string sentencia)
         {
             limpiarTabla();
+            Console.WriteLine(sentencia);
             DataSet resultado = conexion.getData(sentencia, "PEDIDOS");
             DataTable tPedidos = resultado.Tables["PEDIDOS"];
             foreach (DataRow row in tPedidos.Rows)
@@ -290,6 +331,35 @@ namespace MySleepy
             {
                 dgvPedidosRealizados.Rows.RemoveAt(0);
             }
+        }
+
+        private void btnBorrarPedido_Click(object sender, EventArgs e)
+        {
+             if (dgvPedidosRealizados.CurrentRow == null || dgvPedidosRealizados.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No hay ninguna fila seleccionada");
+            }
+            else
+            {
+                String mensaje = "¿Desea marcar como borrado el pedido?";
+                String mensajeConf = "Pedido borrado correctamente";
+                //pedimos confirmacion
+                DialogResult opcion = MessageBox.Show(mensaje, "Confirmación",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                if (opcion == DialogResult.OK)
+                {
+                    borrarPedido(dgvPedidosRealizados.CurrentRow);
+                    dgvPedidosRealizados.Rows.RemoveAt(dgvPedidosRealizados.CurrentRow.Index);
+                    MessageBox.Show(mensajeConf);
+                }
+            }
+        }
+
+        private void borrarPedido(DataGridViewRow fila)
+        {
+            int n_pedido = Convert.ToInt32(fila.Cells[0].Value.ToString());
+            String delete = "UPDATE SET ELIMINADO=1 WHERE N_PEDIDO=" + n_pedido;
+            conexion.setData(delete);
         }
 
     }

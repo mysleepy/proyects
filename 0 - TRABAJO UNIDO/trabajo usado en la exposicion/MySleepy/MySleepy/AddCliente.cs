@@ -155,13 +155,21 @@ namespace MySleepy
 
                            
                             conexion.setData(ins);
-                            limpiar();
-
                             //reseteamos el mensaje para que no se acumulen los nombres
-                            confirmacion="¿Desea añadir el cliente?";
+                            confirmacion = "¿Desea añadir el cliente?";
 
                             //Insert en la tabla historial de cambios
                             insert.insertHistorialCambio(idUsuario, 1, "Cliente añadido ->" + nombre);
+                            DialogResult opcion = MessageBox.Show("¿Desea añadir más Clientes?", "Question",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (opcion == DialogResult.Yes)
+                            {
+                                limpiar();
+                            }
+                            else
+                            {
+                                this.Dispose();
+                            }
                         }//fin if existe cliente
                     }//fin if añadir
                     else
@@ -174,10 +182,9 @@ namespace MySleepy
 
                         //reseteamos el mensaje para que no se acumulen los nombres
                         confirmacion = "¿Desea modificar al cliente?";
-                       
-
-                        //insert en la tabla historial de cambios
+                       //insert en la tabla historial de cambios
                         insert.insertHistorialCambio(idUsuario, 2, "Cliente modificado ->" + nombre);
+                        this.Dispose();
                     }//fin else modificar
 
                 }//fin if permiso

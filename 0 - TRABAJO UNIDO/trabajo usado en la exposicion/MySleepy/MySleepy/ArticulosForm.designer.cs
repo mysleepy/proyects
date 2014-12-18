@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ArticulosForm));
             this.txtCantidad = new System.Windows.Forms.NumericUpDown();
             this.lblCantidad = new System.Windows.Forms.Label();
@@ -53,6 +54,7 @@
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Texto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +65,7 @@
             this.btnBorrar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAñadir = new System.Windows.Forms.Button();
+            this.btnAnadirMasUno = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtCantidad)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
@@ -70,7 +73,7 @@
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(490, 159);
+            this.txtCantidad.Location = new System.Drawing.Point(594, 159);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(120, 20);
             this.txtCantidad.TabIndex = 45;
@@ -79,7 +82,7 @@
             // lblCantidad
             // 
             this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(410, 161);
+            this.lblCantidad.Location = new System.Drawing.Point(514, 161);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(52, 13);
             this.lblCantidad.TabIndex = 44;
@@ -231,18 +234,19 @@
             this.dgvArticulos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Origen,
             this.Nombre,
+            this.Stock,
             this.Destino,
             this.Texto,
             this.Telefono,
             this.IDARTICULO});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Black", 9.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvArticulos.GridColor = System.Drawing.Color.LightSalmon;
             this.dgvArticulos.ImeMode = System.Windows.Forms.ImeMode.Off;
@@ -275,11 +279,20 @@
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
-            // Destino
+            // Stock
             // 
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Destino.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Stock.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Stock.HeaderText = "Stock";
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            // 
+            // Destino
+            // 
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Destino.DefaultCellStyle = dataGridViewCellStyle5;
             this.Destino.FillWeight = 58.28161F;
             this.Destino.HeaderText = "Composicion";
             this.Destino.Name = "Destino";
@@ -287,9 +300,9 @@
             // 
             // Texto
             // 
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Texto.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Texto.DefaultCellStyle = dataGridViewCellStyle6;
             this.Texto.FillWeight = 61.92574F;
             this.Texto.HeaderText = "Medida";
             this.Texto.Name = "Texto";
@@ -297,9 +310,9 @@
             // 
             // Telefono
             // 
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.Telefono.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.Telefono.DefaultCellStyle = dataGridViewCellStyle7;
             this.Telefono.FillWeight = 94.99262F;
             this.Telefono.HeaderText = "Precio";
             this.Telefono.Name = "Telefono";
@@ -326,7 +339,7 @@
             // 
             this.btnRestaurar.Enabled = false;
             this.btnRestaurar.Image = global::MySleepy.Properties.Resources.restaurar;
-            this.btnRestaurar.Location = new System.Drawing.Point(318, 138);
+            this.btnRestaurar.Location = new System.Drawing.Point(422, 138);
             this.btnRestaurar.Name = "btnRestaurar";
             this.btnRestaurar.Size = new System.Drawing.Size(61, 58);
             this.btnRestaurar.TabIndex = 42;
@@ -346,7 +359,7 @@
             // btnBorrar
             // 
             this.btnBorrar.Image = global::MySleepy.Properties.Resources.papelera_de_reciclaje;
-            this.btnBorrar.Location = new System.Drawing.Point(223, 138);
+            this.btnBorrar.Location = new System.Drawing.Point(327, 138);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(61, 58);
             this.btnBorrar.TabIndex = 38;
@@ -356,7 +369,7 @@
             // btnModificar
             // 
             this.btnModificar.Image = global::MySleepy.Properties.Resources.adwords_editor_128;
-            this.btnModificar.Location = new System.Drawing.Point(134, 138);
+            this.btnModificar.Location = new System.Drawing.Point(238, 138);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(61, 58);
             this.btnModificar.TabIndex = 37;
@@ -373,11 +386,22 @@
             this.btnAñadir.UseVisualStyleBackColor = true;
             this.btnAñadir.Click += new System.EventHandler(this.btnAñadir_Click);
             // 
+            // btnAnadirMasUno
+            // 
+            this.btnAnadirMasUno.Image = global::MySleepy.Properties.Resources.historial;
+            this.btnAnadirMasUno.Location = new System.Drawing.Point(136, 138);
+            this.btnAnadirMasUno.Name = "btnAnadirMasUno";
+            this.btnAnadirMasUno.Size = new System.Drawing.Size(61, 58);
+            this.btnAnadirMasUno.TabIndex = 47;
+            this.btnAnadirMasUno.UseVisualStyleBackColor = true;
+            this.btnAnadirMasUno.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ArticulosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 500);
+            this.Controls.Add(this.btnAnadirMasUno);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.lblCantidad);
@@ -427,10 +451,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Origen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
         private System.Windows.Forms.DataGridViewTextBoxColumn Texto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDARTICULO;
+        private System.Windows.Forms.Button btnAnadirMasUno;
 
     }
 }

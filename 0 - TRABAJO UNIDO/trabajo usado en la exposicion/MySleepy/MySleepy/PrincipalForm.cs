@@ -17,7 +17,7 @@ namespace MySleepy
         UsuariosForm usuarios;
         ArticulosForm articulos;
         PedidosForm pedidos;
-        Proveedor proveedores;
+        Proveedores proveedores;
         HistorialForm historial;
         DataSet ds;
         int idRol;
@@ -119,6 +119,10 @@ namespace MySleepy
             cargarProveedorBBDD("proveedor.xml");
             Application.Exit();
         }
+        private void PrincipalForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            cargarProveedorBBDD("proveedor.xml");
+        }
 
         private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -190,7 +194,7 @@ namespace MySleepy
             Form[] ventanas = { pedidos, historial };
             if (ventanasCerradas(ventanas))
             {
-                proveedores = Proveedor.Instance(idRol, conexion, idUsuario,ds); //le pasamos ademas el DataSet
+                proveedores = Proveedores.Instance(idRol, conexion, idUsuario,ds); //le pasamos ademas el DataSet
                 proveedores.MdiParent = this;
                 proveedores.SetDesktopLocation(-1, -1);
                 proveedores.WindowState = FormWindowState.Normal;
@@ -228,15 +232,22 @@ namespace MySleepy
             String sentencia;
             for (int i = 0; i < datos.GetLength(0); i++)
             {
-                idProveedor = Convert.ToInt32(conexion.DLookUp("MAX(IDPROVEEDOR)", "PROVEEDORES", ""));
-                if (Convert.ToInt32(datos[i, 0]) <= idProveedor)
+
+                idProveedor = Convert.ToInt32(conexion.DLookUp("IDPROVEEDOR", "PROVEEDORES", "IDPROVEEDOR = 1"));
+                if (idProveedor == -1) { idProveedor = 0; Console.WriteLine(idProveedor); }
+                else { idProveedor = Convert.ToInt32(conexion.DLookUp("MAX(IDPROVEEDOR)", "PROVEEDORES", "")) + 1; }
+                if (Convert.ToInt32(datos[i, 0]) < idProveedor)
                 {
+                    Console.WriteLine("UPDATE "+idProveedor);
+                    Console.WriteLine(datos[i, 0]);
                     sentencia = "UPDATE PROVEEDORES set CIF = '" + datos[i, 1] + "',NOMBRE = '" + datos[i, 2] +
                         "', DIRECCION = '" + datos[i, 3] + "', REFCPPOBLACIONES = " + datos[i, 4] + ",TELEFONO = " + datos[i, 5] +
                         ",ELIMINADO= " + datos[i, 6] + ", NIF ='" + datos[i, 7] + "' WHERE IDPROVEEDOR=" + datos[i, 0];
                 }
                 else
                 {
+                    Console.WriteLine("ENTRO EN INSERT");
+                    Console.Write(" " + datos[i, 0]);
                     sentencia = "INSERT INTO PROVEEDORES (IDPROVEEDOR,CIF,NOMBRE,DIRECCION,REFCPPOBLACIONES,TELEFONO,ELIMINADO,NIF)" +
                                 " VALUES(" + datos[i, 0] + ",'" + datos[i, 1] + "','" + datos[i, 2] + "','" + datos[i, 3] + "'," + datos[i, 4] +
                                 "," + datos[i, 5] + "," + datos[i, 6] + ",'" + datos[i, 7] + "')";

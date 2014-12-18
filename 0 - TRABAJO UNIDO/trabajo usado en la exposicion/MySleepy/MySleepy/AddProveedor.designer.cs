@@ -52,6 +52,8 @@
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.lNombre = new System.Windows.Forms.Label();
+            this.ltelefono = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -191,6 +193,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ltelefono);
+            this.groupBox1.Controls.Add(this.lNombre);
             this.groupBox1.Controls.Add(this.cbEA);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtCIF);
@@ -287,7 +291,7 @@
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(124, 20);
             this.txtDNI.TabIndex = 3;
-            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido1_KeyPress);
+            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDNI_KeyPress);
             // 
             // label5
             // 
@@ -297,6 +301,24 @@
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 18;
             this.label5.Text = "Teléfono:";
+            // 
+            // lNombre
+            // 
+            this.lNombre.AutoSize = true;
+            this.lNombre.ForeColor = System.Drawing.Color.Red;
+            this.lNombre.Location = new System.Drawing.Point(97, 120);
+            this.lNombre.Name = "lNombre";
+            this.lNombre.Size = new System.Drawing.Size(0, 13);
+            this.lNombre.TabIndex = 26;
+            // 
+            // ltelefono
+            // 
+            this.ltelefono.AutoSize = true;
+            this.ltelefono.ForeColor = System.Drawing.Color.Red;
+            this.ltelefono.Location = new System.Drawing.Point(326, 120);
+            this.ltelefono.Name = "ltelefono";
+            this.ltelefono.Size = new System.Drawing.Size(0, 13);
+            this.ltelefono.TabIndex = 27;
             // 
             // AddProveedor
             // 
@@ -344,6 +366,8 @@
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtDNI;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label ltelefono;
+        private System.Windows.Forms.Label lNombre;
 
 
     }

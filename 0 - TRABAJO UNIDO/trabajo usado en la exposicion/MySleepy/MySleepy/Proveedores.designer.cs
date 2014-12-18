@@ -1,6 +1,6 @@
 ﻿namespace MySleepy
 {
-    partial class Proveedor
+    partial class Proveedores
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Proveedor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Proveedores));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
+            this.lNombre = new System.Windows.Forms.Label();
+            this.lTelefono = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbEA = new System.Windows.Forms.ComboBox();
             this.rbEliminados = new System.Windows.Forms.RadioButton();
@@ -51,17 +51,18 @@
             this.btnRestaurar = new System.Windows.Forms.Button();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
             this.IDPROVEEDOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cif = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CIF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOMBRE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DIRECCION = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TELEFONO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnBuscar);
+            this.groupBox1.Controls.Add(this.lNombre);
+            this.groupBox1.Controls.Add(this.lTelefono);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cbEA);
             this.groupBox1.Controls.Add(this.rbEliminados);
@@ -80,15 +81,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar";
             // 
-            // btnBuscar
+            // lNombre
             // 
-            this.btnBuscar.Image = global::MySleepy.Properties.Resources.lupa;
-            this.btnBuscar.Location = new System.Drawing.Point(707, 34);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(70, 58);
-            this.btnBuscar.TabIndex = 27;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            this.lNombre.AutoSize = true;
+            this.lNombre.ForeColor = System.Drawing.Color.Red;
+            this.lNombre.Location = new System.Drawing.Point(73, 56);
+            this.lNombre.Name = "lNombre";
+            this.lNombre.Size = new System.Drawing.Size(0, 13);
+            this.lNombre.TabIndex = 27;
+            // 
+            // lTelefono
+            // 
+            this.lTelefono.AutoSize = true;
+            this.lTelefono.ForeColor = System.Drawing.Color.Red;
+            this.lTelefono.Location = new System.Drawing.Point(73, 102);
+            this.lTelefono.Name = "lTelefono";
+            this.lTelefono.Size = new System.Drawing.Size(0, 13);
+            this.lTelefono.TabIndex = 26;
             // 
             // label1
             // 
@@ -134,7 +143,7 @@
             this.rbNoEliminados.TabStop = true;
             this.rbNoEliminados.Text = "No Eliminados";
             this.rbNoEliminados.UseVisualStyleBackColor = true;
-            this.rbNoEliminados.CheckedChanged += new System.EventHandler(this.rbNoEliminados_CheckedChanged);
+            this.rbNoEliminados.Click += new System.EventHandler(this.rbNoEliminados_Click);
             // 
             // label3
             // 
@@ -151,7 +160,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(124, 20);
             this.txtTelefono.TabIndex = 2;
-            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtNombre
             // 
@@ -174,9 +183,9 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Image = global::MySleepy.Properties.Resources.prestamos;
-            this.btnLimpiar.Location = new System.Drawing.Point(808, 34);
+            this.btnLimpiar.Location = new System.Drawing.Point(753, 26);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(61, 58);
+            this.btnLimpiar.Size = new System.Drawing.Size(86, 73);
             this.btnLimpiar.TabIndex = 10;
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -189,6 +198,7 @@
             this.txtCIFNIF.Name = "txtCIFNIF";
             this.txtCIFNIF.Size = new System.Drawing.Size(160, 20);
             this.txtCIFNIF.TabIndex = 3;
+            this.txtCIFNIF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCIFNIF_KeyPress);
             // 
             // lblPoblacion
             // 
@@ -255,78 +265,59 @@
             this.dgvProveedores.AllowUserToDeleteRows = false;
             this.dgvProveedores.AllowUserToResizeColumns = false;
             this.dgvProveedores.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSteelBlue;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.dgvProveedores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProveedores.BackgroundColor = System.Drawing.Color.Snow;
-            this.dgvProveedores.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvProveedores.BackgroundColor = System.Drawing.SystemColors.Info;
             this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDPROVEEDOR,
-            this.cif,
-            this.Nombre,
-            this.Direccion,
-            this.Telefono});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Constantia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvProveedores.GridColor = System.Drawing.Color.LightSalmon;
-            this.dgvProveedores.Location = new System.Drawing.Point(37, 243);
-            this.dgvProveedores.MultiSelect = false;
+            this.CIF,
+            this.NOMBRE,
+            this.DIRECCION,
+            this.TELEFONO});
+            this.dgvProveedores.Location = new System.Drawing.Point(37, 247);
             this.dgvProveedores.Name = "dgvProveedores";
-            this.dgvProveedores.ReadOnly = true;
             this.dgvProveedores.RowHeadersVisible = false;
-            this.dgvProveedores.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProveedores.Size = new System.Drawing.Size(910, 252);
+            this.dgvProveedores.Size = new System.Drawing.Size(910, 241);
             this.dgvProveedores.TabIndex = 31;
             // 
             // IDPROVEEDOR
             // 
-            this.IDPROVEEDOR.HeaderText = "IdProveedor";
+            this.IDPROVEEDOR.HeaderText = "IDproveedor";
             this.IDPROVEEDOR.Name = "IDPROVEEDOR";
             this.IDPROVEEDOR.ReadOnly = true;
+            this.IDPROVEEDOR.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.IDPROVEEDOR.Visible = false;
             // 
-            // cif
+            // CIF
             // 
-            this.cif.HeaderText = "CIF/NIF";
-            this.cif.Name = "cif";
-            this.cif.ReadOnly = true;
+            this.CIF.HeaderText = "CIF/NIF";
+            this.CIF.Name = "CIF";
+            this.CIF.ReadOnly = true;
+            this.CIF.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // Nombre
+            // NOMBRE
             // 
-            this.Nombre.FillWeight = 100.6677F;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.NOMBRE.HeaderText = "Nombre";
+            this.NOMBRE.Name = "NOMBRE";
+            this.NOMBRE.ReadOnly = true;
             // 
-            // Direccion
+            // DIRECCION
             // 
-            this.Direccion.FillWeight = 95.77672F;
-            this.Direccion.HeaderText = "Direccion";
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            this.Direccion.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.DIRECCION.HeaderText = "Dirección";
+            this.DIRECCION.Name = "DIRECCION";
+            this.DIRECCION.ReadOnly = true;
             // 
-            // Telefono
+            // TELEFONO
             // 
-            this.Telefono.FillWeight = 93.28328F;
-            this.Telefono.HeaderText = "Telefono";
-            this.Telefono.Name = "Telefono";
-            this.Telefono.ReadOnly = true;
-            this.Telefono.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.TELEFONO.HeaderText = "Teléfono";
+            this.TELEFONO.Name = "TELEFONO";
+            this.TELEFONO.ReadOnly = true;
             // 
-            // Proveedor
+            // Proveedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -339,7 +330,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAñadir);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Proveedor";
+            this.Name = "Proveedores";
             this.Text = "Proveedores";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Proveedor_FormClosed);
             this.Load += new System.EventHandler(this.Proveedores_Load);
@@ -369,12 +360,13 @@
         private System.Windows.Forms.RadioButton rbNoEliminados;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbEA;
-        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Label lNombre;
+        private System.Windows.Forms.Label lTelefono;
         private System.Windows.Forms.DataGridView dgvProveedores;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDPROVEEDOR;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cif;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CIF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NOMBRE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DIRECCION;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TELEFONO;
     }
 }

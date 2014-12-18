@@ -66,7 +66,7 @@ namespace MySleepy
 
         private void cargarDGVInicio()
         {
-            String sentencia = "SELECT IDARTICULO,REFCOMPOSICION,REFMEDIDA,PRECIO,NOMBRE,REFERENCIA FROM ARTICULOS WHERE ELIMINADO=0";
+            String sentencia = "SELECT * FROM ARTICULOS WHERE ELIMINADO=0";
             actualizarDGV(sentencia);
             dgvArticulos.ClearSelection();
         }
@@ -150,12 +150,13 @@ namespace MySleepy
             foreach (DataRow row in tArticulos.Rows)
             {
                 int referencia = Convert.ToInt32(row["REFERENCIA"]);
+                int stock = Convert.ToInt32(row["STOCK"]);
                 int id = Convert.ToInt32(row["IDARTICULO"]);
                 String nombre = Convert.ToString(row["NOMBRE"]);
                 String composicion = Convert.ToString(conexion.DLookUp("COMPOSICION", "COMPOSICIONES", "IDCOMPOSICION=" + row["REFCOMPOSICION"]));
                 String medida = Convert.ToString(conexion.DLookUp("MEDIDA", "MEDIDAS", "IDMEDIDA=" + row["REFMEDIDA"]));
                 String precio = Convert.ToString(row["PRECIO"]);
-                dgvArticulos.Rows.Add(referencia, nombre, composicion, medida, precio, id);
+                dgvArticulos.Rows.Add(referencia, nombre,stock, composicion, medida, precio, id);
 
             } // Fin del bucle for each
             limpiarSeleccion();
@@ -177,7 +178,7 @@ namespace MySleepy
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            AddNuevoArticulo add = new AddNuevoArticulo(conexion, 0, this, idUsuario);
+            AddNuevoArticulo add = new AddNuevoArticulo(conexion, 0, this, idUsuario,0);
             add.ShowDialog();
             if (add.IsDisposed)
             {
@@ -194,8 +195,7 @@ namespace MySleepy
             }
             else
             {
-
-                AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1, this, idUsuario);
+                AddNuevoArticulo add = new AddNuevoArticulo(conexion, 1, this, idUsuario,0);
                 add.activarReferencia(false);
                 add.rellenar(dgvArticulos.CurrentRow);
                 add.ShowDialog();
@@ -239,9 +239,7 @@ namespace MySleepy
 
             //insert en la tabla historial de cambios
             //pedimos confirmacion
-            String nombreArticulo = Convert.ToString
-                            (conexion.DLookUp("NOMBRE", "ARTICULOS", " IDARTICULO = " + idarticuloseleccionado));
-            //MessageBox.Show("nombreArt" + nombreArticulo);
+            String nombreArticulo = Convert.ToString(conexion.DLookUp("NOMBRE", "ARTICULOS", " IDARTICULO = " + idarticuloseleccionado));
             String mensaje = Interaction.InputBox("¿Motivo por el cual se elimina?", "Motivo", "");
             mensaje = "Articulo borrado ->" + nombreArticulo + " Motivo ->" + mensaje;
             
@@ -374,11 +372,11 @@ namespace MySleepy
                 {
                     lblCantidad.ForeColor = Color.Green;
                     cantidad = Convert.ToString(txtCantidad.Value);
-                    pedido.nuevoArticulo(Convert.ToInt32(dgvArticulos.CurrentRow.Cells[5].Value.ToString()),
+                    pedido.nuevoArticulo(Convert.ToInt32(dgvArticulos.CurrentRow.Cells[6].Value.ToString()),
                         dgvArticulos.CurrentRow.Cells[0].Value.ToString(), dgvArticulos.CurrentRow.Cells[1].Value.ToString(),
-                        dgvArticulos.CurrentRow.Cells[2].Value.ToString(), dgvArticulos.CurrentRow.Cells[3].Value.ToString(),
-                        dgvArticulos.CurrentRow.Cells[4].Value.ToString(), cantidad);
-                    actualizarCantidad(stock - txtCantidad.Value, Convert.ToInt32(dgvArticulos.CurrentRow.Cells[5].Value.ToString()));
+                        dgvArticulos.CurrentRow.Cells[3].Value.ToString(), dgvArticulos.CurrentRow.Cells[4].Value.ToString(),
+                        dgvArticulos.CurrentRow.Cells[5].Value.ToString(), cantidad, dgvArticulos.CurrentRow.Cells[2].Value.ToString());
+                    
                     return;
                 }
                 else
@@ -392,7 +390,7 @@ namespace MySleepy
             }
         }
 
-        private void actualizarCantidad(decimal p1, int p2)
+        public void actualizarCantidad(decimal p1, int p2)
         {
             String select = "UPDATE ARTICULOS SET STOCK=" + p1 + " WHERE IDARTICULO=" + p2;
             conexion.setData(select);
@@ -425,6 +423,16 @@ namespace MySleepy
             btnRestaurar.Enabled = false;
             rbNoEliminados.Checked = true;
             rbEliminados.Checked = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddNuevoArticulo add = new AddNuevoArticulo(conexion, 0, this, idUsuario,1);
+            add.ShowDialog();
+            if (add.IsDisposed)
+            {
+                filtrar(cbMedida.SelectedIndex, txtNombre.Text, txtReferencia.Text, txtPrecio.Text);
+            }
         }
 
 
